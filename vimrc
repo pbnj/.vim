@@ -16,7 +16,6 @@ Plug 'https://github.com/junegunn/fzf', {'dir': '~/.fzf', 'do': { -> fzf#install
 Plug 'https://github.com/junegunn/fzf.vim' | let g:fzf_colors = {'border': ['fg','DiffDelete']}
 Plug 'https://github.com/lifepillar/vim-mucomplete' | let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/pbnj/pbnj.vim'
 Plug 'https://github.com/pbnj/terradoc.vim'
 Plug 'https://github.com/pbnj/vim-britive'
 Plug 'https://github.com/pbnj/vim-ddgr'
