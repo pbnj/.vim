@@ -133,13 +133,14 @@ cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
+nnoremap <leader>gg :G<cr>
 nnoremap <leader>sp :sp **/*
-nnoremap <leader>tt <cmd>topleft terminal<cr>
 nnoremap <leader>TT :topleft terminal <c-r><c-l>
+nnoremap <leader>tt <cmd>topleft terminal<cr>
 nnoremap <leader>vs :vs **/*
 nnoremap Y y$
-noremap <expr> n (v:searchforward ? 'n' : 'N')
 noremap <expr> N (v:searchforward ? 'N' : 'n')
+noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
