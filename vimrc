@@ -24,6 +24,7 @@ Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/tpope/vim-rhubarb'
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
@@ -102,6 +103,7 @@ let g:ale_fixers = { '*' : [ 'remove_trailing_lines', 'trim_whitespace' ] }
 let g:ale_hover_cursor = 0
 let g:ale_open_list = 1
 let g:ale_virtualtext_cursor = 0
+let g:ale_set_signs = 0
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
 nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>
@@ -126,34 +128,6 @@ command! BD %bd
 
 " Re-open nested vim-in-vim in outer vim
 command! Unwrap let g:file = expand('%') | bdelete | exec 'silent !echo -e "\033]51;[\"drop\", \"'..g:file..'\"]\007"' | q
-
-" Jira command opens Jira issues in the browser
-command! -nargs=? Jira silent ! open $JIRA_URL/<args>
-
-" GitBrowse takes a dictionary and opens files on remote git repo websites.
-function! GitBrowse(args) abort
-  let l:branch = len(a:args.branch) ? a:args.branch : 'origin'
-  let l:remote = trim(system('git config branch.'..l:branch..'.remote'))
-  let l:cmd = 'git browse ' .. ((a:args.range) ? printf("%s %s %s %s",l:remote, a:args.filename, a:args.line1, a:args.line2) : printf("%s %s", l:remote, a:args.filename))
-  echom l:cmd
-  execute 'silent ! '..l:cmd | redraw!
-endfunction
-" View [G]it repo, branch, & file in the [B]rowser
-command! -range GB
-      \ call GitBrowse({
-      \   'branch': trim(system('git rev-parse --abbrev-ref HEAD 2>/dev/null')),
-      \   'filename': trim(system('git ls-files --full-name ' .. expand('%'))),
-      \   'range': <range>,
-      \   'line1': <line1>,
-      \   'line2': <line2>,
-      \ })
-command! GR execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
-
-" Custom cmmand for `aws` with completion for profile names
-function! AWSProfileCompletion(A,L,P) abort
-  return filter(systemlist("awk -F '[][]' '{print $2}' ~/.aws/config | awk 'NF > 0 {print $2}'"),'v:val =~ a:A')
-endfunction
-command! -nargs=* -complete=customlist,AWSProfileCompletion AWS Dispatch aws --output text --profile <args>
 
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
