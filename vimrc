@@ -134,8 +134,9 @@ cnoremap <c-p> <c-Up>
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>gg :G<cr>
-nnoremap <leader>gP :G pull<cr>
-nnoremap <leader>gp :G push<cr>
+nnoremap <leader>gP :G! pull<cr>
+nnoremap <leader>gp :G! push<cr>
+nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>TT :topleft terminal <c-r><c-l>
 nnoremap <leader>tt <cmd>topleft terminal<cr>
