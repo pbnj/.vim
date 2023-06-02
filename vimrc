@@ -43,7 +43,6 @@ filetype plugin indent on
 " vim options
 let &autoindent = 1
 let &autoread = 1
-let &background = 'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
@@ -145,5 +144,3 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
-
-colorscheme pbnj
