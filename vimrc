@@ -16,7 +16,6 @@ Plug 'https://github.com/junegunn/fzf', {'dir': '~/.fzf', 'do': { -> fzf#install
 Plug 'https://github.com/junegunn/fzf.vim' | let g:fzf_colors = {'border': ['fg','DiffDelete']}
 Plug 'https://github.com/lifepillar/vim-mucomplete' | let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/pbnj/terradoc.vim'
 Plug 'https://github.com/pbnj/vim-britive'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/thalesmello/webcomplete.vim' | let &completefunc = 'webcomplete#complete'
@@ -54,7 +53,7 @@ let &encoding = 'utf-8'
 let &errorformat = '%f:%l:%m,%f:%l:%c:%m'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
-let &grepprg = 'grep -HIn --line-buffered $*'
+let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 let &guifont = 'SF Mono'
 let &guioptions = ''
 let &hidden = 1
@@ -67,7 +66,7 @@ let &lazyredraw = 1
 let &list = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
-let &mouse = 'a'
+let &mouse = ''
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
