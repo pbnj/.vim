@@ -16,7 +16,6 @@ Plug 'https://github.com/junegunn/fzf', {'dir': '~/.fzf', 'do': { -> fzf#install
 Plug 'https://github.com/junegunn/fzf.vim' | let g:fzf_colors = {'border': ['fg','DiffDelete']}
 Plug 'https://github.com/lifepillar/vim-mucomplete' | let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/pbnj/vim-britive'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/thalesmello/webcomplete.vim' | let &completefunc = 'webcomplete#complete'
 Plug 'https://github.com/tpope/vim-commentary'
@@ -84,10 +83,11 @@ let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 
-augroup cursorline_toggle
-  autocmd!
-  autocmd InsertEnter,InsertLeave * setlocal cursorline!
-augroup end
+if &term =~ "xterm"
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
+endif
 
 " netrw options
 let g:netrw_fastbrowse = 0
@@ -144,3 +144,5 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
+
+colorscheme pbnj
