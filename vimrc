@@ -17,7 +17,6 @@ Plug 'https://github.com/junegunn/fzf.vim' | let g:fzf_colors = {'border': ['fg'
 Plug 'https://github.com/lifepillar/vim-mucomplete' | let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/pbnj/vim-ddgr'
-Plug 'https://github.com/thalesmello/webcomplete.vim' | let &completefunc = 'webcomplete#complete'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
