@@ -9,7 +9,6 @@ runtime ftplugin/man.vim
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', {'dir': '~/.fzf', 'do': { -> fzf#install() }}
@@ -26,6 +25,7 @@ Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
+Plug 'https://github.com/vim-airline/vim-airline'
 
 let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
@@ -50,7 +50,7 @@ let &encoding = 'utf-8'
 let &errorformat = '%f:%l:%m,%f:%l:%c:%m'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
-let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
+let &grepprg = executable('rg') ? 'rg --vimgrep --hidden --smart-case $*' : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 let &guifont = 'SF Mono'
 let &guioptions = ''
 let &hidden = 1
@@ -98,7 +98,6 @@ let &omnifunc = 'ale#completion#OmniFunc'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : [ 'remove_trailing_lines', 'trim_whitespace' ] }
 let g:ale_hover_cursor = 0
-let g:ale_open_list = 1
 let g:ale_virtualtext_cursor = 0
 let g:ale_set_signs = 0
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
