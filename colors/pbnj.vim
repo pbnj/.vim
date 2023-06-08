@@ -40,43 +40,86 @@ highlight!  VertSplit   NONE
 highlight!  Visual      NONE
 
 highlight!  ColorColumn   cterm=reverse         ctermfg=DarkRed      ctermbg=NONE
-highlight!  Comment       cterm=NONE            ctermfg=DarkGray     ctermbg=NONE        gui=NONE            guifg=DarkGray     guibg=NONE
+highlight!  Comment       cterm=NONE            ctermfg=Gray         ctermbg=NONE
 highlight!  Constant      cterm=NONE            ctermfg=DarkRed      ctermbg=NONE
 highlight!  CurSearch     cterm=reverse         ctermfg=DarkRed      ctermbg=NONE
-highlight!  CursorColumn  cterm=NONE            ctermfg=NONE         ctermbg=DarkGray
-highlight!  DiffAdd       cterm=bold            ctermfg=DarkGreen    ctermbg=NONE        gui=bold            guifg=DarkGreen    guibg=NONE
-highlight!  DiffChange    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE        gui=bold            guifg=DarkYellow   guibg=NONE
-highlight!  DiffDelete    cterm=bold            ctermfg=DarkRed      ctermbg=NONE        gui=bold            guifg=DarkRed      guibg=NONE
-highlight!  DiffText      cterm=bold,underline  ctermfg=DarkYellow   ctermbg=NONE        gui=bold,undercurl  guifg=DarkYellow   guibg=NONE
+highlight!  CursorColumn  cterm=reverse         ctermfg=Gray         ctermbg=NONE
+highlight!  DiffAdd       cterm=bold            ctermfg=DarkGreen    ctermbg=NONE
+highlight!  DiffChange    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE
+highlight!  DiffDelete    cterm=bold            ctermfg=DarkRed      ctermbg=NONE
+highlight!  DiffText      cterm=bold,underline  ctermfg=DarkYellow   ctermbg=NONE
 highlight!  Directory     cterm=bold            ctermfg=NONE         ctermbg=NONE
 highlight!  Error         cterm=reverse         ctermfg=Red          ctermbg=NONE
 highlight!  ErrorMsg      cterm=bold            ctermfg=DarkRed      ctermbg=NONE
-highlight!  Folded        cterm=NONE            ctermfg=DarkGray     ctermbg=NONE
+highlight!  Folded        cterm=NONE            ctermfg=Gray         ctermbg=NONE
 highlight!  Identifier    cterm=NONE            ctermfg=DarkCyan     ctermbg=NONE
-highlight!  Ignore        cterm=NONE            ctermfg=DarkGray     ctermbg=NONE
-highlight!  LineNr        cterm=NONE            ctermfg=DarkGray     ctermbg=NONE        gui=NONE            guifg=DarkGray     guibg=NONE
-highlight!  MatchParen    cterm=bold            ctermfg=NONE         ctermbg=NONE        gui=bold            guifg=NONE         guibg=NONE
+highlight!  Ignore        cterm=NONE            ctermfg=Gray         ctermbg=NONE
+highlight!  LineNr        cterm=NONE            ctermfg=Gray         ctermbg=NONE
+highlight!  MatchParen    cterm=bold            ctermfg=NONE         ctermbg=NONE
 highlight!  ModeMsg       cterm=bold            ctermfg=NONE         ctermbg=NONE
 highlight!  MoreMsg       cterm=bold            ctermfg=DarkGreen    ctermbg=NONE
-highlight!  NonText       cterm=NONE            ctermfg=DarkGray     ctermbg=NONE        gui=NONE            guifg=DarkGray     guibg=NONE
-highlight!  Pmenu         cterm=reverse         ctermfg=DarkMagenta  ctermbg=NONE        gui=reverse         guifg=DarkMagenta  guibg=NONE
-highlight!  PmenuSel      cterm=reverse         ctermfg=NONE         ctermbg=NONE        gui=reverse         guifg=NONE         guibg=NONE
+highlight!  NonText       cterm=NONE            ctermfg=Gray         ctermbg=NONE
+highlight!  Pmenu         cterm=reverse         ctermfg=DarkMagenta  ctermbg=NONE
+highlight!  PmenuSel      cterm=reverse         ctermfg=NONE         ctermbg=NONE
 highlight!  PreProc       cterm=NONE            ctermfg=DarkMagenta  ctermbg=NONE
 highlight!  Question      cterm=bold            ctermfg=DarkGreen    ctermbg=NONE
 highlight!  Search        cterm=reverse         ctermfg=DarkYellow   ctermbg=Black
 highlight!  Special       cterm=NONE            ctermfg=DarkMagenta  ctermbg=NONE
-highlight!  SpellBad      cterm=underline       ctermfg=DarkRed      ctermbg=NONE        gui=undercurl
-highlight!  SpellCap      cterm=underline       ctermfg=Blue         ctermbg=NONE        gui=undercurl
-highlight!  SpellLocal    cterm=underline       ctermfg=DarkMagenta  ctermbg=NONE        gui=undercurl
-highlight!  SpellRare     cterm=underline       ctermfg=DarkCyan     ctermbg=NONE        gui=undercurl
+highlight!  SpellBad      cterm=reverse         ctermfg=Red          ctermbg=NONE
+highlight!  SpellCap      cterm=reverse         ctermfg=Blue         ctermbg=NONE
+highlight!  SpellLocal    cterm=reverse         ctermfg=Magenta      ctermbg=NONE
+highlight!  SpellRare     cterm=reverse         ctermfg=Cyan         ctermbg=NONE
 highlight!  Statement     cterm=NONE            ctermfg=DarkYellow   ctermbg=NONE
 highlight!  TabLine       cterm=reverse         ctermfg=NONE         ctermbg=NONE
 highlight!  TabLineSel    cterm=bold            ctermfg=NONE         ctermbg=NONE
 highlight!  Title         cterm=bold            ctermfg=DarkMagenta  ctermbg=NONE
 highlight!  Todo          cterm=NONE            ctermfg=Black        ctermbg=DarkYellow
 highlight!  Type          cterm=NONE            ctermfg=DarkGreen    ctermbg=NONE
-highlight!  Visual        cterm=reverse         ctermfg=NONE         ctermbg=NONE        gui=reverse         guifg=NONE         guibg=NONE
+highlight!  Visual        cterm=reverse         ctermfg=NONE         ctermbg=NONE
 highlight!  WarningMsg    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE
+
+if has('gui_running')
+	highlight!  ColorColumn   gui=reverse         guifg=DarkRed      guibg=NONE
+	highlight!  Comment       gui=NONE            guifg=Gray         guibg=NONE
+	highlight!  Constant      gui=NONE            guifg=DarkRed      guibg=NONE
+	highlight!  CurSearch     gui=reverse         guifg=DarkRed      guibg=NONE
+	highlight!  CursorColumn  gui=reverse         guifg=Gray         guibg=NONE
+	highlight!  DiffAdd       gui=bold            guifg=DarkGreen    guibg=NONE
+	highlight!  DiffChange    gui=bold            guifg=DarkYellow   guibg=NONE
+	highlight!  DiffDelete    gui=bold            guifg=DarkRed      guibg=NONE
+	highlight!  DiffText      gui=bold,underline  guifg=DarkYellow   guibg=NONE
+	highlight!  Directory     gui=bold            guifg=NONE         guibg=NONE
+	highlight!  Error         gui=reverse         guifg=Red          guibg=NONE
+	highlight!  ErrorMsg      gui=bold            guifg=DarkRed      guibg=NONE
+	highlight!  Folded        gui=NONE            guifg=Gray         guibg=NONE
+	highlight!  Identifier    gui=NONE            guifg=DarkCyan     guibg=NONE
+	highlight!  Ignore        gui=NONE            guifg=Gray         guibg=NONE
+	highlight!  LineNr        gui=NONE            guifg=Gray         guibg=NONE
+	highlight!  MatchParen    gui=bold            guifg=NONE         guibg=NONE
+	highlight!  ModeMsg       gui=bold            guifg=NONE         guibg=NONE
+	highlight!  MoreMsg       gui=bold            guifg=DarkGreen    guibg=NONE
+	highlight!  NonText       gui=NONE            guifg=Gray         guibg=NONE
+	highlight!  Pmenu         gui=reverse         guifg=DarkMagenta  guibg=NONE
+	highlight!  PmenuSel      gui=reverse         guifg=NONE         guibg=NONE
+	highlight!  PreProc       gui=NONE            guifg=DarkMagenta  guibg=NONE
+	highlight!  Question      gui=bold            guifg=DarkGreen    guibg=NONE
+	highlight!  Search        gui=reverse         guifg=DarkYellow   guibg=Black
+	highlight!  Special       gui=NONE            guifg=DarkMagenta  guibg=NONE
+	highlight!  SpellBad      gui=reverse         guifg=Red          guibg=NONE
+	highlight!  SpellCap      gui=reverse         guifg=Blue         guibg=NONE
+	highlight!  SpellLocal    gui=reverse         guifg=Magenta      guibg=NONE
+	highlight!  SpellRare     gui=reverse         guifg=Cyan         guibg=NONE
+	highlight!  Statement     gui=NONE            guifg=DarkYellow   guibg=NONE
+	highlight!  TabLine       gui=reverse         guifg=NONE         guibg=NONE
+	highlight!  TabLineSel    gui=bold            guifg=NONE         guibg=NONE
+	highlight!  Title         gui=bold            guifg=DarkMagenta  guibg=NONE
+	highlight!  Todo          gui=NONE            guifg=Black        guibg=DarkYellow
+	highlight!  Type          gui=NONE            guifg=DarkGreen    guibg=NONE
+	highlight!  Visual        gui=reverse         guifg=NONE         guibg=NONE
+	highlight!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
+endif
+
+
 
 highlight!  link  EndOfBuffer   NonText
 highlight!  link  IncSearch     Search
