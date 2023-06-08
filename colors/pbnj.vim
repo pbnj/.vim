@@ -49,7 +49,7 @@ highlight!  DiffChange    cterm=bold            ctermfg=DarkYellow   ctermbg=NON
 highlight!  DiffDelete    cterm=bold            ctermfg=DarkRed      ctermbg=NONE        gui=bold            guifg=DarkRed      guibg=NONE
 highlight!  DiffText      cterm=bold,underline  ctermfg=DarkYellow   ctermbg=NONE        gui=bold,undercurl  guifg=DarkYellow   guibg=NONE
 highlight!  Directory     cterm=bold            ctermfg=NONE         ctermbg=NONE
-highlight!  Error         cterm=NONE            ctermfg=DarkRed      ctermbg=NONE
+highlight!  Error         cterm=reverse         ctermfg=Red          ctermbg=NONE
 highlight!  ErrorMsg      cterm=bold            ctermfg=DarkRed      ctermbg=NONE
 highlight!  Folded        cterm=NONE            ctermfg=DarkGray     ctermbg=NONE
 highlight!  Identifier    cterm=NONE            ctermfg=DarkCyan     ctermbg=NONE
