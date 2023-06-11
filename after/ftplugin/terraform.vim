@@ -1,7 +1,3 @@
-let b:ale_fixers = ['terraform', 'remove_trailing_lines', 'trim_whitespace']
-let &l:keywordprg = ':!ddgr terraform'
-let &l:formatprg = 'terraform fmt -'
-
 " code expansions
 iabbrev  tfdaip   <c-o>:read ~/.vim/templates/terraform/aws/data-aws-iam-policy.tf<cr><esc>
 iabbrev  tfdaipd  <c-o>:read ~/.vim/templates/terraform/aws/data-aws-iam-policy-document.tf<cr><esc>
@@ -22,12 +18,3 @@ function! TerraformStateShow(args) abort
     endif
 endfunction
 command! -nargs=? -complete=customlist,TerraformStateCompletion TerraformStateShow call TerraformStateShow(<q-args>)
-
-" call ale#linter#Define('terraform', {
-"       \ 'name': 'tfsec',
-"       \ 'executable': 'tfsec',
-"       \ 'command': '%e -f csv %s | awk -F, ''{print $1":"$2":"$5" "$6}''',
-"       \ 'language': 'terraform',
-"       \ 'project_root': { _ -> expand('%p:h') },
-"       \ 'callback': '',
-"       \ })
