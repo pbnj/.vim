@@ -106,6 +106,7 @@ let &list = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
 let &number = 1
+let &signcolumn = 'number'
 let &path = '.,,src/**,cmd/**'
 let &pumheight = 50
 let &secure = 1
@@ -160,27 +161,18 @@ noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-augroup languages
-	autocmd!
-	autocmd FileType go let &l:keywordprg=':!go doc'
-	autocmd FileType netrw setlocal bufhidden=wipe
-	autocmd FileType terraform command! -buffer -nargs=? -complete=customlist,TerraformStateCompletion TerraformStateShow <mods> terminal terraform state show <args>
-	autocmd BufRead,BufNewFile *.tfbackend,*.tfvars,*.tf set filetype=terraform
-	autocmd BufRead,BufNewFile *.envrc setfiletype sh
-augroup END
-
 " Custom Functionality
-
-" Terraform helper functions
-function! TerraformStateCompletion(A,L,P) abort
-	return filter(systemlist('terraform state list 2>/dev/null'),'v:val =~ a:A')
-endfunction
 
 " Custom command for `aws` with completion for profile names
 function! AWSProfileCompletion(A,L,P) abort
 	return filter(systemlist("awk -F '[][]' '{print $2}' ~/.aws/config | awk 'NF > 0 {print $2}'"),'v:val =~ a:A')
 endfunction
-command! -nargs=* -complete=customlist,AWSProfileCompletion AWS <mods> terminal aws --output text --profile <args>
+command! -nargs=* -complete=customlist,AWSProfileCompletion AWS
+			\ <mods> terminal aws --output text --profile <args>
+command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole
+			\ ! aws-console -p <args>
+command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSLogin
+			\ ! aws sso login --profile <args>
 
 " GitBrowse takes a dictionary and opens files on remote git repo websites.
 function! GitBrowse(args) abort
