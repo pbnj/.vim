@@ -51,12 +51,15 @@ nnoremap <leader>FF <cmd>Files %:p:h<cr>
 nnoremap <leader>uu <cmd>URLs<cr>
 
 packadd minpac
+command! PackUpdate call minpac#update()
+command! PackClean call minpac#clean()
+command! PackStatus call minpac#status()
 
 call minpac#init()
 call minpac#add('https://github.com/vim/colorschemes')
 call minpac#add('https://github.com/dense-analysis/ale')
 call minpac#add('https://github.com/editorconfig/editorconfig-vim')
-call minpac#add('https://github.com/junegunn/fzf', {'do': './install --all'})
+call minpac#add('https://github.com/junegunn/fzf')
 call minpac#add('https://github.com/junegunn/fzf.vim')
 call minpac#add('https://github.com/lifepillar/vim-mucomplete')
 call minpac#add('https://github.com/machakann/vim-highlightedyank')
@@ -69,15 +72,10 @@ call minpac#add('https://github.com/tpope/vim-rsi')
 call minpac#add('https://github.com/tpope/vim-surround')
 call minpac#add('https://github.com/tpope/vim-unimpaired')
 call minpac#add('https://github.com/tpope/vim-vinegar')
-call minpac#add('https://github.com/vim-airline/vim-airline')
 call minpac#add('https://github.com/sheerun/vim-polyglot')
 if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-gutentags') | endif
 
 packloadall
-
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
-command! PackStatus call minpac#status()
 
 " vim options
 let &autoindent = 1
@@ -89,7 +87,6 @@ let &clipboard = 'unnamed,unnamedplus'
 let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
-let &errorformat = '%f:%l:%m,%f:%l:%c:%m'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
 let &grepprg = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
@@ -100,19 +97,18 @@ let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
 let &keywordprg = ':!ddgr'
-let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
 let &number = 1
-let &signcolumn = 'number'
 let &path = '.,,src/**,cmd/**'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showbreak = '… '
 let &showmode = 1
+let &signcolumn = 'number'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
@@ -126,6 +122,7 @@ let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 
+" change insert/replace cursor shape based on vim mode
 if &term =~ "xterm"
 	let &t_SI = "\e[6 q"
 	let &t_SR = "\e[4 q"
@@ -202,4 +199,4 @@ function! OnePasswordItemCompletion(A,L,P) abort
 endfunction
 command! -nargs=* -complete=customlist,OnePasswordItemCompletion OP <mods> terminal op item get <q-args>
 
-colorscheme pbnj
+" colorscheme pbnj
