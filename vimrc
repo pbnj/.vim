@@ -16,7 +16,6 @@ let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim':
 " ale
 let &omnifunc = 'ale#completion#OmniFunc'
 let g:ale_echo_cursor = 0
-let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 			\ '*' : ['remove_trailing_lines', 'trim_whitespace'],
 			\ 'bash': ['shfmt'],
@@ -35,7 +34,10 @@ let g:ale_linters = {
 			\ }
 let g:ale_hover_cursor = 0
 let g:ale_virtualtext_cursor = 2
+nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
+nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
+nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
 nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
@@ -90,7 +92,9 @@ let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
-let &grepprg = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
+let &grepprg = executable('rg')
+			\ ? 'rg --vimgrep --smart-case $*'
+			\ : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 let &guioptions = ''
 let &hidden = 1
 let &hlsearch = 0
@@ -103,7 +107,7 @@ let &list = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
 let &number = 1
-let &path = '.,,src/**,cmd/**'
+let &path = '.,,docs/**,src/**,cmd/**'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
@@ -129,11 +133,6 @@ if &term =~ "xterm"
 	let &t_SR = "\e[4 q"
 	let &t_EI = "\e[2 q"
 endif
-
-" netrw options
-let g:netrw_keepdir = 0
-let g:netrw_fastbrowse = 0
-let g:netrw_localrmdir = 'rm -rf'
 
 " [B]uffer [D]elete all buffers. To re-open most recent buffer: `:e#`
 command! BD %bd
@@ -199,5 +198,3 @@ function! OnePasswordItemCompletion(A,L,P) abort
 	return filter(systemlist("op item list --format=json | jq -rc '.[].title'"), 'v:val =~ a:A')
 endfunction
 command! -nargs=* -complete=customlist,OnePasswordItemCompletion OP <mods> terminal op item get <q-args>
-
-" colorscheme pbnj
