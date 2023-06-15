@@ -1,3 +1,5 @@
+setlocal spell
+
 function! ALEInstall() abort
 	if executable('brew')
 		! brew install node
