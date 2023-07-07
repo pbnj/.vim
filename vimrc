@@ -1,3 +1,4 @@
+" git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 
@@ -15,25 +16,24 @@ let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim':
 
 " ale
 let &omnifunc = 'ale#completion#OmniFunc'
-let g:ale_echo_cursor = 0
+let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-			\ '*' : ['remove_trailing_lines', 'trim_whitespace'],
-			\ 'bash': ['shfmt'],
-			\ 'go': ['goimports', 'gopls'],
-			\ 'json': ['jq'],
-			\ 'markdown': ['prettier'],
-			\ 'python': ['isort', 'black'],
-			\ 'rust': ['rustfmt'],
-			\ 'sh': ['shfmt'],
-			\ 'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
-			\ 'yaml': ['prettier'],
-			\ }
+            \ '*' : ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'bash': ['shfmt'],
+            \ 'go': ['goimports', 'gopls'],
+            \ 'json': ['jq'],
+            \ 'markdown': ['prettier'],
+            \ 'python': ['isort', 'black'],
+            \ 'rust': ['rustfmt'],
+            \ 'sh': ['shfmt'],
+            \ 'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
+            \ 'yaml': ['prettier'],
+            \ }
 let g:ale_linters = {
-			\ 'rust': ['cargo', 'analyzer'],
-			\ 'terraform': ['terraform', 'tflint', 'terraform_ls'],
-			\ }
-let g:ale_hover_cursor = 0
-let g:ale_virtualtext_cursor = 2
+            \ 'rust': ['cargo', 'analyzer'],
+            \ 'terraform': ['terraform', 'tflint', 'terraform_ls'],
+            \ }
+let g:ale_virtualtext_cursor = 0
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
 nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
@@ -42,15 +42,21 @@ nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
 
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+    return l:counts.total == 0 ? '' : printf('W:%d E:%d', all_non_errors, all_errors)
+endfunction
+
 " fzf
 let project_finder = executable('fd') ? 'fd . ~/Projects --type d' : 'find ~/Projects -type d -not \( -path *.git -prune \) -not \( -path *.terraform -prune \)'
 command! -bang Projects call fzf#run(fzf#wrap({'source': project_finder, 'options': '--prompt=Projects\>\ '}, <bang>0))
-command! URLs call fzf#run(fzf#wrap({'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
-command! F Files
-command! FF Files %:p:h
 nnoremap <leader>bb <cmd>Buffers<cr>
-nnoremap <leader>ff <cmd>GFiles<cr>
+nnoremap <leader>ff <cmd>Files<cr>
 nnoremap <leader>FF <cmd>Files %:p:h<cr>
+nnoremap <leader>fg <cmd>GFiles<cr>
+nnoremap <leader>FG <cmd>GFiles?<cr>
 nnoremap <leader>uu <cmd>URLs<cr>
 
 packadd minpac
@@ -59,15 +65,15 @@ command! PackClean call minpac#clean()
 command! PackStatus call minpac#status()
 
 call minpac#init()
-call minpac#add('https://github.com/vim/colorschemes')
+
 call minpac#add('https://github.com/dense-analysis/ale')
 call minpac#add('https://github.com/editorconfig/editorconfig-vim')
 call minpac#add('https://github.com/junegunn/fzf')
 call minpac#add('https://github.com/junegunn/fzf.vim')
 call minpac#add('https://github.com/lifepillar/vim-mucomplete')
 call minpac#add('https://github.com/machakann/vim-highlightedyank')
+call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/tpope/vim-commentary')
-call minpac#add('https://github.com/tpope/vim-dispatch')
 call minpac#add('https://github.com/tpope/vim-eunuch')
 call minpac#add('https://github.com/tpope/vim-fugitive')
 call minpac#add('https://github.com/tpope/vim-rhubarb')
@@ -75,7 +81,6 @@ call minpac#add('https://github.com/tpope/vim-rsi')
 call minpac#add('https://github.com/tpope/vim-surround')
 call minpac#add('https://github.com/tpope/vim-unimpaired')
 call minpac#add('https://github.com/tpope/vim-vinegar')
-call minpac#add('https://github.com/sheerun/vim-polyglot')
 if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-gutentags') | endif
 
 packloadall
@@ -83,7 +88,8 @@ packloadall
 " vim options
 let &autoindent = 1
 let &autoread = 1
-let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
+" let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
+let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
@@ -92,9 +98,6 @@ let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
-let &grepprg = executable('rg')
-			\ ? 'rg --vimgrep --smart-case $*'
-			\ : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 let &guioptions = ''
 let &hidden = 1
 let &hlsearch = 0
@@ -102,20 +105,21 @@ let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
 let &keywordprg = ':!ddgr'
+let &laststatus = 2
 let &lazyredraw = 1
-let &list = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
-let &number = 1
+let &number = 0
 let &path = '.,,docs/**,src/**,cmd/**'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showbreak = '… '
 let &showmode = 1
-let &signcolumn = 'number'
+let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
+let &statusline = '%n %f %m%r%h%w%y%q %{LinterStatus()}'
 let &swapfile = 0
 let &ttimeout = 1
 let &ttimeoutlen = 50
@@ -126,19 +130,18 @@ let &wildmenu = 1
 let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
+let &t_Co = 16
+
+let &grepprg = executable('rg')
+            \ ? 'rg --vimgrep --smart-case $*'
+            \ : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 
 " change insert/replace cursor shape based on vim mode
 if &term =~ "xterm"
-	let &t_SI = "\e[6 q"
-	let &t_SR = "\e[4 q"
-	let &t_EI = "\e[2 q"
+    let &t_SI = "\e[6 q"
+    let &t_SR = "\e[4 q"
+    let &t_EI = "\e[2 q"
 endif
-
-" [B]uffer [D]elete all buffers. To re-open most recent buffer: `:e#`
-command! BD %bd
-
-" Re-open nested vim-in-vim in outer vim
-command! Unwrap let g:file = expand('%') | bdelete | exec 'silent !echo -e "\033]51;[\"drop\", \"'..g:file..'\"]\007"' | q
 
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>

@@ -1,4 +1,4 @@
-set &l:keywordprg = ':!cargo doc --open'
+" let &l:keywordprg = ':!cargo doc --open'
 
 function! ALEInstall() abort
 	if executable('brew')
