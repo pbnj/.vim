@@ -42,13 +42,6 @@ nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf('W:%d E:%d', all_non_errors, all_errors)
-endfunction
-
 " fzf
 let project_finder = executable('fd') ? 'fd . ~/Projects --type d' : 'find ~/Projects -type d -not \( -path *.git -prune \) -not \( -path *.terraform -prune \)'
 command! -bang Projects call fzf#run(fzf#wrap({'source': project_finder, 'options': '--prompt=Projects\>\ '}, <bang>0))
@@ -119,7 +112,7 @@ let &showmode = 1
 let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%n %f %m%r%h%w%y%q %{LinterStatus()}'
+let &statusline = '%n %f %m%r%h%w%y%q'
 let &swapfile = 0
 let &ttimeout = 1
 let &ttimeoutlen = 50
@@ -160,3 +153,5 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
+
+colorscheme quiet
