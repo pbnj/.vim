@@ -1,10 +1,6 @@
 nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 
-if !isdirectory(glob('~/.vim/pack/minpac/opt/minpac'))
-    git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-endif
-
 filetype plugin indent on
 
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
