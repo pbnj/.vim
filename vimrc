@@ -10,7 +10,7 @@ packadd cfilter
 runtime ftplugin/man.vim
 
 " Plugins
-let g:polyglot_disabled = ['csv']
+" let g:polyglot_disabled = ['csv']
 let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 
 " ale
@@ -42,14 +42,11 @@ nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
 
 " fzf
-let project_finder = executable('fd') ? 'fd . ~/Projects --type d' : 'find ~/Projects -type d -not \( -path *.git -prune \) -not \( -path *.terraform -prune \)'
-command! -bang Projects call fzf#run(fzf#wrap({'source': project_finder, 'options': '--prompt=Projects\>\ '}, <bang>0))
 nnoremap <leader>bb <cmd>Buffers<cr>
 nnoremap <leader>ff <cmd>Files<cr>
 nnoremap <leader>FF <cmd>Files %:p:h<cr>
 nnoremap <leader>fg <cmd>GFiles<cr>
 nnoremap <leader>FG <cmd>GFiles?<cr>
-nnoremap <leader>uu <cmd>URLs<cr>
 
 if empty(glob('~/.vim/pack/minpac/opt/minpac'))
   ! git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
@@ -69,7 +66,7 @@ call minpac#add('https://github.com/junegunn/fzf')
 call minpac#add('https://github.com/junegunn/fzf.vim')
 call minpac#add('https://github.com/lifepillar/vim-mucomplete')
 call minpac#add('https://github.com/machakann/vim-highlightedyank')
-call minpac#add('https://github.com/sheerun/vim-polyglot')
+" call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/tpope/vim-commentary')
 call minpac#add('https://github.com/tpope/vim-eunuch')
 call minpac#add('https://github.com/tpope/vim-fugitive')
@@ -82,10 +79,10 @@ if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-
 
 packloadall
 
+" let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
 " vim options
 let &autoindent = 1
 let &autoread = 1
-" let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
 let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
@@ -116,8 +113,9 @@ let &showmode = 1
 let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%n %f %m%r%h%w%y%q'
+let &statusline = '%f %m%r%h%w%y%q'
 let &swapfile = 0
+let &t_Co = 16
 let &ttimeout = 1
 let &ttimeoutlen = 50
 let &ttyfast = 1
@@ -127,7 +125,6 @@ let &wildmenu = 1
 let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
-let &t_Co = 16
 
 let &grepprg = executable('rg')
             \ ? 'rg --vimgrep --smart-case $*'
