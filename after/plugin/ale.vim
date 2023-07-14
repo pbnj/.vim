@@ -8,4 +8,4 @@ function! LinterStatus() abort
     let l:all_non_errors = l:counts.total - l:all_errors
     return l:counts.total == 0 ? '' : printf('W:%d E:%d', all_non_errors, all_errors)
 endfunction
-let &statusline ..= ' %{LinterStatus()}'
+let &statusline ..= ' %#Error#%{LinterStatus()}%*'

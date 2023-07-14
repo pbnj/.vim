@@ -1,15 +1,18 @@
+let b:ale_fixers = ['prettier']
 setlocal spell
 
 function! ALEInstall() abort
 	if executable('brew')
-		! brew install node
-		terminal npm i -g doctoc prettier markdownlint-cli
+		! brew install node prettier markdownlint
+		! npm i -g doctoc
 	elseif executable('apt')
 		! curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
-		terminal npm i -g doctoc prettier markdownlint-cli
+		! npm i -g doctoc prettier markdownlint-cli
 	elseif executable('apk')
 		! apk add --no-cache nodejs npm
-		terminal npm i -g doctoc prettier markdownlint-cli
+		! npm i -g doctoc prettier markdownlint-cli
+	else
+		echoerr "brew or apt or apk not found. cannot install `doctoc`, `prettier`, and/or `markdownlint-cli`."
 	endif
 endfunction
 command! ALEInstall call ALEInstall()

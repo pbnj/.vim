@@ -16,23 +16,9 @@ let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim':
 " ale
 let &omnifunc = 'ale#completion#OmniFunc'
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-            \ '*' : ['remove_trailing_lines', 'trim_whitespace'],
-            \ 'bash': ['shfmt'],
-            \ 'go': ['goimports', 'gopls'],
-            \ 'json': ['jq'],
-            \ 'markdown': ['prettier'],
-            \ 'python': ['isort', 'black'],
-            \ 'rust': ['rustfmt'],
-            \ 'sh': ['shfmt'],
-            \ 'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
-            \ 'yaml': ['prettier'],
-            \ }
-let g:ale_linters = {
-            \ 'rust': ['cargo', 'analyzer'],
-            \ 'terraform': ['terraform', 'tflint', 'terraform_ls'],
-            \ }
+let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
 let g:ale_virtualtext_cursor = 0
+let g:ale_floating_preview = 0
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
 nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
@@ -60,13 +46,13 @@ command! PackStatus call minpac#status()
 
 call minpac#init()
 
+" call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/dense-analysis/ale')
 call minpac#add('https://github.com/editorconfig/editorconfig-vim')
 call minpac#add('https://github.com/junegunn/fzf')
 call minpac#add('https://github.com/junegunn/fzf.vim')
 call minpac#add('https://github.com/lifepillar/vim-mucomplete')
 call minpac#add('https://github.com/machakann/vim-highlightedyank')
-" call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/tpope/vim-commentary')
 call minpac#add('https://github.com/tpope/vim-eunuch')
 call minpac#add('https://github.com/tpope/vim-fugitive')
@@ -80,14 +66,14 @@ if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-
 packloadall
 
 " let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
+" let &clipboard = 'unnamed,unnamedplus'
 " vim options
 let &autoindent = 1
 let &autoread = 1
 let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
-let &clipboard = 'unnamed,unnamedplus'
-let &completeopt = 'menu,longest'
+" let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
@@ -103,6 +89,7 @@ let &laststatus = 2
 let &lazyredraw = 1
 let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
+let &mouse = 'a'
 let &number = 0
 let &path = '.,,docs/**,src/**,cmd/**'
 let &pumheight = 50
@@ -145,13 +132,14 @@ nnoremap <leader>gg :G<cr>
 nnoremap <leader>gP :G! pull<cr>
 nnoremap <leader>gp :G! push<cr>
 nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>l <cmd>lopen<cr>
+nnoremap <leader>q <cmd>copen<cr>
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>TT :topleft terminal <c-r><c-l>
 nnoremap <leader>tt <cmd>topleft terminal<cr>
 nnoremap <leader>vs :vs **/*
 nnoremap Y y$
 noremap <expr> N (v:searchforward ? 'N' : 'n')
-noremap <expr> n (v:searchforward ? 'n' : 'N')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
