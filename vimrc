@@ -10,7 +10,7 @@ packadd cfilter
 runtime ftplugin/man.vim
 
 " Plugins
-" let g:polyglot_disabled = ['csv']
+let g:polyglot_disabled = ['csv']
 let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 
 " ale
@@ -46,7 +46,7 @@ command! PackStatus call minpac#status()
 
 call minpac#init()
 
-" call minpac#add('https://github.com/sheerun/vim-polyglot')
+call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/dense-analysis/ale')
 call minpac#add('https://github.com/editorconfig/editorconfig-vim')
 call minpac#add('https://github.com/junegunn/fzf')
@@ -67,20 +67,20 @@ packloadall
 
 " let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
 " let &clipboard = 'unnamed,unnamedplus'
+" let &completeopt = 'menu,longest'
 " vim options
 let &autoindent = 1
 let &autoread = 1
 let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
-" let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
 let &guioptions = ''
 let &hidden = 1
-let &hlsearch = 0
+let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
@@ -142,5 +142,3 @@ nnoremap Y y$
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
-
-colorscheme quiet
