@@ -46,13 +46,13 @@ command! PackStatus call minpac#status()
 
 call minpac#init()
 
-call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/dense-analysis/ale')
 call minpac#add('https://github.com/editorconfig/editorconfig-vim')
 call minpac#add('https://github.com/junegunn/fzf')
 call minpac#add('https://github.com/junegunn/fzf.vim')
 call minpac#add('https://github.com/lifepillar/vim-mucomplete')
 call minpac#add('https://github.com/machakann/vim-highlightedyank')
+call minpac#add('https://github.com/sheerun/vim-polyglot')
 call minpac#add('https://github.com/tpope/vim-commentary')
 call minpac#add('https://github.com/tpope/vim-eunuch')
 call minpac#add('https://github.com/tpope/vim-fugitive')
@@ -142,3 +142,5 @@ nnoremap Y y$
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
+
+colorscheme pbnj
