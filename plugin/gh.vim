@@ -35,3 +35,9 @@ function! GHCompletion(A,L,P) abort
 endfunction
 command! -nargs=* -complete=customlist,GHCompletion GH
 			\ <mods> terminal gh <args>
+command! -nargs=* GHRunView
+			\ <mods> terminal gh run view <args>
+command! -nargs=* GHRunLog
+			\ <mods> terminal gh run view --log <args>
+command! -nargs=* GHRunWatch
+			\ <mods> terminal gh run watch <args>
