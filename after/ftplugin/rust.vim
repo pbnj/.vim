@@ -11,3 +11,25 @@ function! ALEInstall() abort
 	endif
 endfunction
 command! ALEInstall call ALEInstall()
+
+function! CargoCompletion(A,L,P) abort
+	return filter([
+				\ 'build', 'b',
+				\ 'check', 'c',
+				\ 'clean',
+				\ 'doc', 'd',
+				\ 'new',
+				\ 'init',
+				\ 'add',
+				\ 'remove',
+				\ 'run', 'r',
+				\ 'test', 't',
+				\ 'bench',
+				\ 'update',
+				\ 'search',
+				\ 'publish',
+				\ 'install',
+				\ 'uninstall',
+				\ ], 'v:val =~ a:A')
+endfunction
+command! -nargs=* -complete=customlist,CargoCompletion Cargo term cargo <args>

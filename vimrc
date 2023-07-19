@@ -15,10 +15,11 @@ let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim':
 
 " ale
 let &omnifunc = 'ale#completion#OmniFunc'
+let g:ale_close_preview_on_insert = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
-let g:ale_virtualtext_cursor = 0
 let g:ale_floating_preview = 0
+let g:ale_virtualtext_cursor = 0
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
 nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
@@ -66,21 +67,20 @@ if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-
 packloadall
 
 " let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
-" let &clipboard = 'unnamed,unnamedplus'
-" let &completeopt = 'menu,longest'
 " vim options
 let &autoindent = 1
 let &autoread = 1
 let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
+let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
 let &grepformat = '%f:%l:%m'
 let &guioptions = ''
 let &hidden = 1
-let &hlsearch = 1
+let &hlsearch = 0
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
@@ -138,6 +138,9 @@ nnoremap <leader>sp :sp **/*
 nnoremap <leader>TT :topleft terminal <c-r><c-l>
 nnoremap <leader>tt <cmd>topleft terminal<cr>
 nnoremap <leader>vs :vs **/*
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
+nnoremap Q <nop>
 nnoremap Y y$
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>

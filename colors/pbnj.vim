@@ -119,6 +119,11 @@ hi!  Visual        gui=reverse         guifg=NONE         guibg=NONE
 hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
 endif
 
+hi!  link  ALEVirtualTextError         DiffDelete
+hi!  link  ALEVirtualTextInfo          DiffChange
+hi!  link  ALEVirtualTextStyleError    DiffDelete
+hi!  link  ALEVirtualTextStyleWarning  DiffChange
+hi!  link  ALEVirtualTextWarning       DiffChange
 hi!  link  EndOfBuffer                 NonText
 hi!  link  IncSearch                   Search
 hi!  link  PmenuSBar                   Pmenu
@@ -126,11 +131,7 @@ hi!  link  PmenuThumb                  PmenuSel
 hi!  link  QuickFixLine                Error
 hi!  link  SpecialKey                  NonText
 hi!  link  TabLineFill                 TabLine
+hi!  link  Terminal                    Normal
 hi!  link  diffAdded                   DiffAdd
 hi!  link  diffChanged                 DiffChange
 hi!  link  diffRemoved                 DiffDelete
-hi!  link  ALEVirtualTextError         DiffDelete
-hi!  link  ALEVirtualTextWarning       DiffChange
-hi!  link  ALEVirtualTextInfo          DiffChange
-hi!  link  ALEVirtualTextStyleError    DiffDelete
-hi!  link  ALEVirtualTextStyleWarning  DiffChange

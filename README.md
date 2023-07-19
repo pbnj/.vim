@@ -1,6 +1,6 @@
 # dotvim
 
-> My .vim
+> My .vim configurations
 
 ## Overview
 
