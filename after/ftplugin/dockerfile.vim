@@ -10,6 +10,7 @@ call ale#linter#Define('dockerfile', {
 function! ALEInstall() abort
 	if executable('npm')
 		! npm install -g dockerfile-language-server-nodejs
+		! npm install -g @microsoft/compose-language-service
 	endif
 endfunction
 command! ALEInstall call ALEInstall()

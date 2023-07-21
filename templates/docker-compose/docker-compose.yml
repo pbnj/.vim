@@ -8,6 +8,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ${HOME}/.aws:/root/.aws
+      - ${HOME}/.vim:/root/.vim
       - ${HOME}/.config:/root/.config
       - ${HOME}/.kube:/root/.kube
       - ${HOME}/.docker:/root/.docker
