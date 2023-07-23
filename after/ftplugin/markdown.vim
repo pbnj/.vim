@@ -17,4 +17,5 @@ function! ALEInstall() abort
 endfunction
 command! ALEInstall call ALEInstall()
 
-command! -nargs=* Doctoc ! npx doctoc --update-only <args>
+command! TOCGen ! npx doctoc %
+command! TOCUpdate ! npx doctoc --update-only %

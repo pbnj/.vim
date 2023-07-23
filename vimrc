@@ -35,44 +35,40 @@ nnoremap <leader>FF <cmd>Files %:p:h<cr>
 nnoremap <leader>fg <cmd>GFiles<cr>
 nnoremap <leader>FG <cmd>GFiles?<cr>
 
-if empty(glob('~/.vim/pack/minpac/opt/minpac'))
-  ! git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-packadd minpac
+call plug#begin()
 
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
-command! PackStatus call minpac#status()
+Plug 'https://github.com/dense-analysis/ale'
+Plug 'https://github.com/editorconfig/editorconfig-vim'
+Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/lifepillar/vim-mucomplete'
+Plug 'https://github.com/machakann/vim-highlightedyank'
+Plug 'https://github.com/sheerun/vim-polyglot'
+Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-eunuch'
+Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/tpope/vim-rhubarb'
+Plug 'https://github.com/tpope/vim-rsi'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/tpope/vim-unimpaired'
+Plug 'https://github.com/tpope/vim-vinegar'
+if executable('ctags') | Plug 'https://github.com/ludovicchabant/vim-gutentags' | endif
 
-call minpac#init()
+call plug#end()
 
-call minpac#add('https://github.com/dense-analysis/ale')
-call minpac#add('https://github.com/editorconfig/editorconfig-vim')
-call minpac#add('https://github.com/junegunn/fzf')
-call minpac#add('https://github.com/junegunn/fzf.vim')
-call minpac#add('https://github.com/lifepillar/vim-mucomplete')
-call minpac#add('https://github.com/machakann/vim-highlightedyank')
-call minpac#add('https://github.com/sheerun/vim-polyglot')
-call minpac#add('https://github.com/tpope/vim-commentary')
-call minpac#add('https://github.com/tpope/vim-eunuch')
-call minpac#add('https://github.com/tpope/vim-fugitive')
-call minpac#add('https://github.com/tpope/vim-rhubarb')
-call minpac#add('https://github.com/tpope/vim-rsi')
-call minpac#add('https://github.com/tpope/vim-surround')
-call minpac#add('https://github.com/tpope/vim-unimpaired')
-call minpac#add('https://github.com/tpope/vim-vinegar')
-if executable('ctags') | call minpac#add('https://github.com/ludovicchabant/vim-gutentags') | endif
-
-packloadall
-
-" let &background = (system('defaults read -g AppleInterfaceStyle') =~ '^Dark') ? 'dark' : 'light'
 " vim options
 let &autoindent = 1
 let &autoread = 1
 let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
+let &clipboard = 'unnamed,unnamedplus'
 let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
