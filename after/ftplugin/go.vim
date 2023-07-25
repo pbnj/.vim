@@ -1,6 +1,8 @@
+let &l:keywordprg = ':!ddgr golang'
+
 let b:ale_fixers = ['goimports', 'gopls']
 let b:ale_linters = ['gofmt', 'gopls', 'govet', 'golangci-lint']
-let &l:keywordprg=':!go doc'
+" let &l:keywordprg=':!go doc'
 
 function! ALEInstall() abort
 	if executable('brew')

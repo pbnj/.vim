@@ -1,3 +1,5 @@
+let &l:keywordprg = printf(':!ddgr %s', &filetype)
+
 call ale#linter#Define('dockerfile', {
 			\ 'name': 'docker-language-server',
 			\ 'lsp': 'stdio',

@@ -1,3 +1,5 @@
+let &l:keywordprg = ':!ddgr docker-compose'
+
 call ale#linter#Define('docker-compose', {
 			\ 'name': 'docker-compose-langserver',
 			\ 'lsp': 'stdio',

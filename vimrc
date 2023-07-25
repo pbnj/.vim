@@ -24,6 +24,7 @@ nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
 nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
 nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
+nnoremap <leader>gr <cmd>ALEFindReferences<cr>
 nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
@@ -79,7 +80,6 @@ let &hlsearch = 0
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &keywordprg = ':!ddgr'
 let &laststatus = 2
 let &lazyredraw = 1
 let &listchars = 'tab:┊ ,trail:·'

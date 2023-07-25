@@ -1,3 +1,5 @@
+let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
+
 let b:ale_fixers = ['prettier']
 let b:ale_yaml_ls_config = {'yaml': {'schemaStore': { 'enable': v:true }, 'completion': v:true } }
 

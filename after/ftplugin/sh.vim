@@ -1,5 +1,7 @@
-let b:ale_fixers = ['shfmt']
+let &l:keywordprg = ':!ddgr shell'
 let &l:formatprg = 'shfmt'
+
+let b:ale_fixers = ['shfmt']
 
 function! ALEInstall() abort
 	if executable('brew')

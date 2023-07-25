@@ -1,3 +1,5 @@
+let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
+
 let b:ale_fixers = ['ruff']
 
 function! ALEInstall() abort
