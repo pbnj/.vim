@@ -19,24 +19,12 @@ nnoremap <leader>FF <cmd>Files %:p:h<cr>
 nnoremap <leader>fg <cmd>GFiles<cr>
 nnoremap <leader>FG <cmd>GFiles?<cr>
 
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin()
 
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/mattn/vim-lsp-settings'
-Plug 'https://github.com/prabirshrestha/asyncomplete-buffer.vim'
-Plug 'https://github.com/prabirshrestha/asyncomplete-file.vim'
-Plug 'https://github.com/prabirshrestha/asyncomplete-lsp.vim'
-Plug 'https://github.com/prabirshrestha/asyncomplete-tags.vim'
-Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
 Plug 'https://github.com/prabirshrestha/vim-lsp'
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-commentary'
