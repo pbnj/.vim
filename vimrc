@@ -11,6 +11,22 @@ runtime ftplugin/man.vim
 
 " Plugins
 let g:polyglot_disabled = ['csv']
+let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
+
+" ale
+let &omnifunc = 'ale#completion#OmniFunc'
+let g:ale_close_preview_on_insert = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
+let g:ale_floating_preview = 0
+let g:ale_virtualtext_cursor = 0
+nnoremap <leader>af <cmd>ALEFix<cr>
+nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
+nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
+nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
+nnoremap <leader>k <cmd>ALEHover<cr>
+nnoremap [d <cmd>ALEPrevious<cr>
+nnoremap ]d <cmd>ALENext<cr>
 
 " fzf
 nnoremap <leader>bb <cmd>Buffers<cr>
@@ -21,9 +37,13 @@ nnoremap <leader>FG <cmd>GFiles?<cr>
 
 call plug#begin()
 
+Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/lifepillar/vim-mucomplete'
+Plug 'https://github.com/kana/vim-textobj-entire'
+Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/prabirshrestha/vim-lsp'
 Plug 'https://github.com/sheerun/vim-polyglot'
@@ -48,6 +68,7 @@ let &background =  'dark'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
+let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
@@ -74,7 +95,6 @@ let &showmode = 1
 let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %#Error#%{len(getloclist(winnr())) > 0 ? len(getloclist(winnr())) : ""}%*'
 let &swapfile = 0
 let &t_Co = 16
 let &ttimeout = 1

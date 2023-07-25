@@ -1,4 +1,5 @@
 let b:ale_fixers = ['shfmt']
+let &l:formatprg = 'shfmt'
 
 function! ALEInstall() abort
 	if executable('brew')
