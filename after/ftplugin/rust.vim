@@ -52,3 +52,7 @@ command! -nargs=* Csearch Cargo search <args>
 command! -nargs=* Ctest Cargo test <args>
 
 nnoremap c<space> :Cargo<space>
+
+if exists('g:loaded_lsp')
+	call LspAddServer([#{name: 'rustlang', filetype: ['rust'], path: '/Users/peter.benjamin/.cargo/bin/rust-analyzer', args: [], syncInit: v:true}])
+endif

@@ -30,6 +30,7 @@ nnoremap [d <cmd>ALEPrevious<cr>
 nnoremap ]d <cmd>ALENext<cr>
 
 " fzf
+command! URLs call fzf#run(fzf#wrap({'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
 nnoremap <leader>bb <cmd>Buffers<cr>
 nnoremap <leader>ff <cmd>Files<cr>
 nnoremap <leader>FF <cmd>Files %:p:h<cr>
@@ -38,6 +39,7 @@ nnoremap <leader>FG <cmd>GFiles?<cr>
 
 call plug#begin()
 
+" Plug 'https://github.com/yegappan/lsp'
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -46,7 +48,6 @@ Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/prabirshrestha/vim-lsp'
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
