@@ -3,17 +3,6 @@ let &l:keywordprg = ':!ddgr rustlang'
 let b:ale_fixers = ['rustfmt']
 let b:ale_linters = ['cargo', 'analyzer']
 
-function! ALEInstall() abort
-	if executable('brew')
-		! brew install rust-analyzer rustfmt
-	elseif executable('rustup')
-		! rustup component add rust-analyzer rustfmt
-	else
-		echoerr "brew or rustup not found. cannot install `rust-analyzer` and/or `rustfmt`"
-	endif
-endfunction
-command! ALEInstall call ALEInstall()
-
 function! CargoCompletion(A,L,P) abort
 	return filter([
 				\ 'build', 'b',
@@ -53,6 +42,19 @@ command! -nargs=* Ctest Cargo test <args>
 
 nnoremap c<space> :Cargo<space>
 
+if exists('g:loaded_ale')
+	function! ALEInstall() abort
+		if executable('brew')
+			! brew install rust-analyzer rustfmt
+		elseif executable('rustup')
+			! rustup component add rust-analyzer rustfmt
+		else
+			echoerr "brew or rustup not found. cannot install `rust-analyzer` and/or `rustfmt`"
+		endif
+	endfunction
+	command! ALEInstall call ALEInstall()
+endif
+
 if exists('g:loaded_lsp')
-	call LspAddServer([#{name: 'rustlang', filetype: ['rust'], path: '/Users/peter.benjamin/.cargo/bin/rust-analyzer', args: [], syncInit: v:true}])
+	call LspAddServer([#{name: 'rustlang', filetype: ['rust'], path: 'rust-analyzer', args: [], syncInit: v:true}])
 endif
