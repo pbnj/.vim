@@ -109,7 +109,7 @@ let &grepprg = executable('rg')
             \ : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 
 " change insert/replace cursor shape based on vim mode
-if &term =~ "xterm"
+if &term =~# 'xterm'
     let &t_SI = "\e[6 q"
     let &t_SR = "\e[4 q"
     let &t_EI = "\e[2 q"

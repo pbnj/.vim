@@ -13,10 +13,5 @@ if exists('g:loaded_ale')
 endif
 
 if exists('g:loaded_lsp')
-	call LspAddServer([#{
-				\    name: 'yaml-language-server',
-				\    filetype: ['yaml', 'yml'],
-				\    path: 'yaml-language-server',
-				\    args: ['--stdio'],
-				\  }])
+	call LspAddServer([#{ name: 'yaml', filetype: ['yaml', 'yml'], path: 'yaml-language-server', args: ['--stdio'], }])
 endif
