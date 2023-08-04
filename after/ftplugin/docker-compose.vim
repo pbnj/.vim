@@ -3,7 +3,6 @@ let &l:keywordprg = ':!ddgr docker-compose'
 if exists('g:loaded_ale')
 	function! ALEInstall() abort
 		if executable('npm')
-			! npm install -g dockerfile-language-server-nodejs
 			! npm install -g @microsoft/compose-language-service
 		endif
 	endfunction
@@ -17,6 +16,6 @@ if exists('g:loaded_ale')
 				\ })
 endif
 
-if exists('g:loaded_lsp')
-	call LspAddServer([#{name: 'dockerfile', filetype: ['Dockerfile'], path: 'docker-langserver', args: ['--stdio']}])
-endif
+" if exists('g:loaded_lsp')
+" 	call LspAddServer([#{name: 'dockerfile', filetype: ['Dockerfile'], path: 'docker-langserver', args: ['--stdio']}])
+" endif
