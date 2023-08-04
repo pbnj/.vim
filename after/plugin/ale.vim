@@ -6,7 +6,8 @@ if exists('g:loaded_ale')
         return l:counts.total == 0 ? '' : printf(' W:%d E:%d ', all_non_errors, all_errors)
     endfunction
 
-    let &omnifunc = 'ale#completion#OmniFunc'
+    " https://github.com/dense-analysis/ale/issues/4569
+    " let &omnifunc = 'ale#completion#OmniFunc'
     let &statusline ..= '%#ALEError#%{LinterStatus()}%*'
 
     nnoremap <leader>af <cmd>ALEFix<cr>

@@ -12,10 +12,10 @@ if exists('g:loaded_lsp')
     nnoremap [d <cmd>LspDiagPrev<cr>
     nnoremap ]d <cmd>LspDiagNext<cr>
 
-    call lsp#options#OptionsSet({
+    call LspOptionsSet({
+                \ 'aleSupport': v:true,
                 \ 'omniComplete': v:true,
                 \ 'outlineOnRight': v:true,
                 \ })
-                " \ 'autoPopulateDiags': v:true,
 
 endif

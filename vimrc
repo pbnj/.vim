@@ -15,24 +15,20 @@ let g:polyglot_disabled = ['csv']
 let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 
 " ale
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0 " https://github.com/dense-analysis/ale/issues/4569
 let g:ale_close_preview_on_insert = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
 let g:ale_floating_preview = 0
 let g:ale_virtualtext_cursor = 0
 
-" fzf
-command! URLs call fzf#run(fzf#wrap({'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
-nnoremap <leader>bb <cmd>Buffers<cr>
-nnoremap <leader>ff <cmd>Files<cr>
-nnoremap <leader>FF <cmd>Files %:p:h<cr>
-nnoremap <leader>fg <cmd>GFiles<cr>
-nnoremap <leader>FG <cmd>GFiles?<cr>
-
 call plug#begin()
 
+" Language Support
 Plug 'https://github.com/dense-analysis/ale'
+Plug 'https://github.com/yegappan/lsp'
+
+Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
