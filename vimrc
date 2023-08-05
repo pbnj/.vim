@@ -15,7 +15,8 @@ let g:polyglot_disabled = ['csv']
 let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 
 " ale
-let g:ale_completion_enabled = 0 " https://github.com/dense-analysis/ale/issues/4569
+let g:ale_completion_enabled = 0    " https://github.com/dense-analysis/ale/issues/4569
+let g:ale_disable_lsp = 1           " https://github.com/dense-analysis/ale/issues/4569
 let g:ale_close_preview_on_insert = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }

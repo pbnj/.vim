@@ -9,8 +9,6 @@ if exists('g:loaded_lsp')
     nnoremap <leader>gt <cmd>LspGotoTypeDef<cr>
     nnoremap <leader>k  <cmd>LspHover<cr>
     nnoremap <leader>K  <cmd>LspShowSignature<cr>
-    nnoremap [d <cmd>LspDiagPrev<cr>
-    nnoremap ]d <cmd>LspDiagNext<cr>
 
     call LspOptionsSet({
                 \ 'aleSupport': v:true,
