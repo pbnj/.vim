@@ -7,7 +7,7 @@ if exists('g:loaded_ale')
     endfunction
 
     " https://github.com/dense-analysis/ale/issues/4569
-    " let &omnifunc = 'ale#completion#OmniFunc'
+    let &omnifunc = 'ale#completion#OmniFunc'
     let &statusline ..= '%#ALEError#%{LinterStatus()}%*'
 
     nnoremap <leader>af <cmd>ALEFix<cr>
