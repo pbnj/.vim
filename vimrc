@@ -23,10 +23,8 @@ let g:ale_virtualtext_cursor = 0
 
 call plug#begin()
 
-" Language Support
-Plug 'https://github.com/dense-analysis/ale'
-
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
