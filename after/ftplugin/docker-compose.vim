@@ -15,7 +15,3 @@ if exists('g:loaded_ale')
 				\ 'project_root': { _ -> expand('%p:h') }
 				\ })
 endif
-
-" if exists('g:loaded_lsp')
-" 	call LspAddServer([#{name: 'dockerfile', filetype: ['Dockerfile'], path: 'docker-langserver', args: ['--stdio']}])
-" endif

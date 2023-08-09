@@ -17,7 +17,3 @@ if exists('g:loaded_ale')
 	endfunction
 	command! ALEInstall call ALEInstall()
 endif
-
-if exists('g:loaded_lsp')
-	call LspAddServer([#{ name: 'golang', filetype: ['go', 'gomod'], path: 'gopls', args: ['serve'], syncInit: v:true }])
-endif

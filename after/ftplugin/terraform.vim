@@ -1,7 +1,7 @@
 let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
 
 let b:ale_fixers = ['terraform', 'remove_trailing_lines', 'trim_whitespace']
-let b:ale_linters = ['terraform', 'tflint', 'terraform_ls']
+let b:ale_linters = ['terraform', 'tflint', 'terraform_ls', 'snyk']
 
 function! TFenvCompletion(A,L,P) abort
 	return filter([
@@ -41,8 +41,4 @@ if exists('g:loaded_ale')
 		endif
 	endfunction
 	command! ALEInstall call ALEInstall()
-endif
-
-if exists('g:loaded_lsp')
-	call LspAddServer([#{name: 'terraform', filetype: ['terraform', 'terraform-vars'], path: 'terraform-ls', args: ['serve']}])
 endif

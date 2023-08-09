@@ -45,7 +45,3 @@ if exists('g:loaded_ale')
 	endfunction
 	command! ALEInstall call ALEInstall()
 endif
-
-if exists('g:loaded_lsp')
-	call LspAddServer([#{name: 'markdown', filetype: ['markdown'], path: '/opt/homebrew/bin/marksman', args: ['server'], syncInit: v:true}])
-endif
