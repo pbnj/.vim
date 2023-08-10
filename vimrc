@@ -54,11 +54,11 @@ call plug#end()
 " vim options
 let &autoindent = 1
 let &autoread = 1
-let &background =  'dark'
+let &background = (system("defaults read -g AppleInterfaceStyle") =~ '^Dark') ? 'dark' : 'light'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
-let &completeopt = 'menu,noinsert,noselect'
+let &completeopt = 'menu,longest'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 0
@@ -128,4 +128,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme pbnj
+colorscheme quiet
