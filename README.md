@@ -1,12 +1,11 @@
-# dotvim
+# .vim
 
 > My .vim configurations
 
 ## Overview
 
-My personal `vim` distribution.
-
-It focuses on minimalism without compromising pragmatism and functionality.
+My personal `vim` configuration, focusing on minimalism without compromising
+pragmatism and functionality.
 
 Notable features include:
 
@@ -20,7 +19,7 @@ Notable features include:
 ## Install
 
 ```sh
-git clone https://github.com/pbnj/dotvim ~/.vim
+git clone https://github.com/pbnj/.vim ~/.vim
 ```
 
 ## Install/Update Plugins
