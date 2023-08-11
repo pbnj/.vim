@@ -1,12 +1,12 @@
 " Vim compiler file
-" Compiler:	vint
+" Compiler:	actionlint
 " Maintainer:	Peter Benjamin
-" Last Change: 2023-07-31T10:45:12-07:00
+" Last Change: 2023-08-10T20:49:28-07:00
 
 if exists('current_compiler')
   finish
 endif
-let current_compiler = 'vint'
+let current_compiler = 'actionlint'
 
 if exists(':CompilerSet') != 2
   command -nargs=* CompilerSet setlocal <args>
@@ -15,7 +15,7 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-CompilerSet makeprg=vint\ %
+CompilerSet makeprg=actionlint\ -no-color\ -oneline
 CompilerSet errorformat=%f:%l:%c:\ %m
 
 let &cpo = s:save_cpo

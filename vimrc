@@ -13,18 +13,18 @@ runtime ftplugin/man.vim
 let g:polyglot_disabled = ['csv']
 let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
 
-" ale
-let g:ale_completion_enabled = 1
-let g:ale_close_preview_on_insert = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
-let g:ale_floating_preview = 0
-let g:ale_virtualtext_cursor = 0
+" " ale
+" let g:ale_completion_enabled = 1
+" let g:ale_close_preview_on_insert = 1
+" let g:ale_fix_on_save = 1
+" let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
+" let g:ale_floating_preview = 0
+" let g:ale_virtualtext_cursor = 0
 
 call plug#begin()
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-Plug 'https://github.com/dense-analysis/ale'
+" Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -44,6 +44,7 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/tmux-complete.vim'
+Plug 'https://github.com/dhruvasagar/vim-markify'
 
 if executable('ctags')
     Plug 'https://github.com/ludovicchabant/vim-gutentags'
@@ -75,12 +76,12 @@ let &listchars = 'tab:┊ ,trail:·'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 1
-let &path = '.,,docs/**,src/**,cmd/**'
+let &path = '.,,docs,src,cmd,.github'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showmode = 1
-let &signcolumn = 'number'
+let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
@@ -88,7 +89,7 @@ let &t_Co = 16
 let &ttimeout = 1
 let &ttimeoutlen = 50
 let &ttyfast = 1
-let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache,.terraform'
+let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
 let &wildignorecase = 1
 let &wildmenu = 1
 let &wildmode = 'longest:full,full'
@@ -108,24 +109,22 @@ endif
 
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
+nnoremap <expr> <leader>l (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
+nnoremap <expr> <leader>q (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
+nnoremap <leader>Y  "+y$
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
-nnoremap <leader>gg :G<cr>
-nnoremap <leader>gP :G! pull<cr>
-nnoremap <leader>gp :G! push<cr>
-nnoremap <leader>gw :Gwrite<cr>
-nnoremap <leader>l  <cmd>lopen<cr>
-nnoremap <leader>q  <cmd>copen<cr>
 nnoremap <leader>sp :sp **/*
-nnoremap <leader>TT :topleft terminal <c-r><c-l>
-nnoremap <leader>tt <cmd>topleft terminal<cr>
+nnoremap <leader>tt :topleft terminal
 nnoremap <leader>vs :vs **/*
 nnoremap <leader>y  "+y
-nnoremap <leader>Y  "+y$
 nnoremap Q <nop>
 nnoremap Y y$
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme quiet
+iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
+iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
+
+colorscheme pbnj
