@@ -79,44 +79,44 @@ hi!  Visual        cterm=reverse         ctermfg=NONE         ctermbg=NONE
 hi!  WarningMsg    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE
 
 if has('gui_running')
-hi!  ColorColumn   gui=reverse         guifg=DarkRed      guibg=NONE
-hi!  Comment       gui=NONE            guifg=DarkGray     guibg=NONE
-hi!  Constant      gui=NONE            guifg=DarkRed      guibg=NONE
-hi!  CurSearch     gui=reverse         guifg=DarkRed      guibg=NONE
-hi!  CursorColumn  gui=reverse         guifg=DarkGray     guibg=NONE
-hi!  DiffAdd       gui=bold            guifg=DarkGreen    guibg=NONE
-hi!  DiffChange    gui=bold            guifg=DarkYellow   guibg=NONE
-hi!  DiffDelete    gui=bold            guifg=DarkRed      guibg=NONE
-hi!  DiffText      gui=bold,underline  guifg=DarkYellow   guibg=NONE
-hi!  Directory     gui=bold            guifg=NONE         guibg=NONE
-hi!  Error         gui=reverse         guifg=Red          guibg=NONE
-hi!  ErrorMsg      gui=bold            guifg=DarkRed      guibg=NONE
-hi!  Folded        gui=NONE            guifg=DarkGray     guibg=NONE
-hi!  Identifier    gui=NONE            guifg=DarkCyan     guibg=NONE
-hi!  Ignore        gui=NONE            guifg=DarkGray     guibg=NONE
-hi!  LineNr        gui=NONE            guifg=DarkGray     guibg=NONE
-hi!  MatchParen    gui=bold            guifg=NONE         guibg=NONE
-hi!  ModeMsg       gui=bold            guifg=NONE         guibg=NONE
-hi!  MoreMsg       gui=bold            guifg=DarkGreen    guibg=NONE
-hi!  NonText       gui=NONE            guifg=DarkGray     guibg=NONE
-hi!  Pmenu         gui=reverse         guifg=DarkMagenta  guibg=NONE
-hi!  PmenuSel      gui=reverse         guifg=NONE         guibg=NONE
-hi!  PreProc       gui=NONE            guifg=DarkMagenta  guibg=NONE
-hi!  Question      gui=bold            guifg=DarkGreen    guibg=NONE
-hi!  Search        gui=reverse         guifg=DarkYellow   guibg=Black
-hi!  Special       gui=NONE            guifg=DarkMagenta  guibg=NONE
-hi!  SpellBad      gui=undercurl       guifg=Red          guibg=NONE
-hi!  SpellCap      gui=undercurl       guifg=Yellow       guibg=NONE
-hi!  SpellLocal    gui=undercurl       guifg=Magenta      guibg=NONE
-hi!  SpellRare     gui=undercurl       guifg=Cyan         guibg=NONE
-hi!  Statement     gui=NONE            guifg=DarkYellow   guibg=NONE
-hi!  TabLine       gui=reverse         guifg=NONE         guibg=NONE
-hi!  TabLineSel    gui=bold            guifg=NONE         guibg=NONE
-hi!  Title         gui=bold            guifg=DarkMagenta  guibg=NONE
-hi!  Todo          gui=NONE            guifg=Black        guibg=DarkYellow
-hi!  Type          gui=NONE            guifg=DarkGreen    guibg=NONE
-hi!  Visual        gui=reverse         guifg=NONE         guibg=NONE
-hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
+	hi!  ColorColumn   gui=reverse         guifg=DarkRed      guibg=NONE
+	hi!  Comment       gui=NONE            guifg=DarkGray     guibg=NONE
+	hi!  Constant      gui=NONE            guifg=DarkRed      guibg=NONE
+	hi!  CurSearch     gui=reverse         guifg=DarkRed      guibg=NONE
+	hi!  CursorColumn  gui=reverse         guifg=DarkGray     guibg=NONE
+	hi!  DiffAdd       gui=bold            guifg=DarkGreen    guibg=NONE
+	hi!  DiffChange    gui=bold            guifg=DarkYellow   guibg=NONE
+	hi!  DiffDelete    gui=bold            guifg=DarkRed      guibg=NONE
+	hi!  DiffText      gui=bold,underline  guifg=DarkYellow   guibg=NONE
+	hi!  Directory     gui=bold            guifg=NONE         guibg=NONE
+	hi!  Error         gui=reverse         guifg=Red          guibg=NONE
+	hi!  ErrorMsg      gui=bold            guifg=DarkRed      guibg=NONE
+	hi!  Folded        gui=NONE            guifg=DarkGray     guibg=NONE
+	hi!  Identifier    gui=NONE            guifg=DarkCyan     guibg=NONE
+	hi!  Ignore        gui=NONE            guifg=DarkGray     guibg=NONE
+	hi!  LineNr        gui=NONE            guifg=DarkGray     guibg=NONE
+	hi!  MatchParen    gui=bold            guifg=NONE         guibg=NONE
+	hi!  ModeMsg       gui=bold            guifg=NONE         guibg=NONE
+	hi!  MoreMsg       gui=bold            guifg=DarkGreen    guibg=NONE
+	hi!  NonText       gui=NONE            guifg=DarkGray     guibg=NONE
+	hi!  Pmenu         gui=reverse         guifg=DarkMagenta  guibg=NONE
+	hi!  PmenuSel      gui=reverse         guifg=NONE         guibg=NONE
+	hi!  PreProc       gui=NONE            guifg=DarkMagenta  guibg=NONE
+	hi!  Question      gui=bold            guifg=DarkGreen    guibg=NONE
+	hi!  Search        gui=reverse         guifg=DarkYellow   guibg=Black
+	hi!  Special       gui=NONE            guifg=DarkMagenta  guibg=NONE
+	hi!  SpellBad      gui=underline       guifg=Red          guibg=NONE
+	hi!  SpellCap      gui=underline       guifg=Yellow       guibg=NONE
+	hi!  SpellLocal    gui=underline       guifg=Magenta      guibg=NONE
+	hi!  SpellRare     gui=underline       guifg=Cyan         guibg=NONE
+	hi!  Statement     gui=NONE            guifg=DarkYellow   guibg=NONE
+	hi!  TabLine       gui=reverse         guifg=NONE         guibg=NONE
+	hi!  TabLineSel    gui=bold            guifg=NONE         guibg=NONE
+	hi!  Title         gui=bold            guifg=DarkMagenta  guibg=NONE
+	hi!  Todo          gui=NONE            guifg=Black        guibg=DarkYellow
+	hi!  Type          gui=NONE            guifg=DarkGreen    guibg=NONE
+	hi!  Visual        gui=reverse         guifg=NONE         guibg=NONE
+	hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
 endif
 
 hi!  link  ALEVirtualTextError         DiffDelete
