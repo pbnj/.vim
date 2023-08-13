@@ -2,10 +2,11 @@ if exists('g:loaded_ale')
     let &omnifunc = 'ale#completion#OmniFunc'
     " let &statusline ..= '%#ALEError#%{LinterStatus()}%*'
 
+    " let g:ale_virtualtext_cursor = 0
+    let g:ale_echo_cursor = 0
     let g:ale_fix_on_save = 1
     let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
     let g:ale_floating_preview = 0
-    " let g:ale_virtualtext_cursor = 0
 
     function! LinterStatus() abort
         let l:counts = ale#statusline#Count(bufnr(''))
@@ -24,5 +25,7 @@ if exists('g:loaded_ale')
     nnoremap <leader>k <cmd>ALEHover<cr>
     nnoremap [d <cmd>ALEPrevious<cr>
     nnoremap ]d <cmd>ALENext<cr>
+    nnoremap [D <cmd>ALEFirst<cr>
+    nnoremap ]D <cmd>ALELast<cr>
 
 endif

@@ -1,5 +1,5 @@
 if exists('g:loaded_fzf')
-	let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+	let $FZF_DEFAULT_COMMAND = 'find . -type f \( -not -path .git \)'
 
 	command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
 
