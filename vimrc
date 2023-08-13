@@ -27,6 +27,7 @@ Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
+Plug 'https://github.com/mhinz/vim-signify'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -75,7 +76,7 @@ let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showmode = 0
-let &signcolumn = 'number'
+let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
