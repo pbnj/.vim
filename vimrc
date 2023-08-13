@@ -1,8 +1,6 @@
 nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 
-filetype plugin indent on
-
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd cfilter
 
@@ -10,22 +8,16 @@ packadd cfilter
 runtime ftplugin/man.vim
 
 " Plugins
-let g:polyglot_disabled = ['csv']
-let g:mucomplete#chains = {'default': ['path','omni','c-n','user','tags'],'vim': ['path','cmd','c-n','tags']}
-
-" ale
-let g:ale_completion_enabled = 1
-let g:ale_close_preview_on_insert = 1
-let g:ale_fix_on_save = 1
-let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
-let g:ale_floating_preview = 0
-let g:ale_virtualtext_cursor = 0
-
 call plug#begin()
 
+let g:ale_completion_enabled = 1
 Plug 'https://github.com/dense-analysis/ale'
+
+let g:polyglot_disabled = ['csv']
+Plug 'https://github.com/sheerun/vim-polyglot'
+
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
-Plug 'https://github.com/dhruvasagar/vim-markify'
+Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -33,8 +25,8 @@ Plug 'https://github.com/junegunn/vader.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
+Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -43,20 +35,17 @@ Plug 'https://github.com/tpope/vim-rhubarb'
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/wellle/tmux-complete.vim'
-Plug 'https://github.com/ludovicchabant/vim-gutentags'
-Plug 'https://github.com/cocopon/iceberg.vim'
 
 call plug#end()
+
+filetype plugin indent on
 
 if has('nvim')
 	let &inccommand='split'
 else
 	let &lazyredraw = 1
-	let &ttimeout = 1
-	let &ttimeoutlen = 50
 	let &ttyfast = 1
 endif
 
@@ -91,6 +80,8 @@ let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
 let &termguicolors = 1
+let &ttimeout = 1
+let &ttimeoutlen = 50
 let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
 let &wildignorecase = 1
 let &wildmenu = 1
@@ -98,15 +89,19 @@ let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 
-let &grepprg = executable('rg')
-			\ ? 'rg --vimgrep --smart-case $*'
-			\ : 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
+if executable('rg')
+	let &grepprg = 'rg --vimgrep --smart-case $*'
+else
+	let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
+endif
 
 " change insert/replace cursor shape based on vim mode
-if &term =~# 'xterm'
-	let &t_SI = "\e[6 q"
-	let &t_SR = "\e[4 q"
-	let &t_EI = "\e[2 q"
+if !has('nvim')
+	if &term =~# 'xterm'
+		let &t_SI = "\e[6 q"
+		let &t_SR = "\e[4 q"
+		let &t_EI = "\e[2 q"
+	endif
 endif
 
 cnoremap <c-n> <c-Down>

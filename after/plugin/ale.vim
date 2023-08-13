@@ -1,4 +1,12 @@
 if exists('g:loaded_ale')
+    let &omnifunc = 'ale#completion#OmniFunc'
+    " let &statusline ..= '%#ALEError#%{LinterStatus()}%*'
+
+    let g:ale_fix_on_save = 1
+    let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
+    let g:ale_floating_preview = 0
+    " let g:ale_virtualtext_cursor = 0
+
     function! LinterStatus() abort
         let l:counts = ale#statusline#Count(bufnr(''))
         let l:all_errors = l:counts.error + l:counts.style_error
@@ -6,11 +14,8 @@ if exists('g:loaded_ale')
         return l:counts.total == 0 ? '' : printf(' W:%d E:%d ', all_non_errors, all_errors)
     endfunction
 
-    " https://github.com/dense-analysis/ale/issues/4569
-    let &omnifunc = 'ale#completion#OmniFunc'
-    let &statusline ..= '%#ALEError#%{LinterStatus()}%*'
-
     nnoremap <leader>af <cmd>ALEFix<cr>
+    nnoremap <leader>ai <cmd>ALEInfo<cr>
     nnoremap <leader>ca <cmd>ALECodeAction<cr>
     nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
     nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
