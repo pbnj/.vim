@@ -16,6 +16,9 @@ Plug 'https://github.com/dense-analysis/ale'
 let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
+let g:floaterm_keymap_toggle = '<F12>'
+Plug 'https://github.com/voldikss/vim-floaterm'
+
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
@@ -44,10 +47,10 @@ call plug#end()
 filetype plugin indent on
 
 if has('nvim')
-	let &inccommand='split'
+  let &inccommand='split'
 else
-	let &lazyredraw = 1
-	let &ttyfast = 1
+  let &lazyredraw = 1
+  let &ttyfast = 1
 endif
 
 let &autoindent = 1
@@ -62,7 +65,6 @@ let &encoding = 'utf-8'
 let &expandtab = 1
 let &grepformat = '%f:%l:%m'
 let &hidden = 1
-let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
@@ -80,9 +82,10 @@ let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
-let &termguicolors = 1
+let &termguicolors = ( $COLORTERM is# 'truecolor' ) ? 1 : 0
 let &ttimeout = 1
 let &ttimeoutlen = 50
+let &wildcharm = 26
 let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
 let &wildignorecase = 1
 let &wildmenu = 1
@@ -91,18 +94,18 @@ let &wildoptions = 'pum'
 let &wrap = 0
 
 if executable('rg')
-	let &grepprg = 'rg --vimgrep --smart-case $*'
+  let &grepprg = 'rg --vimgrep --smart-case $*'
 else
-	let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
+  let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 endif
 
 " change insert/replace cursor shape based on vim mode
 if !has('nvim')
-	if &term =~# 'xterm'
-		let &t_SI = "\e[6 q"
-		let &t_SR = "\e[4 q"
-		let &t_EI = "\e[2 q"
-	endif
+  if &term =~# 'xterm'
+    let &t_SI = "\e[6 q"
+    let &t_SR = "\e[4 q"
+    let &t_EI = "\e[2 q"
+  endif
 endif
 
 cnoremap <c-n> <c-Down>
@@ -113,7 +116,6 @@ nnoremap <leader>Y  "+y$
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>sp :sp **/*
-nnoremap <leader>tt :topleft terminal
 nnoremap <leader>vs :vs **/*
 nnoremap <leader>y  "+y
 nnoremap Q <nop>
@@ -126,7 +128,7 @@ iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
 iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
 if &termguicolors == 1
-	colorscheme iceberg
+  colorscheme iceberg
 else
-	colorscheme pbnj
+  colorscheme pbnj
 endif
