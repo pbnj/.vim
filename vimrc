@@ -31,6 +31,7 @@ Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/mhinz/vim-signify'
+Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -40,22 +41,16 @@ Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
 call plug#end()
 
 filetype plugin indent on
 
-if has('nvim')
-  let &inccommand='split'
-else
-  let &lazyredraw = 1
-  let &ttyfast = 1
-endif
-
 let &autoindent = 1
 let &autoread = 1
-let &background = (system("defaults read -g AppleInterfaceStyle") =~ '^Dark') ? 'dark' : 'light'
+let &background = (trim(system("defaults read -g AppleInterfaceStyle")) is# 'Dark') ? 'dark' : 'light'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
@@ -69,11 +64,13 @@ let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
 let &laststatus = 2
-let &listchars = 'tab:┊ ,trail:·'
+let &lazyredraw = 1
+let &list = 1
+let &listchars = 'tab:┊·,trail:·,multispace:·'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 1
-let &path = '.,,docs,src,cmd'
+let &path = '.,,doc,docs,src,cmd,terraform'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
@@ -85,6 +82,7 @@ let &swapfile = 0
 let &termguicolors = ( $COLORTERM is# 'truecolor' ) ? 1 : 0
 let &ttimeout = 1
 let &ttimeoutlen = 50
+let &ttyfast = 1
 let &wildcharm = 26
 let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
 let &wildignorecase = 1
@@ -107,6 +105,8 @@ if !has('nvim')
     let &t_EI = "\e[2 q"
   endif
 endif
+
+let g:netrw_keepdir = 0
 
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
