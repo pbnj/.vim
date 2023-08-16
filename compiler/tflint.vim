@@ -1,6 +1,6 @@
 " Vim compiler file
-" Compiler:	tflint
-" Maintainer:	Peter Benjamin
+" Compiler: tflint
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-01T13:14:01-07:00
 
 if exists('current_compiler')
@@ -15,9 +15,13 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-CompilerSet makeprg=tflint\ --format\ compact
-CompilerSet errorformat=%f:%l:%c:\ %tarning\ -\ %m
-CompilerSet errorformat+=%f:%l:%c:\ %trror\ -\ %m
+let &l:makeprg = 'tflint --format compact'
+
+setlocal errorformat=%f:%l:%c:\ %tarning\ -\ %m
+setlocal errorformat+=%f:%l:%c:\ %trror\ -\ %m
+
+silent CompilerSet makeprg
+silent CompilerSet errorformat
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

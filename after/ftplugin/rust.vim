@@ -1,8 +1,5 @@
 let &l:keywordprg = ':!ddgr rustlang'
 
-let b:ale_fixers = ['rustfmt']
-let b:ale_linters = ['cargo', 'analyzer']
-
 function! CargoCompletion(A,L,P) abort
 	return filter([
 				\ 'build', 'b',
@@ -43,6 +40,9 @@ command! -nargs=* Ctest Cargo test <args>
 nnoremap c<space> :Cargo<space>
 
 if exists('g:loaded_ale')
+	let b:ale_fixers = ['rustfmt']
+	let b:ale_linters = ['cargo', 'analyzer']
+
 	function! ALEInstall() abort
 		if executable('brew')
 			! brew install rust-analyzer rustfmt

@@ -15,8 +15,11 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-CompilerSet makeprg=gitleaks\ detect\ --no-git\ --no-color\ --no-banner\ --verbose\ --source=%
-CompilerSet errorformat=Fingerprint:\ %f:%m:%l
+let &l:makeprg = 'gitleaks detect --verbose --no-git --no-color --no-banner --redact'
+let &l:errorformat = '%-C%.%#,%AFingerprint: %f:%m:%l,%-Z%.%#'
+
+silent CompilerSet makeprg
+silent CompilerSet errorformat
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

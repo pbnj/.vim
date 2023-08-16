@@ -15,8 +15,11 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-CompilerSet makeprg=golangci-lint\ run\ %
-CompilerSet errorformat=%A%f:%l:%c:\ %m,%-G%.%#
+let &l:makeprg = 'golangci-lint run %'
+let &l:errorformat = '%A%f:%l:%c: %m,%-G%.%#'
+
+silent CompilerSet makeprg
+silent CompilerSet errorformat
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

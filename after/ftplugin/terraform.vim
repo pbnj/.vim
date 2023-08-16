@@ -1,8 +1,5 @@
 let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
 
-let b:ale_fixers = ['terraform', 'remove_trailing_lines', 'trim_whitespace']
-let b:ale_linters = ['terraform', 'tflint', 'terraform_ls', 'snyk']
-
 function! TFenvCompletion(A,L,P) abort
 	return filter([
 				\ 'install',
@@ -25,6 +22,9 @@ endfunction
 command! -nargs=? -complete=customlist,TerraformStateCompletion TerraformStateShow <mods> terminal terraform state show <args>
 
 if exists('g:loaded_ale')
+	let b:ale_fixers = ['terraform', 'remove_trailing_lines', 'trim_whitespace']
+	let b:ale_linters = ['terraform', 'tflint', 'terraform_ls', 'snyk', 'gitleaks']
+
 	function! ALEInstall() abort
 		if executable('brew')
 			! brew install hashicorp/tap/terraform-ls tflint tfenv

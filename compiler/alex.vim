@@ -15,8 +15,11 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-CompilerSet makeprg=alex\ %
-CompilerSet errorformat=%-P%f,%C\ \ %l:%c\ %t\ %m,%-G%.%#
+let &l:makeprg = 'alex %'
+let &l:errorformat = '%-P%f,%C  %l:%c %t %m,%-G%.%#'
+
+silent CompilerSet makeprg
+silent CompilerSet errorformat
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
