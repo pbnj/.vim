@@ -1,10 +1,10 @@
 if exists('g:loaded_ale')
     let &omnifunc = 'ale#completion#OmniFunc'
 
-    let g:ale_echo_cursor = 0
     let g:ale_fix_on_save = 1
     let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
     let g:ale_floating_preview = 0
+    let g:ale_virtualtext_cursor = 0
 
     " function! LinterStatus() abort
     "     let l:counts = ale#statusline#Count(bufnr(''))
