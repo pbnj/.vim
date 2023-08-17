@@ -17,10 +17,11 @@ set cpo-=C
 
 let &l:makeprg = 'hadolint --no-color %'
 
-setlocal errorformat=%f:%l\ DL%n\ %trror:\ %m
-setlocal errorformat+=%f:%l\ DL%n\ %tarning:\ %m
-setlocal errorformat+=%f:%l\ SC%n\ %trror:\ %m
-setlocal errorformat+=%f:%l\ SC%n\ %tarning:\ %m
+" match on output like:
+"   /path/to/Dockerfile:123 DL123 error: some error message
+"   /path/to/Dockerfile:123 SC123 warning: some warning message
+setlocal errorformat=%f:%l\ DL%n\ %t%*[a-z]:\ %m
+setlocal errorformat+=%f:%l\ SC%n\ %t%*[a-z]:\ %m
 
 silent CompilerSet makeprg
 silent CompilerSet errorformat
