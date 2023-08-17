@@ -16,9 +16,6 @@ Plug 'https://github.com/dense-analysis/ale'
 let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
-let g:floaterm_keymap_toggle = '<F12>'
-Plug 'https://github.com/voldikss/vim-floaterm'
-
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
@@ -50,7 +47,7 @@ filetype plugin indent on
 
 let &autoindent = 1
 let &autoread = 1
-let &background = (trim(system("defaults read -g AppleInterfaceStyle")) is# 'Dark') ? 'dark' : 'light'
+let &background = ( trim(system("defaults read -g AppleInterfaceStyle")) is# 'Dark' ) ? 'dark' : 'light'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
@@ -88,22 +85,18 @@ let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_mo
 let &wildignorecase = 1
 let &wildmenu = 1
 let &wildmode = 'longest:full,full'
-let &wildoptions = 'pum'
+let &wildoptions = 'pum,fuzzy'
 let &wrap = 0
 
 if executable('rg')
   let &grepprg = 'rg --vimgrep --smart-case $*'
-else
-  let &grepprg = 'grep -HIn --line-buffered --exclude={tags,.terraform\*,\*.tfstate.\*,\*.so} --exclude-dir={.git,node_modules,.terraform\*,__pycache__,debug,target} $*'
 endif
 
 " change insert/replace cursor shape based on vim mode
-if !has('nvim')
-  if &term =~# 'xterm'
-    let &t_SI = "\e[6 q"
-    let &t_SR = "\e[4 q"
-    let &t_EI = "\e[2 q"
-  endif
+if &term =~# 'xterm'
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
 endif
 
 let g:netrw_keepdir = 0
