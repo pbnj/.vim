@@ -1,7 +1,5 @@
-if exists('g:loaded_gitbrowse')
-	finish
-endif
-let g:loaded_gitbrowse = 1
+if exists('g:loaded_git') | finish | endif
+let g:loaded_git = 1
 
 " GitBrowse takes a dictionary and opens files on remote git repo websites.
 function! GitBrowse(args) abort
@@ -21,4 +19,8 @@ command! -range GB
 			\   'line1': <line1>,
 			\   'line2': <line2>,
 			\ })
+
 command! Groot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
+
+" Mappings
+nnoremap <leader>gg <cmd>Git<cr>
