@@ -1,6 +1,6 @@
 " Vim compiler file
-" Compiler:	snyk iac
-" Maintainer:	Peter Benjamin
+" Compiler: snyk iac
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-13T15:30:44-07:00
 
 if exists('current_compiler')
@@ -16,7 +16,7 @@ let s:save_cpo = &cpo
 set cpo-=C
 
 " produce errorformat-friendly output
-let &l:makeprg = 'snyk iac test --json | jq -rc ''.[] | select(.ok == false) | @text "\(.targetFilePath):\(.infrastructureAsCodeIssues[].lineNumber | if (. < 0) then 1 else . end) [\(.infrastructureAsCodeIssues[].id)] \(.infrastructureAsCodeIssues[].msg) \(.infrastructureAsCodeIssues[].issue) - \(.infrastructureAsCodeIssues[].impact) - \(.infrastructureAsCodeIssues[].resolve)"'' | sort -u'
+let &l:makeprg = 'snyk iac test --json | jq -rc ''.[] | select(.ok == false) | @text "\(.targetFilePath):\(.infrastructureAsCodeIssues[].lineNumber | if (. < 0) then 1 else . end) \(.infrastructureAsCodeIssues[].msg) - \(.infrastructureAsCodeIssues[].issue) - \(.infrastructureAsCodeIssues[].impact) - \(.infrastructureAsCodeIssues[].resolve) [\(.infrastructureAsCodeIssues[].id)]"'' | sort -u'
 let &l:errorformat = '%f:%l %m'
 
 silent CompilerSet makeprg
