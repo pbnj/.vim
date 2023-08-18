@@ -21,4 +21,4 @@ command! -range GB
 			\   'line1': <line1>,
 			\   'line2': <line2>,
 			\ })
-command! GR execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
+command! Groot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
