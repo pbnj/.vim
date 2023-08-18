@@ -1,5 +1,5 @@
-plugged/*
-tags*
-.netrwhist
-spell/
-pack/*
+/.netrwhist
+/pack/*
+/plugged/*
+/spell/*
+/tags*
