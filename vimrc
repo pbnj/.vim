@@ -28,6 +28,7 @@ endfunction
 Plug 'https://github.com/ludovicchabant/vim-gutentags', {'do': { -> Install_Ctags() } }
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -88,7 +89,6 @@ let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
-let &t_Co = 16
 let &ttimeout = 1
 let &ttimeoutlen = 50
 let &ttyfast = 1
@@ -131,4 +131,10 @@ tnoremap <s-space> <space>
 iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
 iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
-colorscheme pbnj
+try
+  let &termguicolors = 1
+  colorscheme iceberg
+catch
+  let &t_Co = 16
+  colorscheme pbnj
+endtry
