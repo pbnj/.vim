@@ -16,6 +16,17 @@ Plug 'https://github.com/dense-analysis/ale'
 let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
+function! Install_Ctags() abort
+  if executable('apt')
+    ! apt update && apt install -y universal-ctags
+  elseif executable('brew')
+    ! brew install universal-ctags
+  elseif executable('apk')
+    ! apk add --no-cache ctags
+  endif
+endfunction
+Plug 'https://github.com/ludovicchabant/vim-gutentags', {'do': { -> Install_Ctags() } }
+
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -24,7 +35,6 @@ Plug 'https://github.com/junegunn/vader.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
-Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/mhinz/vim-signify'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
@@ -46,6 +56,7 @@ call plug#end()
 
 filetype plugin indent on
 
+" Options
 let &autoindent = 1
 let &autoread = 1
 let &background = ( trim(system("defaults read -g AppleInterfaceStyle")) is# 'Dark' ) ? 'dark' : 'light'
@@ -64,7 +75,7 @@ let &infercase = 1
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:┊ ,trail:·,multispace:·'
+let &listchars = 'tab:┊ ,trail:·,nbsp:·'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 1
@@ -90,9 +101,7 @@ let &wildoptions = 'pum,fuzzy'
 let &wrap = 0
 let g:netrw_keepdir = 0
 
-if executable('rg')
-  let &grepprg = 'rg --vimgrep --smart-case $*'
-endif
+if executable('rg') | let &grepprg = 'rg --vimgrep --smart-case $*' | endif
 
 " change insert/replace cursor shape based on vim mode
 if &term =~# 'xterm'
@@ -101,6 +110,7 @@ if &term =~# 'xterm'
   let &t_EI = "\e[2 q"
 endif
 
+" Mappings
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>l (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
@@ -117,6 +127,7 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
+" Abbreviations
 iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
 iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
