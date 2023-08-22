@@ -71,8 +71,8 @@ function! JiraIssueList(A,L,P) abort
 				\ '-c', '--config',
 				\ '--debug',
 				\ '-p', '--project',
-					\ ], 'v:val =~ a:A'
-					\ )
+				\ ], 'v:val =~ a:A'
+				\ )
 endfunction
 
 command! -nargs=? -complete=customlist,JiraIssueList JiraIssueList
