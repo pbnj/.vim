@@ -31,8 +31,8 @@ function! JiraCompletion(A,L,P) abort
 				\ '--debug',
 				\ '-h', '--help',
 				\ '-p', '--project',
-					\ ], 'v:val =~ a:A'
-					\ )
+				\ ], 'v:val =~ a:A'
+				\ )
 endfunction
 
 command! -nargs=? -complete=customlist,JiraCompletion Jira
