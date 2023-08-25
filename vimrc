@@ -29,7 +29,7 @@ Plug 'https://github.com/junegunn/vader.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
-Plug 'https://github.com/ludovicchabant/vim-gutentags', {'do': { -> Install_Ctags() } }
+Plug 'https://github.com/ludovicchabant/vim-gutentags', { 'do': { -> Install_Ctags() } }
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-dispatch'
@@ -75,7 +75,6 @@ filetype plugin indent on
 
 """ Options """
 if has('nvim')
-        lua require('plugins')
         let &inccommand = 'split'
         augroup highlight_yanks
                 autocmd!
