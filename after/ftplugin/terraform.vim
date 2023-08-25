@@ -1,4 +1,5 @@
 let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
+let &l:formatprg = 'terraform fmt -'
 
 function! TFenvCompletion(A,L,P) abort
 	return filter([
