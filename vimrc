@@ -32,7 +32,6 @@ Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/ludovicchabant/vim-gutentags', {'do': { -> Install_Ctags() } }
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/romainl/vim-qf'
-Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
@@ -51,6 +50,7 @@ if has('nvim')
         Plug 'https://github.com/hrsh7th/nvim-cmp' | Plug 'https://github.com/hrsh7th/cmp-path' | Plug 'https://github.com/hrsh7th/cmp-buffer' | Plug 'https://github.com/hrsh7th/cmp-nvim-lsp' | Plug 'https://github.com/saadparwaiz1/cmp_luasnip'
         Plug 'https://github.com/lewis6991/gitsigns.nvim'
         Plug 'https://github.com/lukas-reineke/indent-blankline.nvim'
+        Plug 'https://github.com/numToStr/Comment.nvim'
         Plug 'https://github.com/nvim-lualine/lualine.nvim'
         Plug 'https://github.com/nvim-treesitter/nvim-treesitter' | Plug 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'https://github.com/williamboman/mason.nvim' | Plug 'https://github.com/neovim/nvim-lspconfig' | Plug 'https://github.com/williamboman/mason-lspconfig.nvim'
@@ -65,6 +65,7 @@ else
         Plug 'https://github.com/cocopon/iceberg.vim'
         Plug 'https://github.com/machakann/vim-highlightedyank'
         Plug 'https://github.com/mhinz/vim-signify'
+        Plug 'https://github.com/tpope/vim-commentary'
         Plug 'https://github.com/vim-airline/vim-airline'
 endif
 
