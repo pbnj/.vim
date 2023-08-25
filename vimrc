@@ -1,10 +1,10 @@
 nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 
+""" Plugins """
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd cfilter
 
-" Plugins
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
         silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -55,7 +55,6 @@ if has('nvim')
         Plug 'https://github.com/nvim-treesitter/nvim-treesitter' | Plug 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'https://github.com/williamboman/mason.nvim' | Plug 'https://github.com/neovim/nvim-lspconfig' | Plug 'https://github.com/williamboman/mason-lspconfig.nvim'
 else
-        " Enable :Man built-in vim plugin
         runtime ftplugin/man.vim
 
         let g:ale_completion_enabled = 1
@@ -73,7 +72,7 @@ call plug#end()
 
 filetype plugin indent on
 
-" Options
+""" Options """
 if has('nvim')
         lua require('plugins')
         let &inccommand = 'split'
@@ -138,7 +137,7 @@ let g:netrw_keepdir = 0
 
 if executable('rg') | let &grepprg = 'rg --vimgrep --smart-case $*' | endif
 
-" Mappings
+""" Mappings """
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>l (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
@@ -158,10 +157,11 @@ else
         nnoremap Y y$
 endif
 
-" Abbreviations
+""" Abbreviations """
 iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
 iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
+""" Colors """
 if has('nvim')
         colorscheme tokyonight
 else
