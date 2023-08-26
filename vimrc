@@ -25,14 +25,14 @@ call plug#begin()
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf.vim' | Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-Plug 'https://github.com/junegunn/vader.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/ludovicchabant/vim-gutentags', { 'do': { -> Install_Ctags() } }
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/romainl/vim-qf'
+Plug 'https://github.com/tpope/vim-dadbod' | Plug 'https://github.com/kristijanhusak/vim-dadbod-ui' | Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 Plug 'https://github.com/tpope/vim-dispatch'
+Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 Plug 'https://github.com/tpope/vim-rsi'
@@ -42,8 +42,8 @@ Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
-" neovim only
 if has('nvim')
+        " neovim-only plugins
         Plug 'https://github.com/L3MON4D3/LuaSnip' | Plug 'https://github.com/rafamadriz/friendly-snippets'
         Plug 'https://github.com/akinsho/toggleterm.nvim'
         Plug 'https://github.com/folke/tokyonight.nvim'
@@ -55,6 +55,7 @@ if has('nvim')
         Plug 'https://github.com/nvim-treesitter/nvim-treesitter' | Plug 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'https://github.com/williamboman/mason.nvim' | Plug 'https://github.com/neovim/nvim-lspconfig' | Plug 'https://github.com/williamboman/mason-lspconfig.nvim'
 else
+        " vim-only plugins
         runtime ftplugin/man.vim
 
         let g:ale_completion_enabled = 1
@@ -63,6 +64,8 @@ else
         Plug 'https://github.com/sheerun/vim-polyglot'
 
         Plug 'https://github.com/cocopon/iceberg.vim'
+        Plug 'https://github.com/junegunn/vader.vim'
+        Plug 'https://github.com/lifepillar/vim-mucomplete'
         Plug 'https://github.com/machakann/vim-highlightedyank'
         Plug 'https://github.com/mhinz/vim-signify'
         Plug 'https://github.com/tpope/vim-commentary'
