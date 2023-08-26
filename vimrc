@@ -60,6 +60,7 @@ else
 
         let g:ale_completion_enabled = 1
         Plug 'https://github.com/dense-analysis/ale'
+
         let g:polyglot_disabled = ['csv']
         Plug 'https://github.com/sheerun/vim-polyglot'
 
