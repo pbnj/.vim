@@ -79,7 +79,6 @@ filetype plugin indent on
 
 """ Options """
 if has('nvim')
-        lua require('plugins')
         let &inccommand = 'split'
         augroup highlight_yanks
                 autocmd!
