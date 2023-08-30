@@ -2,7 +2,7 @@ require("indent_blankline").setup({ show_current_context = true, show_current_co
 require("toggleterm").setup({ open_mapping = [[<c-\>]] })
 require('Comment').setup()
 require('gitsigns').setup()
-require('lualine').setup({ options = { icons_enabled = false, component_separators = '|', section_separators = '' } })
+require('lualine').setup({ options = { theme = 'auto', icons_enabled = false, component_separators = '|', section_separators = '' } })
 require('mason').setup()
 
 require('nvim-treesitter.configs').setup({
