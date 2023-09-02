@@ -23,6 +23,25 @@ function! Install_Ctags() abort
         endif
 endfunction
 
+function! GHIssuesCompletion() abort
+        call complete(col('.'), extend(systemlist('gh issue list --json number --jq .[].number'), systemlist('gh pr list --json number --jq .[].number')))
+        return ''
+endfunction
+function! GHUsersCompletion() abort
+        call complete(col('.'), systemlist('gh api repos/{owner}/{repo}/contributors --jq .[].login'))
+        return ''
+endfunction
+let g:mucomplete#can_complete = {}
+let g:mucomplete#can_complete.default = {}
+let g:mucomplete#can_complete.default.ghi = { t -> t is# '#' }
+let g:mucomplete#can_complete.default.ghu = { t -> t is# '@' }
+let g:mucomplete#user_mappings = {}
+let g:mucomplete#user_mappings.ghi = "\<c-r>=GHIssuesCompletion()\<cr>"
+let g:mucomplete#user_mappings.ghu = "\<c-r>=GHUsersCompletion()\<cr>"
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.vim = ['path', 'cmd', 'c-n', 'tags']
+let g:mucomplete#chains.default = [ 'ghi', 'ghu', 'path', 'omni', 'c-n', 'user', 'tags']
+
 call plug#begin()
 
 let g:ale_completion_enabled = 1
@@ -32,6 +51,7 @@ let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/junegunn/fzf.vim' | Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/vader.vim'
@@ -55,8 +75,6 @@ Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
-
-endif
 
 call plug#end()
 
@@ -95,8 +113,7 @@ let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
 let &swapfile = 0
-let &t_Co = 16
-let &termguicolors = 0
+let &termguicolors = 1
 let &ttimeout = 1
 let &ttimeoutlen = 50
 let &ttyfast = 1
@@ -138,4 +155,4 @@ iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
 iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
 """ Colors
-colorscheme pbnj
+colorscheme iceberg
