@@ -7,7 +7,8 @@
 "  |_|              |__/
 "
 " Author:      Peter Benjamin
-" Description: Minimal, 16-color colorscheme that works on light & dark terminal & GUI Vim.
+" Description: Minimal, 16-color colorscheme that works on light & dark terminal
+"              & GUI Vim.
 
 " :help cterm-colors
 
@@ -39,7 +40,7 @@ hi!  SpecialKey  NONE
 hi!  VertSplit   NONE
 hi!  Visual      NONE
 
-hi!  ColorColumn   cterm=reverse         ctermfg=DarkRed      ctermbg=NONE
+hi!  ColorColumn   cterm=NONE            ctermfg=NONE         ctermbg=DarkGray
 hi!  Comment       cterm=NONE            ctermfg=DarkGray     ctermbg=NONE
 hi!  Constant      cterm=NONE            ctermfg=DarkRed      ctermbg=NONE
 hi!  CurSearch     cterm=reverse         ctermfg=DarkRed      ctermbg=NONE
