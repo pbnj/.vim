@@ -161,3 +161,4 @@ iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
 """ Colors
 colorscheme pbnj
+syntax manual
