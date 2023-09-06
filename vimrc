@@ -29,15 +29,15 @@ call plug#begin()
 let g:ale_completion_enabled = 1
 Plug 'https://github.com/dense-analysis/ale'
 
-" language support
-let g:polyglot_disabled = ['csv', 'json']
-Plug 'https://github.com/sheerun/vim-polyglot'
-
 " fzf
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/junegunn/fzf', {
       \ 'dir': '~/.fzf',
       \ 'do': { -> fzf#install() } }
+
+" language support
+let g:polyglot_disabled = ['csv']
+Plug 'https://github.com/sheerun/vim-polyglot'
 
 " tags
 Plug 'https://github.com/ludovicchabant/vim-gutentags', {
@@ -66,6 +66,7 @@ Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
+Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
@@ -75,7 +76,6 @@ Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
-" Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
@@ -112,7 +112,7 @@ let &path = '.,,doc,docs,src,cmd,terraform'
 let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
-let &showmode = 0
+let &showmode = 1
 let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
@@ -152,6 +152,8 @@ nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
 nnoremap Q <nop>
 nnoremap Y y$
+nnoremap j gj
+nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 
@@ -161,4 +163,3 @@ iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
 """ Colors
 colorscheme pbnj
-syntax manual
