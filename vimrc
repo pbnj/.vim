@@ -52,11 +52,6 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 
-" snippets
-Plug 'https://github.com/hrsh7th/vim-vsnip'
-Plug 'https://github.com/hrsh7th/vim-vsnip-integ'
-Plug 'https://github.com/rafamadriz/friendly-snippets'
-
 " misc
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
@@ -92,7 +87,7 @@ let &autoread = 1
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
-let &completeopt = 'menu,longest'
+let &completeopt = 'menu,noselect,noinsert'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 1
