@@ -16,8 +16,8 @@ let s:save_cpo = &cpo
 set cpo-=C
 
 " produce errorformat-friendly output
-let &l:makeprg = 'snyk iac test --json | jq -rc ''.[] | select(.ok == false) | @text "\(.targetFilePath):\(.infrastructureAsCodeIssues[].lineNumber | if (. < 0) then 1 else . end) \(.infrastructureAsCodeIssues[].msg) - \(.infrastructureAsCodeIssues[].issue) - \(.infrastructureAsCodeIssues[].impact) - \(.infrastructureAsCodeIssues[].resolve) [\(.infrastructureAsCodeIssues[].id)]"'' | sort -u'
-let &l:errorformat = '%f:%l %m'
+let &l:makeprg = 'snyk iac test --json | jq -rc ''.[] | select(.ok == false) | @text "\(.targetFilePath):\(.infrastructureAsCodeIssues[].lineNumber | if (. < 0) then 1 else . end):1 \(.infrastructureAsCodeIssues[].msg) - \(.infrastructureAsCodeIssues[].issue) - \(.infrastructureAsCodeIssues[].impact) - \(.infrastructureAsCodeIssues[].resolve) [\(.infrastructureAsCodeIssues[].id)]"'' | sort -u'
+let &l:errorformat = '%f:%l:%c %m'
 
 silent CompilerSet makeprg
 silent CompilerSet errorformat

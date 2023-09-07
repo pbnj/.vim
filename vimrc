@@ -27,13 +27,56 @@ call plug#begin()
 
 " linters, formatters, lsp
 let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
+let g:ale_floating_preview = 0
+let g:ale_virtualtext_cursor = 0
+command! ALEDisableFixers       let g:ale_fix_on_save=0
+command! ALEEnableFixers        let g:ale_fix_on_save=1
+command! ALEDisableFixersBuffer let b:ale_fix_on_save=0
+command! ALEEnableFixersBuffer  let b:ale_fix_on_save=1
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf(' W:%d E:%d ', all_non_errors, all_errors)
+endfunction
+nnoremap <leader>af <cmd>ALEFix<cr>
+nnoremap <leader>ai <cmd>ALEInfo<cr>
+nnoremap <leader>ca <cmd>ALECodeAction<cr>
+nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
+nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
+nnoremap <leader>gr <cmd>ALEFindReferences<cr>
+nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
+nnoremap <leader>k <cmd>ALEHover<cr>
+nnoremap [d <cmd>ALEPrevious<cr>
+nnoremap ]d <cmd>ALENext<cr>
+nnoremap [D <cmd>ALEFirst<cr>
+nnoremap ]D <cmd>ALELast<cr>
 Plug 'https://github.com/dense-analysis/ale'
+Plug 'https://github.com/junegunn/vader.vim'
 
 " fzf
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/junegunn/fzf', {
       \ 'dir': '~/.fzf',
       \ 'do': { -> fzf#install() } }
+let $FZF_DEFAULT_COMMAND = 'find . -type f \( -not -path ''*.git/*'' \) -prune'
+let g:fzf_layout = { 'down': '40%' }
+command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
+nnoremap <leader>/ <cmd>Rg<cr>
+nnoremap <leader><space> <cmd>History<cr>
+nnoremap <leader>? <cmd>Helptags<cr>
+nnoremap <leader>bb <cmd>Buffers<cr>
+nnoremap <leader>ff <cmd>Files<cr>
+nnoremap <leader>fg <cmd>GFiles<cr>
+nnoremap <leader>fs <cmd>GFiles?<cr>
+nnoremap <leader>fw :Rg <c-r><c-w><cr>
+nnoremap <leader>tt <cmd>Tags<cr>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+imap <expr> <c-x><c-i> fzf#vim#complete('gh issue list --json number --jq .[].number; gh pr list --json number --jq .[].number')
 
 " language support
 let g:polyglot_disabled = ['csv']
@@ -52,13 +95,18 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 
+" completion
+Plug 'https://github.com/lifepillar/vim-mucomplete'
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default = [ 'path', 'omni', 'c-n', 'user', 'tags' ]
+let g:mucomplete#chains.gitcommit = [ 'path', 'c-n', 'vsnip' ]
+let g:mucomplete#chains.vim = ['path', 'cmd', 'c-n', 'tags']
+
 " misc
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
-Plug 'https://github.com/junegunn/vader.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr'
@@ -87,7 +135,7 @@ let &autoread = 1
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
-let &completeopt = 'menu,noselect,noinsert'
+let &completeopt = 'menu,noselect'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 1
@@ -103,6 +151,7 @@ let &listchars = 'tab:| ,trail:·,nbsp:·,precedes:<,extends:>'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 1
+let &omnifunc = 'ale#completion#OmniFunc'
 let &path = '.,,doc,docs,src,cmd,terraform'
 let &pumheight = 50
 let &secure = 1
@@ -111,7 +160,7 @@ let &showmode = 1
 let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %l/%c %p%%'
+let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()} %#ALEError#%{LinterStatus()}%*'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -125,6 +174,7 @@ let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 let g:netrw_keepdir = 0
+let &statusline ..= ''
 
 if executable('rg') | let &grepprg = 'rg --vimgrep --smart-case $*' | endif
 

@@ -18,9 +18,4 @@ if exists('g:loaded_mucomplete')
   " let g:mucomplete#user_mappings.ghi = "\<c-r>=GHIssuesCompletion()\<cr>"
   " let g:mucomplete#user_mappings.ghu = "\<c-r>=GHUsersCompletion()\<cr>"
 
-  let g:mucomplete#chains = {}
-  let g:mucomplete#chains.default = [ 'path', 'omni', 'c-n', 'user', 'tags' ]
-  let g:mucomplete#chains.gitcommit = [ 'path', 'c-n', 'vsnip' ]
-  let g:mucomplete#chains.vim = ['path', 'cmd', 'c-n', 'tags']
-
 endif
