@@ -1,10 +1,10 @@
 " Vim compiler file
-" Compiler: gitleaks
+" Compiler: trufflehog.vim
 " Maintainer: Peter Benjamin
-" Last Change: 2023-08-08T10:16:49-07:00
+" Last Modified: September 08, 2023
 
 if exists('current_compiler') | finish | endif
-let current_compiler = 'gitleaks'
+let current_compiler = 'trufflehog'
 
 if exists(':CompilerSet') != 2
   command -nargs=* CompilerSet setlocal <args>
@@ -13,8 +13,8 @@ endif
 let s:save_cpo = &cpo
 set cpo-=C
 
-let &l:makeprg = 'gitleaks detect --verbose --no-git --no-color --no-banner'
-let &l:errorformat = 'Fingerprint: %f:%m:%l'
+let &l:makeprg = 'trufflehog filesystem --only-verified --json . 2>/dev/null | jq -rc ''. | @text "\(.SourceMetadata.Data.Filesystem.file):\(.SourceMetadata.Data.Filesystem.line) \(.DetectorName) - \(.Raw)"'''
+let &l:errorformat = '%f:%l %m'
 
 silent CompilerSet makeprg
 silent CompilerSet errorformat
