@@ -40,7 +40,7 @@ hi!  SpecialKey  NONE
 hi!  VertSplit   NONE
 hi!  Visual      NONE
 
-hi!  ColorColumn   cterm=NONE            ctermfg=NONE         ctermbg=DarkGray
+hi!  ColorColumn   cterm=reverse         ctermfg=DarkGray     ctermbg=NONE
 hi!  Comment       cterm=NONE            ctermfg=DarkGray     ctermbg=NONE
 hi!  Constant      cterm=NONE            ctermfg=DarkRed      ctermbg=NONE
 hi!  CurSearch     cterm=reverse         ctermfg=DarkRed      ctermbg=NONE
