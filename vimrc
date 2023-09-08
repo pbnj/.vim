@@ -38,7 +38,6 @@ Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
-Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
@@ -118,8 +117,15 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 
 " completion
-let g:mucomplete#chains = {'default': [ 'path', 'omni', 'c-n', 'tags', 'user' ], 'vim': [ 'path', 'cmd', 'c-n', 'tags' ]}
 Plug 'https://github.com/lifepillar/vim-mucomplete'
+let g:mucomplete#chains = {'default': [ 'path', 'snip', 'omni', 'c-n', 'tags', 'user' ], 'vim': [ 'path', 'snip', 'cmd', 'c-n', 'tags' ]}
+Plug 'https://github.com/marcweber/vim-addon-mw-utils'
+Plug 'https://github.com/tomtom/tlib_vim'
+Plug 'https://github.com/garbas/vim-snipmate'
+let g:snipMate = { 'snippet_version': 1, 'no_match_completion_feedkeys_chars': ''}
+imap <C-F> <Plug>snipMateNextOrTrigger
+smap <C-F> <Plug>snipMateNextOrTrigger
+Plug 'https://github.com/honza/vim-snippets'
 
 call plug#end()
 
