@@ -26,9 +26,17 @@ endfunction
 call plug#begin()
 
 " linters, formatters, lsp
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
+let g:ale_pattern_options_enabled = 1
+let g:ale_pattern_options = {
+      \   '.github/workflows/.*.yaml$': {
+      \     'ale_linters': { 'yaml': ['actionlint', 'yamllint'] },
+      \   },
+      \ }
 let g:ale_floating_preview = 0
 let g:ale_virtualtext_cursor = 0
 command! ALEDisableFixers       let g:ale_fix_on_save=0
@@ -62,7 +70,6 @@ Plug 'https://github.com/junegunn/fzf', {
       \ 'dir': '~/.fzf',
       \ 'do': { -> fzf#install() } }
 let $FZF_DEFAULT_COMMAND = 'find . -type f \( -not -path ''*.git/*'' \) -prune'
-let g:fzf_layout = { 'down': '40%' }
 command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
 nnoremap <leader>/ <cmd>Rg<cr>
 nnoremap <leader><space> <cmd>History<cr>
@@ -96,11 +103,13 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 
 " completion
-Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {}
-let g:mucomplete#chains.default = [ 'path', 'omni', 'c-n', 'user', 'tags' ]
-let g:mucomplete#chains.gitcommit = [ 'path', 'c-n', 'vsnip' ]
-let g:mucomplete#chains.vim = ['path', 'cmd', 'c-n', 'tags']
+let g:SuperTabContextDefaultCompletionType = '<c-n>'
+let g:SuperTabDefaultCompletionType = 'context'
+Plug 'https://github.com/ervandew/supertab'
+Plug 'https://github.com/garbas/vim-snipmate' | let g:snipMate = { 'snippet_version' : 1 }
+Plug 'https://github.com/marcweber/vim-addon-mw-utils'
+Plug 'https://github.com/tomtom/tlib_vim'
+Plug 'https://github.com/honza/vim-snippets'
 
 " misc
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
@@ -135,7 +144,7 @@ let &autoread = 1
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
-let &completeopt = 'menu,noselect'
+let &completeopt = 'menuone,noselect'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 1
@@ -147,7 +156,7 @@ let &infercase = 1
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:| ,trail:·,nbsp:·,precedes:<,extends:>'
+let &listchars = 'tab:⋮ ,trail:·,nbsp:·,precedes:<,extends:>'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 1
@@ -157,7 +166,7 @@ let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showmode = 1
-let &signcolumn = 'yes'
+let &signcolumn = 'number'
 let &smartcase = 1
 let &smarttab = 1
 let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()} %#ALEError#%{LinterStatus()}%*'
@@ -174,7 +183,6 @@ let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 let g:netrw_keepdir = 0
-let &statusline ..= ''
 
 if executable('rg') | let &grepprg = 'rg --vimgrep --smart-case $*' | endif
 
@@ -201,10 +209,6 @@ nnoremap j gj
 nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
-
-""" Abbreviations
-iabbrev dateiso <c-r>=trim(system('date -Iseconds'))<cr>
-iabbrev isodate <c-r>=trim(system('date -Iseconds'))<cr>
 
 """ Colors
 colorscheme pbnj
