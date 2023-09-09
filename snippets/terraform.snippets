@@ -1,0 +1,36 @@
+snippet provider
+	provider "${1:aws}" {
+		region = "${2:us-west-2}"
+		assume_role {
+			role_arn = "arn:aws:iam::${3}:role/${4:name}"
+		}
+	}
+snippet resource
+	resource "${1}" "${2}" {
+		${3}
+	}
+snippet data
+	data "${1}" "${2}" {
+		${3}
+	}
+snippet variable
+	variable "${1:name}" {
+		default = "${2}"
+		description = "${3}"
+		type = "${4}"
+	}
+snippet output
+	output "${1:name}" {
+		description = "${2}"
+		sensitive = ${3:false}
+		value = $4
+	}
+snippet tags
+	tags = {
+		# see https://komodohealth.atlassian.net/wiki/spaces/OP/pages/838926347/AWS+Resource+Tag+Dictionary for details
+		Env       = "${1:prod|standby|dr|staging|qa|dev}"
+		Jira      = "${2:ABC-123}"
+		Nest      = "${3}"
+		NestEmail = "${3}@komodohealth.com"
+		Owner     = "${4:first.last@komodohealth.com}"
+	}
