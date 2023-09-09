@@ -28,6 +28,7 @@ call plug#begin()
 " misc
 Plug 'https://github.com/AndrewRadev/splitjoin.vim'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
+Plug 'https://github.com/godlygeek/tabular'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
@@ -39,24 +40,19 @@ Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
 " linters, formatters, lsp
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '●'
 let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
-let g:ale_pattern_options_enabled = 1
-let g:ale_pattern_options = {
-      \   '.github/workflows/.*.yaml$': {
-      \     'ale_linters': { 'yaml': ['actionlint', 'yamllint'] },
-      \   },
-      \ }
 let g:ale_floating_preview = 0
+let g:ale_pattern_options_enabled = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
 let g:ale_virtualtext_cursor = 0
+let g:ale_pattern_options = { '.github/workflows/.*.yaml$': { 'ale_linters': { 'yaml': ['actionlint', 'yamllint'] } } }
 command! ALEDisableFixers       let g:ale_fix_on_save=0
 command! ALEEnableFixers        let g:ale_fix_on_save=1
 command! ALEDisableFixersBuffer let b:ale_fix_on_save=0
@@ -65,7 +61,7 @@ function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf(' W:%d E:%d ', all_non_errors, all_errors)
+  return ( l:all_errors > 0 ? '%#ALEError#' . printf(' E:%d ', all_errors) . '%*' : '' ) . ( l:all_non_errors > 0 ? '%#ALEWarning#' . printf(' W:%d ', all_non_errors) . '%*' : '' )
 endfunction
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>ai <cmd>ALEInfo<cr>
@@ -75,10 +71,10 @@ nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
 nnoremap <leader>gr <cmd>ALEFindReferences<cr>
 nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
 nnoremap <leader>k <cmd>ALEHover<cr>
-nnoremap [d <cmd>ALEPrevious<cr>
-nnoremap ]d <cmd>ALENext<cr>
-nnoremap [D <cmd>ALEFirst<cr>
-nnoremap ]D <cmd>ALELast<cr>
+nnoremap [d <cmd>ALEPrevious<cr>zz
+nnoremap ]d <cmd>ALENext<cr>zz
+nnoremap [D <cmd>ALEFirst<cr>zz
+nnoremap ]D <cmd>ALELast<cr>zz
 Plug 'https://github.com/dense-analysis/ale'
 Plug 'https://github.com/junegunn/vader.vim'
 
@@ -87,6 +83,25 @@ Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/junegunn/fzf', {
       \ 'dir': '~/.fzf',
       \ 'do': { -> fzf#install() } }
+
+function! RunCompilers(args) abort
+  for l:c in a:args
+    let l:compiler = fnamemodify(l:c, ':t:r')
+    execute ':compiler ' . l:compiler
+    execute ':Make'
+  endfor
+endfunction
+function! FZFCompiler(args) abort
+  if empty(a:args)
+    call fzf#run( fzf#wrap( {'source': split(globpath(&rtp, 'compiler/*.vim'),"\n"), 'sinklist': function('Compiler'), 'options': '--multi --preview ''cat {}''' } ) )
+  else
+    call RunCompilers(a:args)
+  endif
+endfunction
+function! CompilerCompletion(A,L,P) abort
+  return globpath(&rtp, 'compiler/*.vim')->split('\n')->map('fnamemodify(v:val, ":t:r")')->filter('v:val =~ a:A')
+endfunction
+command! -nargs=* -complete=customlist,CompilerCompletion Compilers call FZFCompiler(split(<q-args>, ' '))
 command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
 nnoremap <leader>/ <cmd>Rg<cr>
 nnoremap <leader><space> <cmd>History<cr>
@@ -118,7 +133,7 @@ Plug 'https://github.com/tpope/vim-rhubarb'
 
 " completion
 Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {'default': [ 'path', 'snip', 'omni', 'c-n', 'tags', 'user' ], 'vim': [ 'path', 'snip', 'cmd', 'c-n', 'tags' ]}
+let g:mucomplete#chains = {'default': [ 'snip', 'path', 'omni', 'c-n', 'tags', 'user' ], 'vim': [ 'snip', 'path', 'cmd', 'c-n', 'tags' ]}
 Plug 'https://github.com/marcweber/vim-addon-mw-utils'
 Plug 'https://github.com/tomtom/tlib_vim'
 Plug 'https://github.com/garbas/vim-snipmate'
@@ -162,7 +177,7 @@ let &showmode = 1
 let &signcolumn = 'number'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()} %#ALEError#%{LinterStatus()}%*'
+let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()} %{%LinterStatus()%}'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -198,9 +213,15 @@ nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
 nnoremap Q <nop>
 nnoremap Y y$
+nnoremap [c <cmd>colder<cr>zz
+nnoremap ]c <cmd>cnewer<cr>zz
+nnoremap [l <cmd>lprev<cr>zz
+nnoremap ]l <cmd>lnext<cr>zz
+nnoremap [q <cmd>cprev<cr>zz
+nnoremap ]q <cmd>cnext<cr>zz
 nnoremap j gj
 nnoremap k gk
-noremap <expr> N (v:searchforward ? 'N' : 'n')
+noremap <expr> N (v:searchforward ? 'N' : 'n')zz
 tnoremap <s-space> <space>
 
 """ Colors
