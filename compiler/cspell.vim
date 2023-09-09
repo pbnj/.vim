@@ -1,6 +1,5 @@
-" Vim compiler file
-" Compiler:	cspell
-" Maintainer:	Peter Benjamin
+" Compiler: cspell
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-01T10:52:30-07:00
 
 if exists('current_compiler')

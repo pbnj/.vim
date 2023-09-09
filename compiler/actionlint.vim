@@ -1,6 +1,5 @@
-" Vim compiler file
-" Compiler:	actionlint
-" Maintainer:	Peter Benjamin
+" Compiler: actionlint
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-10T20:49:28-07:00
 
 if exists('current_compiler')

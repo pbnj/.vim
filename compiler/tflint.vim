@@ -1,4 +1,3 @@
-" Vim compiler file
 " Compiler: tflint
 " Maintainer: Peter Benjamin
 " Last Change: 2023-08-01T13:14:01-07:00

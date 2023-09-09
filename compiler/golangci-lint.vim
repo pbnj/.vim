@@ -1,6 +1,5 @@
-" Vim compiler file
-" Compiler:	golangci-lint
-" Maintainer:	Peter Benjamin
+" Compiler: golangci-lint
+" Maintainer: Peter Benjamin
 " Last Change: Fri Jul 14 19:47:06 PDT 2023
 
 if exists('current_compiler')

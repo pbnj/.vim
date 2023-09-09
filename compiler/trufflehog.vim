@@ -1,5 +1,4 @@
-" Vim compiler file
-" Compiler: trufflehog.vim
+" Compiler: trufflehog
 " Maintainer: Peter Benjamin
 " Last Modified: September 08, 2023
 

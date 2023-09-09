@@ -1,6 +1,5 @@
-" Vim compiler plugin for hadolint
-" Compiler:	hadolint
-" Maintainer:	Peter Benjamin
+" Compiler: hadolint
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-14T14:51:13-07:00
 
 if exists('current_compiler')

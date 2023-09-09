@@ -1,4 +1,3 @@
-" Vim compiler file
 " Compiler: gitleaks
 " Maintainer: Peter Benjamin
 " Last Change: 2023-08-08T10:16:49-07:00

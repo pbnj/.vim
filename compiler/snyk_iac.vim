@@ -1,4 +1,3 @@
-" Vim compiler file
 " Compiler: snyk iac
 " Maintainer: Peter Benjamin
 " Last Change: 2023-08-13T15:30:44-07:00

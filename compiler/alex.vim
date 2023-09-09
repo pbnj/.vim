@@ -1,6 +1,5 @@
-" Vim compiler file
-" Compiler:	alex
-" Maintainer:	Peter Benjamin
+" Compiler: alex
+" Maintainer: Peter Benjamin
 " Last Change: 2023-08-01T10:52:30-07:00
 
 if exists('current_compiler')
