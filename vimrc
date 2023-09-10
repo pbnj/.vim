@@ -112,7 +112,7 @@ nnoremap <leader>fg <cmd>GFiles<cr>
 nnoremap <leader>fs <cmd>GFiles?<cr>
 nnoremap <leader>fw :Rg <c-r><c-w><cr>
 nnoremap <leader>tt <cmd>Tags<cr>
-nnoremap <c-p> <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
+nnoremap <c-f> <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
 
 " language support
 let g:polyglot_disabled = ['csv']
