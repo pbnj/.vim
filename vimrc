@@ -152,6 +152,7 @@ let &autoread = 1
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
+let &complete='.,w,b,u,t'
 let &completeopt = 'menuone,noselect'
 let &cursorline = 0
 let &encoding = 'utf-8'
@@ -221,7 +222,7 @@ nnoremap [q <cmd>cprev<cr>zz
 nnoremap ]q <cmd>cnext<cr>zz
 nnoremap j gj
 nnoremap k gk
-noremap <expr> N (v:searchforward ? 'N' : 'n')zz
+noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 
 """ Colors
