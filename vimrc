@@ -13,16 +13,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-function! Install_Ctags() abort
-  if executable('apt')
-    ! apt update && apt install -y universal-ctags
-  elseif executable('brew')
-    ! brew install universal-ctags
-  elseif executable('apk')
-    ! apk add --no-cache ctags
-  endif
-endfunction
-
 call plug#begin()
 
 " misc
@@ -80,10 +70,7 @@ Plug 'https://github.com/junegunn/vader.vim'
 
 " fzf
 Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/junegunn/fzf', {
-      \ 'dir': '~/.fzf',
-      \ 'do': { -> fzf#install() } }
-
+Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 function! RunCompilers(args) abort
   for l:c in a:args
     let l:compiler = fnamemodify(l:c, ':t:r')
@@ -93,7 +80,7 @@ function! RunCompilers(args) abort
 endfunction
 function! FZFCompiler(args) abort
   if empty(a:args)
-    call fzf#run( fzf#wrap( {'source': split(globpath(&rtp, 'compiler/*.vim'),"\n"), 'sinklist': function('Compiler'), 'options': '--multi --preview ''cat {}''' } ) )
+    call fzf#run( fzf#wrap( {'source': split(globpath(&rtp, 'compiler/*.vim'),"\n"), 'sinklist': function('RunCompilers'), 'options': '--multi --preview ''cat {}''' } ) )
   else
     call RunCompilers(a:args)
   endif
@@ -112,15 +99,25 @@ nnoremap <leader>fg <cmd>GFiles<cr>
 nnoremap <leader>fs <cmd>GFiles?<cr>
 nnoremap <leader>fw :Rg <c-r><c-w><cr>
 nnoremap <leader>tt <cmd>Tags<cr>
-nnoremap <c-f> <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
+nnoremap <c-p> <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
 
 " language support
 let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
 " tags
-Plug 'https://github.com/ludovicchabant/vim-gutentags', {
-      \ 'do': { -> Install_Ctags() } }
+function! InstallCtags() abort
+  if executable('apt')
+    ! apt update && apt install -y universal-ctags
+  elseif executable('apk')
+    ! apk add --no-cache ctags
+  elseif executable('brew')
+    ! brew install universal-ctags
+  else
+    echoerr "ERROR: could not install ctags"
+  endif
+endfunction
+Plug 'https://github.com/ludovicchabant/vim-gutentags', { 'do': function('InstallCtags') }
 
 " db
 Plug 'https://github.com/tpope/vim-dadbod'
@@ -131,16 +128,19 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 
-" completion
-Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {'default': [ 'snip', 'path', 'omni', 'c-n', 'tags', 'user' ], 'vim': [ 'snip', 'path', 'cmd', 'c-n', 'tags' ]}
-Plug 'https://github.com/marcweber/vim-addon-mw-utils'
-Plug 'https://github.com/tomtom/tlib_vim'
-Plug 'https://github.com/garbas/vim-snipmate'
-let g:snipMate = { 'snippet_version': 1, 'no_match_completion_feedkeys_chars': ''}
-imap <C-F> <Plug>snipMateNextOrTrigger
-smap <C-F> <Plug>snipMateNextOrTrigger
+" completion & snippets
+Plug 'https://github.com/ervandew/supertab' | let g:SuperTabDefaultCompletionType = "context"
 Plug 'https://github.com/honza/vim-snippets'
+if has('python3')
+  Plug 'https://github.com/SirVer/ultisnips' " <c-tab>: list snippets, <tab>: expand, <c-j/k>: jump fwd/bwd
+else
+  Plug 'https://github.com/marcweber/vim-addon-mw-utils'
+  Plug 'https://github.com/tomtom/tlib_vim'
+  Plug 'https://github.com/garbas/vim-snipmate'
+  let g:snipMate = { 'snippet_version': 1 }
+  imap <C-F> <Plug>snipMateNextOrTrigger
+  smap <C-F> <Plug>snipMateNextOrTrigger
+endif
 
 call plug#end()
 
@@ -225,5 +225,4 @@ nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 
-""" Colors
 colorscheme pbnj

@@ -120,6 +120,8 @@ if has('gui_running')
   hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
 endif
 
+hi!  link  ALEError                    ErrorMsg
+hi!  link  ALEWarning                  WarningMsg
 hi!  link  ALEErrorSign                ErrorMsg
 hi!  link  ALEWarningSign              WarningMsg
 hi!  link  ALEVirtualTextError         DiffDelete
