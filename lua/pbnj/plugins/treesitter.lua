@@ -1,4 +1,4 @@
--- return {
+return {
   --   'https://github.com/nvim-treesitter/nvim-treesitter',
   --   dependencies = {
   --     'https://github.com/nvim-treesitter/nvim-treesitter-textobjects'
@@ -96,4 +96,4 @@
   --       },
   --     })
   --   end,
-  -- },
+}
