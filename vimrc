@@ -30,6 +30,7 @@ Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
@@ -90,16 +91,19 @@ function! CompilerCompletion(A,L,P) abort
 endfunction
 command! -nargs=* -complete=customlist,CompilerCompletion Compilers call FZFCompiler(split(<q-args>, ' '))
 command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getline(1,'$'),' '),' ')), 'v:val =~ "http"'), {k,v->substitute(v,'\(''\|)\|"\|,\)','','g')}), 'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '}))
-nnoremap <leader>/ <cmd>Rg<cr>
-nnoremap <leader><space> <cmd>History<cr>
-nnoremap <leader>? <cmd>Helptags<cr>
-nnoremap <leader>bb <cmd>Buffers<cr>
-nnoremap <leader>ff <cmd>Files<cr>
-nnoremap <leader>fg <cmd>GFiles<cr>
-nnoremap <leader>fs <cmd>GFiles?<cr>
-nnoremap <leader>fw :Rg <c-r><c-w><cr>
-nnoremap <leader>tt <cmd>Tags<cr>
-nnoremap <c-p> <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
+command! Projects call fzf#run( fzf#wrap( {'source': 'find "${HOME}" -type d -name .git -execdir test -d ''.git'' \; -print -prune | xargs dirname' } ) )
+nnoremap <leader>/                    <cmd>Rg<cr>
+nnoremap <leader><space>              <cmd>History<cr>
+nnoremap <leader>?                    <cmd>Helptags<cr>
+nnoremap <leader>:                    <cmd>Commands<cr>
+nnoremap <leader>;                    <cmd>History:<cr>
+nnoremap <leader>bb                   <cmd>Buffers<cr>
+nnoremap <leader>ff                   <cmd>Files<cr>
+nnoremap <leader>fg                   <cmd>GFiles<cr>
+nnoremap <leader>fs                   <cmd>GFiles?<cr>
+nnoremap <leader>fw                   :Rg <c-r><c-w><cr>
+nnoremap <leader>tt                   <cmd>Tags<cr>
+nnoremap <c-p>                        <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
 
 " language support
 let g:polyglot_disabled = ['csv']
@@ -214,12 +218,6 @@ nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
 nnoremap Q <nop>
 nnoremap Y y$
-nnoremap [c <cmd>colder<cr>zz
-nnoremap ]c <cmd>cnewer<cr>zz
-nnoremap [l <cmd>lprev<cr>zz
-nnoremap ]l <cmd>lnext<cr>zz
-nnoremap [q <cmd>cprev<cr>zz
-nnoremap ]q <cmd>cnext<cr>zz
 nnoremap j gj
 nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
