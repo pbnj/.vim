@@ -72,6 +72,18 @@ Plug 'https://github.com/junegunn/vader.vim'
 " fzf
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+nnoremap <leader>/       <cmd>Rg<cr>
+nnoremap <leader><space> <cmd>History<cr>
+nnoremap <leader>?       <cmd>Helptags<cr>
+nnoremap <leader>:       <cmd>Commands<cr>
+nnoremap <leader>;       <cmd>History:<cr>
+nnoremap <leader>bb      <cmd>Buffers<cr>
+nnoremap <leader>ff      <cmd>Files<cr>
+nnoremap <leader>fg      <cmd>GFiles<cr>
+nnoremap <leader>fs      <cmd>GFiles?<cr>
+nnoremap <leader>fw      :Rg <c-r><c-w><cr>
+nnoremap <leader>tt      <cmd>Tags<cr>
+nnoremap <c-p>           <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
 
 " language support
 let g:polyglot_disabled = ['csv']
@@ -97,14 +109,15 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-ui'
 Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 
 " git
-Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'https://github.com/tpope/vim-rhubarb'
+Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
+nnoremap <leader>gg <cmd>Git<cr>
 
 " completion & snippets
 Plug 'https://github.com/ervandew/supertab' | let g:SuperTabDefaultCompletionType = "context"
 Plug 'https://github.com/honza/vim-snippets'
 if has('python3')
-  Plug 'https://github.com/SirVer/ultisnips' " <c-tab>: list snippets, <tab>: expand, <c-j/k>: jump fwd/bwd
+  Plug 'https://github.com/SirVer/ultisnips'
+  let g:UltiSnipsListSnippets = '<c-l>'
 else
   Plug 'https://github.com/marcweber/vim-addon-mw-utils'
   Plug 'https://github.com/tomtom/tlib_vim'

@@ -7,7 +7,7 @@ function! AWSProfileCompletion(A,L,P) abort
 endfunction
 
 command! -nargs=* -complete=customlist,AWSProfileCompletion AWS
-      \ <mods> terminal aws --output text --profile <args>
+      \ terminal aws --output text --profile <args>
 command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole
       \ ! aws-console -p <args>
 command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSLogin

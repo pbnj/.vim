@@ -26,17 +26,3 @@ command! URLs call fzf#run( fzf#wrap( {'source': map(filter(uniq(split(join(getl
 " Projects command fuzzy finds directories containing `.git/` and opens them
 " in vim
 command! Projects call fzf#run( fzf#wrap( {'source': 'find "${HOME}" -type d -name .git -execdir test -d ''.git'' \; -print -prune | xargs dirname' } ) )
-
-" Mappings
-nnoremap <leader>/       <cmd>Rg<cr>
-nnoremap <leader><space> <cmd>History<cr>
-nnoremap <leader>?       <cmd>Helptags<cr>
-nnoremap <leader>:       <cmd>Commands<cr>
-nnoremap <leader>;       <cmd>History:<cr>
-nnoremap <leader>bb      <cmd>Buffers<cr>
-nnoremap <leader>ff      <cmd>Files<cr>
-nnoremap <leader>fg      <cmd>GFiles<cr>
-nnoremap <leader>fs      <cmd>GFiles?<cr>
-nnoremap <leader>fw      :Rg <c-r><c-w><cr>
-nnoremap <leader>tt      <cmd>Tags<cr>
-nnoremap <c-p>           <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
