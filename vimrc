@@ -203,5 +203,6 @@ nnoremap j gj
 nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
+tnoremap <esc> <c-\><c-n>
 
 colorscheme pbnj
