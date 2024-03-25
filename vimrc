@@ -16,13 +16,12 @@ endif
 call plug#begin()
 
 " misc
-Plug 'https://github.com/AndrewRadev/splitjoin.vim'
+Plug 'https://github.com/dstein64/vim-startuptime'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/godlygeek/tabular'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-commentary'
@@ -32,6 +31,7 @@ Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
+Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
@@ -54,14 +54,17 @@ function! LinterStatus() abort
   let l:all_non_errors = l:counts.total - l:all_errors
   return ( l:all_errors > 0 ? '%#ALEError#' . printf(' E:%d ', all_errors) . '%*' : '' ) . ( l:all_non_errors > 0 ? '%#ALEWarning#' . printf(' W:%d ', all_non_errors) . '%*' : '' )
 endfunction
+augroup AleLSP
+  autocmd!
+  autocmd User ALELSPStarted nnoremap <buffer> <leader>ca <cmd>ALECodeAction<cr>
+  autocmd User ALELSPStarted nnoremap <buffer> gd <cmd>ALEGoToDefinition<cr>
+  autocmd User ALELSPStarted nnoremap <buffer> gi <cmd>ALEGoToImplementation<cr>
+  autocmd User ALELSPStarted nnoremap <buffer> gr <cmd>ALEFindReferences -quickfix -relative<cr>
+  autocmd User ALELSPStarted nnoremap <buffer> gt <cmd>ALEGoToTypeDefinition<cr>
+  autocmd User ALELSPStarted nnoremap <buffer> K  <cmd>ALEHover<cr>
+augroup END
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>ai <cmd>ALEInfo<cr>
-nnoremap <leader>ca <cmd>ALECodeAction<cr>
-nnoremap <leader>gd <cmd>ALEGoToDefinition<cr>
-nnoremap <leader>gi <cmd>ALEGoToImplementation<cr>
-nnoremap <leader>gr <cmd>ALEFindReferences<cr>
-nnoremap <leader>gt <cmd>ALEGoToTypeDefinition<cr>
-nnoremap <leader>k <cmd>ALEHover<cr>
 nnoremap [d <cmd>ALEPrevious<cr>zz
 nnoremap ]d <cmd>ALENext<cr>zz
 nnoremap [D <cmd>ALEFirst<cr>zz
@@ -90,18 +93,9 @@ let g:polyglot_disabled = ['csv']
 Plug 'https://github.com/sheerun/vim-polyglot'
 
 " tags
-function! InstallCtags() abort
-  if executable('apt')
-    ! apt update && apt install -y universal-ctags
-  elseif executable('apk')
-    ! apk add --no-cache ctags
-  elseif executable('brew')
-    ! brew install universal-ctags
-  else
-    echoerr "ERROR: could not install ctags"
-  endif
-endfunction
-Plug 'https://github.com/ludovicchabant/vim-gutentags', { 'do': function('InstallCtags') }
+if executable('ctags')
+  Plug 'https://github.com/ludovicchabant/vim-gutentags'
+endif
 
 " db
 Plug 'https://github.com/tpope/vim-dadbod'
@@ -109,22 +103,11 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-ui'
 Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 
 " git
+Plug 'https://github.com/mhinz/vim-signify'
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 nnoremap <leader>gg <cmd>Git<cr>
-
-" completion & snippets
-Plug 'https://github.com/ervandew/supertab' | let g:SuperTabDefaultCompletionType = "context"
-Plug 'https://github.com/honza/vim-snippets'
-if has('python3')
-  Plug 'https://github.com/SirVer/ultisnips'
-  let g:UltiSnipsListSnippets = '<c-l>'
-else
-  Plug 'https://github.com/marcweber/vim-addon-mw-utils'
-  Plug 'https://github.com/tomtom/tlib_vim'
-  Plug 'https://github.com/garbas/vim-snipmate'
-  let g:snipMate = { 'snippet_version': 1 }
-  imap <C-F> <Plug>snipMateNextOrTrigger
-  smap <C-F> <Plug>snipMateNextOrTrigger
+if executable('lazygit')
+  nnoremap <leader>gG <cmd>terminal ++close lazygit<cr>
 endif
 
 call plug#end()
@@ -190,8 +173,8 @@ endif
 """ Mappings
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
-nnoremap <expr> <leader>l (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
-nnoremap <expr> <leader>q (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
+nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
+nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>gg <cmd>G<cr>
@@ -203,6 +186,6 @@ nnoremap j gj
 nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
-tnoremap <esc> <c-\><c-n>
+tnoremap <esc><esc> <c-\><c-n>
 
 colorscheme pbnj
