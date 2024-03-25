@@ -10,8 +10,8 @@ function! GitVSCodeWeb(args) abort
   execute 'silent ! ' . l:cmd | redraw!
 endfunction
 
-" [G]it [B]rowse to launch repo, branch, & file in the browser
-command! -range GVSC
+" Launch project in VSCode Web instance
+command! -range GitVSCodeWeb
       \ call GitVSCodeWeb({
       \   'branch': trim(system('git rev-parse --abbrev-ref HEAD 2>/dev/null')),
       \   'filename': trim(system('git ls-files --full-name ' .. expand('%'))),
