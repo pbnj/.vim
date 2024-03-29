@@ -40,20 +40,11 @@ let g:ale_fix_on_save = 1
 let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
 let g:ale_floating_preview = 0
 let g:ale_pattern_options_enabled = 1
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '●'
 let g:ale_virtualtext_cursor = 0
-let g:ale_pattern_options = { '.github/workflows/.*.yaml$': { 'ale_linters': { 'yaml': ['actionlint', 'yamllint'] } } }
 command! ALEDisableFixers       let g:ale_fix_on_save=0
 command! ALEEnableFixers        let g:ale_fix_on_save=1
 command! ALEDisableFixersBuffer let b:ale_fix_on_save=0
 command! ALEEnableFixersBuffer  let b:ale_fix_on_save=1
-function! LinterStatus() abort
-  let l:counts = ale#statusline#Count(bufnr(''))
-  let l:all_errors = l:counts.error + l:counts.style_error
-  let l:all_non_errors = l:counts.total - l:all_errors
-  return ( l:all_errors > 0 ? '%#ALEError#' . printf(' E:%d ', all_errors) . '%*' : '' ) . ( l:all_non_errors > 0 ? '%#ALEWarning#' . printf(' W:%d ', all_non_errors) . '%*' : '' )
-endfunction
 augroup AleLSP
   autocmd!
   autocmd User ALELSPStarted nnoremap <buffer> <leader>ca <cmd>ALECodeAction<cr>
@@ -106,9 +97,6 @@ Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 Plug 'https://github.com/mhinz/vim-signify'
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 nnoremap <leader>gg <cmd>Git<cr>
-if executable('lazygit')
-  nnoremap <leader>gG <cmd>terminal ++close lazygit<cr>
-endif
 
 call plug#end()
 
@@ -143,10 +131,10 @@ let &pumheight = 50
 let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showmode = 1
-let &signcolumn = 'number'
+let &signcolumn = 'yes'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()} %{%LinterStatus()%}'
+let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()}'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -188,4 +176,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 tnoremap <esc><esc> <c-\><c-n>
 
-colorscheme pbnj
+colorscheme quiet
