@@ -41,13 +41,13 @@ nnoremap c<space> :Cargo<space>
 
 if exists('g:loaded_ale')
 	let b:ale_fixers = ['rustfmt']
-	let b:ale_linters = ['cargo', 'analyzer']
+	let b:ale_linters = ['cargo']
 
 	function! ALEInstall() abort
 		if executable('brew')
-			! brew install rust-analyzer rustfmt
+			! brew install rustfmt
 		elseif executable('rustup')
-			! rustup component add rust-analyzer rustfmt
+			! rustup component add rustfmt
 		else
 			echoerr "brew or rustup not found. cannot install `rust-analyzer` and/or `rustfmt`"
 		endif

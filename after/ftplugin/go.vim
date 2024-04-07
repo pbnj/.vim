@@ -1,12 +1,12 @@
 let &l:keywordprg = ':!ddgr golang'
 
-let b:ale_fixers = ['goimports', 'gopls']
-let b:ale_linters = ['gofmt', 'gopls', 'govet', 'golangci-lint']
+let b:ale_fixers = ['goimports']
+let b:ale_linters = ['gofmt', 'govet', 'golangci-lint']
 
 if exists('g:loaded_ale')
 	function! ALEInstall() abort
 		if executable('brew')
-			! brew install go gopls golangci-lint gotests
+			! brew install go golangci-lint gotests
 			! go install golang.org/x/tools/cmd/goimports@latest
 		elseif executable('go')
 			! go install golang.org/x/tools/gopls@latest golang.org/x/tools/cmd/goimports@latest github.com/cweill/gotests/...@latest

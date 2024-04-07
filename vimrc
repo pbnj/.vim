@@ -45,15 +45,6 @@ command! ALEDisableFixers       let g:ale_fix_on_save=0
 command! ALEEnableFixers        let g:ale_fix_on_save=1
 command! ALEDisableFixersBuffer let b:ale_fix_on_save=0
 command! ALEEnableFixersBuffer  let b:ale_fix_on_save=1
-augroup AleLSP
-  autocmd!
-  autocmd User ALELSPStarted nnoremap <buffer> <leader>ca <cmd>ALECodeAction<cr>
-  autocmd User ALELSPStarted nnoremap <buffer> gd <cmd>ALEGoToDefinition<cr>
-  autocmd User ALELSPStarted nnoremap <buffer> gi <cmd>ALEGoToImplementation<cr>
-  autocmd User ALELSPStarted nnoremap <buffer> gr <cmd>ALEFindReferences -quickfix -relative<cr>
-  autocmd User ALELSPStarted nnoremap <buffer> gt <cmd>ALEGoToTypeDefinition<cr>
-  autocmd User ALELSPStarted nnoremap <buffer> K  <cmd>ALEHover<cr>
-augroup END
 nnoremap <leader>af <cmd>ALEFix<cr>
 nnoremap <leader>ai <cmd>ALEInfo<cr>
 nnoremap [d <cmd>ALEPrevious<cr>zz
