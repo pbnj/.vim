@@ -138,5 +138,9 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 tnoremap <esc><esc> <c-\><c-n>
 
+""" Commands
+command! GRoot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
+
+""" UI
 highlight TrailingSpaces ctermbg=red guibg=red
 match TrailingSpaces /\s\+$/
