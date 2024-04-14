@@ -19,40 +19,20 @@ call plug#begin()
 Plug 'https://github.com/dstein64/vim-startuptime'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/godlygeek/tabular'
-Plug 'https://github.com/kana/vim-textobj-entire'
-Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-dadbod'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
+Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
-Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
-
-" linters, formatters, lsp
-let g:ale_fix_on_save = 1
-let g:ale_fixers = { '*' : ['remove_trailing_lines', 'trim_whitespace'] }
-let g:ale_floating_preview = 0
-let g:ale_pattern_options_enabled = 1
-let g:ale_virtualtext_cursor = 0
-command! ALEDisableFixers       let g:ale_fix_on_save=0
-command! ALEEnableFixers        let g:ale_fix_on_save=1
-command! ALEDisableFixersBuffer let b:ale_fix_on_save=0
-command! ALEEnableFixersBuffer  let b:ale_fix_on_save=1
-nnoremap <leader>af <cmd>ALEFix<cr>
-nnoremap <leader>ai <cmd>ALEInfo<cr>
-nnoremap [d <cmd>ALEPrevious<cr>zz
-nnoremap ]d <cmd>ALENext<cr>zz
-nnoremap [D <cmd>ALEFirst<cr>zz
-nnoremap ]D <cmd>ALELast<cr>zz
-Plug 'https://github.com/dense-analysis/ale'
-Plug 'https://github.com/junegunn/vader.vim'
 
 " fzf
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -68,11 +48,6 @@ nnoremap <leader>fg      <cmd>GFiles<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
 nnoremap <leader>tt      <cmd>Tags<cr>
-nnoremap <c-p>           <cmd>execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<cr>
-
-" language support
-let g:polyglot_disabled = ['csv']
-Plug 'https://github.com/sheerun/vim-polyglot'
 
 " tags
 if executable('ctags')
@@ -80,12 +55,8 @@ if executable('ctags')
 endif
 
 " db
-Plug 'https://github.com/tpope/vim-dadbod'
-Plug 'https://github.com/kristijanhusak/vim-dadbod-ui'
-Plug 'https://github.com/kristijanhusak/vim-dadbod-completion'
 
 " git
-Plug 'https://github.com/mhinz/vim-signify'
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 nnoremap <leader>gg <cmd>Git<cr>
 
