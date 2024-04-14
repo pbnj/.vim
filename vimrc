@@ -63,6 +63,7 @@ nnoremap <leader>gg <cmd>Git<cr>
 call plug#end()
 
 filetype plugin indent on
+syntax off
 
 """ Options
 let &autoindent = 1
@@ -83,20 +84,19 @@ let &infercase = 1
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:⋮ ,trail:·,nbsp:·,precedes:<,extends:>'
+let &listchars = 'tab:| ,precedes:<,extends:>'
 let &modeline = 1
 let &mouse = 'a'
-let &number = 1
+let &number = 0
 let &omnifunc = 'ale#completion#OmniFunc'
 let &path = '.,,doc,docs,src,cmd,terraform'
 let &pumheight = 50
-let &secure = 1
 let &shortmess = 'filnxtToOcC'
 let &showmode = 1
-let &signcolumn = 'yes'
+let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %l/%c %p%% %{FugitiveStatusline()}'
+let &statusline = '%f %m%r%h%w%y%q %03l/%03c %p%% %{FugitiveStatusline()}'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -138,4 +138,5 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <s-space> <space>
 tnoremap <esc><esc> <c-\><c-n>
 
-colorscheme quiet
+highlight TrailingSpaces ctermbg=red guibg=red
+match TrailingSpaces /\s\+$/
