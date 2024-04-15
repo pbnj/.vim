@@ -2,9 +2,7 @@
 " Maintainer: Peter Benjamin
 " Last Change: Fri Jul 14 19:47:06 PDT 2023
 
-if exists('current_compiler')
-  finish
-endif
+if exists('current_compiler') | finish | endif
 let current_compiler = 'golangci-lint'
 
 if exists(':CompilerSet') != 2
