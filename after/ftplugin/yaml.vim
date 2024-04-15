@@ -1,1 +1,1 @@
-let &l:keywordprg = printf(':!ddgr %s', &l:filetype)
+let &l:formatprg = 'prettier --stdin-filepath %'
