@@ -16,6 +16,7 @@ endif
 call plug#begin()
 
 " misc
+Plug 'https://github.com/Konfekt/vim-compilers'
 Plug 'https://github.com/dstein64/vim-startuptime'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/godlygeek/tabular'
@@ -125,6 +126,7 @@ cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
 nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
+nnoremap <leader>cc <cmd>Compilers<cr>
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>gg <cmd>G<cr>
@@ -135,8 +137,8 @@ nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
-tnoremap <s-space> <space>
 tnoremap <esc><esc> <c-\><c-n>
+tnoremap <s-space> <space>
 
 """ Commands
 command! GRoot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
