@@ -16,7 +16,8 @@ endif
 call plug#begin()
 
 " misc
-Plug 'https://github.com/Konfekt/vim-compilers'
+Plug 'https://github.com/Konfekt/vim-compilers' | nnoremap <leader>cc <cmd>Compilers<cr>
+
 Plug 'https://github.com/dstein64/vim-startuptime'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/godlygeek/tabular'
@@ -126,7 +127,6 @@ cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
 nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
-nnoremap <leader>cc <cmd>Compilers<cr>
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>gg <cmd>G<cr>
