@@ -56,8 +56,6 @@ if executable('ctags')
   Plug 'https://github.com/ludovicchabant/vim-gutentags'
 endif
 
-" db
-
 " git
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 nnoremap <leader>gg <cmd>Git<cr>
@@ -70,11 +68,11 @@ syntax off
 """ Options
 let &autoindent = 1
 let &autoread = 1
+let &background = 'light'
 let &backspace = 'indent,eol,start'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
 let &complete='.,w,b,u,t'
-let &completeopt = 'menuone,noselect'
 let &cursorline = 0
 let &encoding = 'utf-8'
 let &expandtab = 1
@@ -83,7 +81,7 @@ let &hidden = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &laststatus = 2
+let &laststatus = 1
 let &lazyredraw = 1
 let &list = 1
 let &listchars = 'tab:| ,precedes:<,extends:>'
@@ -108,7 +106,6 @@ let &wildcharm = 26
 let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
 let &wildignorecase = 1
 let &wildmenu = 1
-let &wildmode = 'longest:full,full'
 let &wildoptions = 'pum'
 let &wrap = 0
 let g:netrw_keepdir = 0
