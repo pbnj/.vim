@@ -25,7 +25,7 @@ Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-dadbod'
+Plug 'https://github.com/tpope/vim-dadbod' | Plug 'https://github.com/kristijanhusak/vim-dadbod-ui'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -49,12 +49,6 @@ nnoremap <leader>ff      <cmd>Files<cr>
 nnoremap <leader>fg      <cmd>GFiles<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
-nnoremap <leader>tt      <cmd>Tags<cr>
-
-" tags
-if executable('ctags')
-  Plug 'https://github.com/ludovicchabant/vim-gutentags'
-endif
 
 " git
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
@@ -68,8 +62,9 @@ syntax off
 """ Options
 let &autoindent = 1
 let &autoread = 1
-let &background = 'light'
 let &backspace = 'indent,eol,start'
+let &background = 'light'
+let &belloff = 'all'
 let &breakindent = 1
 let &clipboard = 'unnamed,unnamedplus'
 let &complete='.,w,b,u,t'
@@ -81,10 +76,10 @@ let &hidden = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &laststatus = 1
+let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:| ,precedes:<,extends:>'
+let &listchars = 'tab:» ,precedes:<,extends:>,trail:·'
 let &modeline = 1
 let &mouse = 'a'
 let &number = 0
@@ -139,7 +134,3 @@ tnoremap <s-space> <space>
 
 """ Commands
 command! GRoot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
-
-""" UI
-highlight TrailingSpaces ctermbg=red guibg=red
-match TrailingSpaces /\s\+$/
