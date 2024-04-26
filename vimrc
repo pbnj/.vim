@@ -1,31 +1,62 @@
-nnoremap <silent><nowait><space> <nop>
-let g:mapleader = ' '
+" Needs Vim version 9.0 and above
+if !has('vim9script') || v:version < 900
+  finish
+endif
 
-""" Plugins
-" Enable built-in plugin to filter quickfix list. See :h :Cfilter
+vim9script
+
+nnoremap <silent><nowait><space> <nop>
+g:mapleader = ' '
+g:maplocalleader = ' '
+
+# Plugins
+# Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd cfilter
 
-" vim-only plugins
+# vim-only plugins
 runtime ftplugin/man.vim
 
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# disable some built-in plugins
+g:loaded_2html_plugin = 1
+
+# disable netrw
+g:loaded_netrwPlugin = 1
+g:loaded_netrw = 1
+
+# better matchit
+if has('syntax') && has('eval')
+  packadd! matchit
 endif
+
+# Download plug.vim if it doesn't exist yet
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+# Run PlugInstall if there are missing plugins
+augroup PLUG
+  autocmd!
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) > 0
+        \ | PlugInstall --sync
+        \ | source $MYVIMRC
+        \ | endif
+augroup END
 
 call plug#begin()
 
-" misc
-Plug 'https://github.com/Konfekt/vim-compilers' | nnoremap <leader>cc <cmd>Compilers<cr>
-
+# misc
+Plug 'https://github.com/Konfekt/vim-compilers'
+Plug 'https://github.com/bfrg/vim-jqplay'
 Plug 'https://github.com/dstein64/vim-startuptime'
 Plug 'https://github.com/editorconfig/editorconfig-vim'
 Plug 'https://github.com/godlygeek/tabular'
+Plug 'https://github.com/hashivim/vim-terraform'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-dadbod' | Plug 'https://github.com/kristijanhusak/vim-dadbod-ui'
+Plug 'https://github.com/tpope/vim-dadbod'
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -36,85 +67,100 @@ Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
 
-" fzf
-Plug 'https://github.com/junegunn/fzf.vim'
+# completion
+Plug 'https://github.com/girishji/vimcomplete'
+Plug 'https://github.com/girishji/autosuggest.vim'
+Plug 'https://github.com/hrsh7th/vim-vsnip'
+Plug 'https://github.com/hrsh7th/vim-vsnip-integ'
+Plug 'https://github.com/rafamadriz/friendly-snippets'
+
+# fzf
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
-nnoremap <leader><space> <cmd>History<cr>
-nnoremap <leader>?       <cmd>Helptags<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
 nnoremap <leader>;       <cmd>History:<cr>
+nnoremap <leader><space> <cmd>History<cr>
+nnoremap <leader>?       <cmd>Helptags<cr>
 nnoremap <leader>bb      <cmd>Buffers<cr>
 nnoremap <leader>ff      <cmd>Files<cr>
-nnoremap <leader>fg      <cmd>GFiles<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
+nnoremap <leader>gf      <cmd>GFiles<cr>
 
-" git
+# git
 Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
 nnoremap <leader>gg <cmd>Git<cr>
 
 call plug#end()
 
 filetype plugin indent on
-syntax off
+syntax on
 
-""" Options
-let &autoindent = 1
-let &autoread = 1
-let &backspace = 'indent,eol,start'
-let &background = 'light'
-let &belloff = 'all'
-let &breakindent = 1
-let &clipboard = 'unnamed,unnamedplus'
-let &complete='.,w,b,u,t'
-let &cursorline = 0
-let &encoding = 'utf-8'
-let &expandtab = 1
-let &grepformat = '%f:%l:%m'
-let &hidden = 1
-let &ignorecase = 1
-let &incsearch = 1
-let &infercase = 1
-let &laststatus = 2
-let &lazyredraw = 1
-let &list = 1
-let &listchars = 'tab:» ,precedes:<,extends:>,trail:·'
-let &modeline = 1
-let &mouse = 'a'
-let &number = 0
-let &omnifunc = 'ale#completion#OmniFunc'
-let &path = '.,,doc,docs,src,cmd,terraform'
-let &pumheight = 50
-let &shortmess = 'filnxtToOcC'
-let &showmode = 1
-let &signcolumn = 'no'
-let &smartcase = 1
-let &smarttab = 1
-let &statusline = '%f %m%r%h%w%y%q %03l/%03c %p%% %{FugitiveStatusline()}'
-let &swapfile = 0
-let &termguicolors = 0
-let &ttimeout = 1
-let &ttimeoutlen = 50
-let &ttyfast = 1
-let &wildcharm = 26
-let &wildignore = 'LICENSE,tags,.git,.mypy_cache,__pycache__,target,dist,node_modules,vendor,cache'
-let &wildignorecase = 1
-let &wildmenu = 1
-let &wildoptions = 'pum'
-let &wrap = 0
-let g:netrw_keepdir = 0
+# Options
 
-if executable('rg') | let &grepprg = 'rg --vimgrep --smart-case $*' | endif
+source $VIMRUNTIME/defaults.vim
 
-" change insert/replace cursor shape based on vim mode, similar to neovim
-if &term =~# 'xterm'
-  let &t_SI = "\e[6 q"
-  let &t_SR = "\e[4 q"
-  let &t_EI = "\e[2 q"
+set autoindent
+set autoread
+set background=dark
+set backspace=indent,eol,start
+set belloff=all
+set breakindent
+set clipboard=unnamed
+set complete-=i
+set expandtab
+set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:═
+set hidden
+set hlsearch
+set ignorecase
+set incsearch
+set infercase
+set laststatus=2
+set lazyredraw
+set list
+set listchars=tab:→·,trail:~
+set modeline
+set modelines=5
+set mouse=a
+set nocursorline
+set nonumber
+set notermguicolors
+set nowrap
+set path=.,,doc,docs,src,cmd,terraform
+set pumheight=50
+set ruler
+set shortmess=filnxtocTOCI
+set showmode
+set signcolumn=no
+set smartcase
+set smarttab
+set ttimeout
+set ttimeoutlen=50
+set ttyfast
+set viminfofile=$HOME/.vim/.viminfo
+set wildignorecase
+set wildmenu
+set wildoptions=pum
+
+set wildignore=LICENSE,tags,*/.git/*
+set wildignore+=*/.mypy_cache/*,*/__pycache__/*
+set wildignore+=*/target/*
+set wildignore+=*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case\ $*
+  set grepformat=%f:%l:%m
 endif
 
-""" Mappings
+# change insert/replace cursor shape based on vim mode, similar to neovim
+if &term =~# 'xterm'
+  &t_SI = "\e[6 q"
+  &t_SR = "\e[4 q"
+  &t_EI = "\e[2 q"
+endif
+
+# Mappings
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
@@ -124,7 +170,6 @@ nnoremap <leader>ee :ed **/*
 nnoremap <leader>gg <cmd>G<cr>
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
-nnoremap Q <nop>
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
@@ -132,5 +177,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-""" Commands
-command! GRoot execute 'lcd '..finddir('.git/..', expand('%:p:h')..';')
+colorscheme pbnj
