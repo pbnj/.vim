@@ -19,10 +19,6 @@ runtime ftplugin/man.vim
 # disable some built-in plugins
 g:loaded_2html_plugin = 1
 
-# disable netrw
-g:loaded_netrwPlugin = 1
-g:loaded_netrw = 1
-
 # better matchit
 if has('syntax') && has('eval')
   packadd! matchit
@@ -177,4 +173,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme pbnj
+colorscheme retrobox
