@@ -3,3 +3,5 @@
 /plugged/*
 /spell/*
 /tags*
+.viminfo
+*.swp
