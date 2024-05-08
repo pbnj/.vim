@@ -67,8 +67,7 @@ repos:
         language: system
         entry: gitleaks
         args:
-          - --verbose
-          - --no-git
+          - protect
       - id: shellcheck
         name: shellcheck
         description: This hook checks shell files for common problems. `brew install shellcheck` required.
