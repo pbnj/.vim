@@ -76,10 +76,27 @@ hi!  TabLineSel    cterm=bold            ctermfg=NONE         ctermbg=NONE
 hi!  Title         cterm=bold            ctermfg=DarkMagenta  ctermbg=NONE
 hi!  Todo          cterm=NONE            ctermfg=Black        ctermbg=DarkYellow
 hi!  Type          cterm=NONE            ctermfg=DarkGreen    ctermbg=NONE
+hi!  Underlined    ctermfg=NONE          ctermbg=NONE         cterm=underline
 hi!  Visual        cterm=reverse         ctermfg=NONE         ctermbg=NONE
 hi!  WarningMsg    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE
 
+" TODO: should these default highlights be overridden?
+" hi Conceal
+" hi CursorLine
+" hi CursorLineNr
+" hi FoldColumn
+" hi LineNrAbove
+" hi LineNrBelow
+" hi ToolbarButton
+" hi ToolbarLine
+" hi VisualNOS
+" hi WildMenu
+" hi debugBreakpoint
+" hi debugPC
+" hi diffSubname
+
 if has('gui_running')
+
   hi!  ColorColumn   gui=reverse         guifg=DarkRed      guibg=NONE
   hi!  Comment       gui=NONE            guifg=DarkGray     guibg=NONE
   hi!  Constant      gui=NONE            guifg=DarkRed      guibg=NONE
@@ -118,25 +135,55 @@ if has('gui_running')
   hi!  Type          gui=NONE            guifg=DarkGreen    guibg=NONE
   hi!  Visual        gui=reverse         guifg=NONE         guibg=NONE
   hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
+
 endif
 
-hi!  link  ALEError                    ErrorMsg
-hi!  link  ALEWarning                  WarningMsg
-hi!  link  ALEErrorSign                ErrorMsg
-hi!  link  ALEWarningSign              WarningMsg
-hi!  link  ALEVirtualTextError         DiffDelete
-hi!  link  ALEVirtualTextInfo          DiffChange
-hi!  link  ALEVirtualTextStyleError    DiffDelete
-hi!  link  ALEVirtualTextStyleWarning  DiffChange
-hi!  link  ALEVirtualTextWarning       DiffChange
-hi!  link  EndOfBuffer                 NonText
-hi!  link  IncSearch                   Search
-hi!  link  PmenuSBar                   Pmenu
-hi!  link  PmenuThumb                  PmenuSel
-hi!  link  QuickFixLine                Error
-hi!  link  SpecialKey                  NonText
-hi!  link  TabLineFill                 TabLine
-hi!  link  Terminal                    Normal
-hi!  link  diffAdded                   DiffAdd
-hi!  link  diffChanged                 DiffChange
-hi!  link  diffRemoved                 DiffDelete
+" TODO: are ALE highlights still needed?
+" hi!  link  ALEError                    ErrorMsg
+" hi!  link  ALEErrorSign                ErrorMsg
+" hi!  link  ALEVirtualTextError         DiffDelete
+" hi!  link  ALEVirtualTextInfo          DiffChange
+" hi!  link  ALEVirtualTextStyleError    DiffDelete
+" hi!  link  ALEVirtualTextStyleWarning  DiffChange
+" hi!  link  ALEVirtualTextWarning       DiffChange
+" hi!  link  ALEWarning                  WarningMsg
+" hi!  link  ALEWarningSign              WarningMsg
+
+hi!  link  Added                 DiffAdd
+hi!  link  Changed               DiffChange
+hi!  link  Character             Constant
+hi!  link  Debug                 Special
+hi!  link  EndOfBuffer           NonText
+hi!  link  IncSearch             Search
+hi!  link  MessageWindow         Pmenu
+hi!  link  PmenuExtra            Pmenu
+hi!  link  PmenuExtraSel         PmenuSel
+hi!  link  PmenuKind             Pmenu
+hi!  link  PmenuKindSel          PmenuSel
+hi!  link  PmenuSBar             Pmenu
+hi!  link  PmenuThumb            PmenuSel
+hi!  link  PopupNotification     Todo
+hi!  link  QuickFixLine          Error
+hi!  link  Removed               DiffDelete
+hi!  link  SpecialKey            NonText
+hi!  link  StatuslineTerm        Statusline
+hi!  link  StatuslineTermNC      StatuslineNC
+hi!  link  TabLineFill           TabLine
+hi!  link  Terminal              Normal
+hi!  link  Terminal              Normal
+hi!  link  diffAdded             DiffAdd
+hi!  link  diffChanged           DiffChange
+hi!  link  diffRemoved           DiffDelete
+hi!  link  gitCommitSummary      Title
+hi!  link  javaScriptFunction    Statement
+hi!  link  javaScriptIdentifier  Statement
+hi!  link  markdownUrl           String
+hi!  link  rubyDefine            Statement
+hi!  link  rubyMacro             Statement
+hi!  link  sqlKeyword            Statement
+hi!  link  vimCommentString      Comment
+hi!  link  vimOper               Normal
+hi!  link  vimParenSep           Normal
+hi!  link  vimSep                Normal
+hi!  link  vimVar                Normal
+hi!  link  yamlBlockMappingKey   Statement
