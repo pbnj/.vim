@@ -24,6 +24,8 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
+packadd! editorconfig
+
 # Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -43,32 +45,32 @@ call plug#begin()
 
 # misc
 Plug 'https://github.com/Konfekt/vim-compilers'
-Plug 'https://github.com/bfrg/vim-jqplay'
-Plug 'https://github.com/dstein64/vim-startuptime'
-Plug 'https://github.com/editorconfig/editorconfig-vim'
-Plug 'https://github.com/godlygeek/tabular'
-Plug 'https://github.com/hashivim/vim-terraform'
+Plug 'https://github.com/bfrg/vim-jqplay', { 'on': ['Jqplay'] }
+Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
+Plug 'https://github.com/kana/vim-textobj-entire'
+Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
-Plug 'https://github.com/pbnj/vim-ddgr'
+Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/romainl/vim-qf'
+Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-dadbod'
-Plug 'https://github.com/tpope/vim-dispatch'
+Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
+Plug 'https://github.com/tpope/vim-dispatch', { 'on': ['Dispatch', 'Spawn', 'Start'] }
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-eunuch'
+Plug 'https://github.com/tpope/vim-fugitive', { 'on': ['G', 'Git', 'Gwrite', 'GBrowse'] }
+Plug 'https://github.com/tpope/vim-rhubarb' | nnoremap <leader>gg <cmd>Git<cr>
 Plug 'https://github.com/tpope/vim-rsi'
+Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
+Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 
 # completion
-Plug 'https://github.com/girishji/vimcomplete'
-Plug 'https://github.com/girishji/autosuggest.vim'
-Plug 'https://github.com/hrsh7th/vim-vsnip'
-Plug 'https://github.com/hrsh7th/vim-vsnip-integ'
-Plug 'https://github.com/rafamadriz/friendly-snippets'
+Plug 'https://github.com/lifepillar/vim-mucomplete'
 
 # fzf
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
@@ -84,29 +86,23 @@ nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
 nnoremap <leader>gf      <cmd>GFiles<cr>
 
-# git
-Plug 'https://github.com/tpope/vim-fugitive' | Plug 'https://github.com/tpope/vim-rhubarb'
-nnoremap <leader>gg <cmd>Git<cr>
-
 call plug#end()
 
 filetype plugin indent on
 syntax on
 
 # Options
-
 source $VIMRUNTIME/defaults.vim
 
 set autoindent
 set autoread
-set background=dark
 set backspace=indent,eol,start
 set belloff=all
 set breakindent
 set clipboard=unnamed
 set complete-=i
+set completeopt=menuone,noselect
 set expandtab
-set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:═
 set hidden
 set hlsearch
 set ignorecase
@@ -121,16 +117,17 @@ set modelines=5
 set mouse=a
 set nocursorline
 set nonumber
+set noruler
+set noswapfile
 set notermguicolors
 set nowrap
-set path=.,,doc,docs,src,cmd,terraform
 set pumheight=50
-set ruler
 set shortmess=filnxtocTOCI
 set showmode
 set signcolumn=no
 set smartcase
 set smarttab
+set statusline=%f:%l:%c%m%r%h%w%q%=[%{&formatprg}]%y
 set ttimeout
 set ttimeoutlen=50
 set ttyfast
@@ -145,16 +142,22 @@ set wildignore+=*/target/*
 set wildignore+=*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*
 
 if executable('rg')
-  set grepprg=rg\ --vimgrep\ --smart-case\ $*
-  set grepformat=%f:%l:%m
+  &grepprg = 'rg --vimgrep --smart-case $*'
+  &grepformat = '%f:%l:%m'
 endif
 
-# change insert/replace cursor shape based on vim mode, similar to neovim
-if &term =~# 'xterm'
-  &t_SI = "\e[6 q"
-  &t_SR = "\e[4 q"
-  &t_EI = "\e[2 q"
+if executable('fd')
+  if isdirectory('.git')
+    &path = join(systemlist('fd . --type d --hidden'), ',')
+  endif
 endif
+
+# # change insert/replace cursor shape based on vim mode, similar to neovim
+# if &term =~# 'xterm'
+#   &t_SI = "\e[6 q"
+#   &t_SR = "\e[4 q"
+#   &t_EI = "\e[2 q"
+# endif
 
 # Mappings
 cnoremap <c-n> <c-Down>
@@ -173,4 +176,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme retrobox
+colorscheme pbnj
