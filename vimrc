@@ -84,6 +84,7 @@ nnoremap <leader>bb      <cmd>Buffers<cr>
 nnoremap <leader>ff      <cmd>Files<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
+vnoremap <leader>fw      y:Rg <c-r>0<cr>
 nnoremap <leader>gf      <cmd>GFiles<cr>
 
 call plug#end()
