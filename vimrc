@@ -1,52 +1,46 @@
-" Needs Vim version 9.0 and above
-if !has('vim9script') || v:version < 900
-  finish
-endif
-
-vim9script
-
 nnoremap <silent><nowait><space> <nop>
-g:mapleader = ' '
-g:maplocalleader = ' '
+let g:mapleader = ' '
+let g:maplocalleader = ' '
 
-# Plugins
-# Enable built-in plugin to filter quickfix list. See :h :Cfilter
+" Plugins
+" Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd cfilter
 
-# vim-only plugins
+" vim-only plugins
 runtime ftplugin/man.vim
 
-# disable some built-in plugins
-g:loaded_2html_plugin = 1
+" disable some built-in plugins
+let g:loaded_2html_plugin = 1
 
-# better matchit
+" better matchit
 if has('syntax') && has('eval')
   packadd! matchit
 endif
 
 packadd! editorconfig
 
-# Download plug.vim if it doesn't exist yet
+" Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-# Run PlugInstall if there are missing plugins
+" Run PlugInstall if there are missing plugins
 augroup PLUG
   autocmd!
   autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) > 0
-        \ | PlugInstall --sync
-        \ | source $MYVIMRC
+        \ |   PlugInstall --sync
+        \ |   source $MYVIMRC
         \ | endif
 augroup END
 
 call plug#begin()
 
-# misc
+" misc
 Plug 'https://github.com/Konfekt/vim-compilers'
 Plug 'https://github.com/bfrg/vim-jqplay', { 'on': ['Jqplay'] }
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
+Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
@@ -55,11 +49,11 @@ Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
-Plug 'https://github.com/tpope/vim-dispatch', { 'on': ['Dispatch', 'Spawn', 'Start'] }
 Plug 'https://github.com/tpope/vim-dotenv'
+Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive', { 'on': ['G', 'Git', 'Gwrite', 'GBrowse'] }
-Plug 'https://github.com/tpope/vim-rhubarb' | nnoremap <leader>gg <cmd>Git<cr>
+Plug 'https://github.com/tpope/vim-rhubarb', { 'on': ['G', 'Git', 'Gwrite', 'GBrowse'] } | nnoremap <leader>gg <cmd>Git<cr>
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
@@ -67,12 +61,12 @@ Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
-Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
+Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
 
-# completion
+" completion
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 
-# fzf
+" fzf
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
@@ -92,11 +86,12 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
-# Options
+" Options
 source $VIMRUNTIME/defaults.vim
 
 set autoindent
 set autoread
+set background=dark
 set backspace=indent,eol,start
 set belloff=all
 set breakindent
@@ -122,6 +117,7 @@ set noruler
 set noswapfile
 set notermguicolors
 set nowrap
+set path=.,,
 set pumheight=50
 set shortmess=filnxtocTOCI
 set showmode
@@ -143,24 +139,30 @@ set wildignore+=*/target/*
 set wildignore+=*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*
 
 if executable('rg')
-  &grepprg = 'rg --vimgrep --smart-case $*'
-  &grepformat = '%f:%l:%m'
+  let &grepprg = 'rg --vimgrep --smart-case $*'
+  let &grepformat = '%f:%l:%m'
 endif
 
-if executable('fd')
-  if isdirectory('.git')
-    &path = join(systemlist('fd . --type d --hidden'), ',')
-  endif
+" https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
+augroup PATH
+  autocmd!
+  autocmd VimEnter,BufReadPost,BufNewFile * if isdirectory('.git')
+        \ |   if executable('fd')
+        \ |     let &path .= join(systemlist('fd . --type d --hidden'), ',')
+        \ |   elseif executable('git')
+        \ |     let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',')
+        \ |   endif
+        \ | endif
+augroup END
+
+" change insert/replace cursor shape based on vim mode, similar to neovim
+if &term =~# 'xterm'
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
 endif
 
-# # change insert/replace cursor shape based on vim mode, similar to neovim
-# if &term =~# 'xterm'
-#   &t_SI = "\e[6 q"
-#   &t_SR = "\e[4 q"
-#   &t_EI = "\e[2 q"
-# endif
-
-# Mappings
+" Mappings
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
@@ -177,4 +179,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme pbnj
+colorscheme retrobox
