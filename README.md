@@ -1,6 +1,6 @@
 # .vim
 
-> My .vim configurations
+> My .vim configuration
 
 ## Table of Contents
 
@@ -9,26 +9,14 @@
 
 - [Overview](#overview)
 - [Install](#install)
-- [Install/Update Plugins](#installupdate-plugins)
+- [Plugins](#plugins)
 - [Custom Plugins](#custom-plugins)
-- [Filetype Plugins](#filetype-plugins)
-- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
 
-My personal `vim` configuration, focusing on minimalism without compromising
-pragmatism and functionality.
-
-Notable features include:
-
-- [`vim-plug`](https://github.com/junegunn/vim-plug) vim plugin manager
-- [`ale`](https://github.com/dense-analysis/ale) asynchronous linting engine,
-  with zero-config LSP support
-- [`fzf.vim`](https://github.com/junegunn/fzf.vim) fuzzy finder plugin
-- [`vim-fugitive`](https://github.com/tpope/vim-fugitive) git plugin
-- ... and many more
+My personal `vim` configuration.
 
 ## Install
 
@@ -36,20 +24,10 @@ Notable features include:
 git clone https://github.com/pbnj/.vim ~/.vim
 ```
 
-## Install/Update Plugins
+## Plugins
 
-```sh
-:PlugUpdate
-```
+See the plugins in [`vimrc`](vimrc) file between `call plug#begin()` and `call plug#end()`.
 
 ## Custom Plugins
 
-See [`./plugin/`](./plugin/)
-
-## Filetype Plugins
-
-See [`./after/ftplugin/`](./after/ftplugin/)
-
-## License
-
-MIT
+See [`./plugin/`](./plugin/) directory.
