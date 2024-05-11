@@ -67,8 +67,9 @@ Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 
 " fzf
+Plug 'https://github.com/junegunn/vim-slash' | noremap <plug>(slash-after) zz
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'https://github.com/junegunn/fzf.vim' ", { 'on': ['Rg', 'Commands', 'History', 'History:', 'Helptags', 'Tags', 'Buffers', 'Files', 'GFiles?'] }
 nnoremap <leader>/       <cmd>Rg<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
 nnoremap <leader>;       <cmd>History:<cr>
