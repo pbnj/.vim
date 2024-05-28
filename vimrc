@@ -7,7 +7,7 @@ source $VIMRUNTIME/defaults.vim
 
 " Plugins
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
-packadd cfilter
+packadd! cfilter
 
 " vim-only plugins
 runtime ftplugin/man.vim
@@ -15,8 +15,11 @@ runtime ftplugin/man.vim
 " enable built-in editorconfig
 packadd! editorconfig
 
+" comments
+packadd! comment
+
 " netrw
-let g:netrw_keepdir = 0
+" let g:netrw_keepdir = 0
 let g:netrw_hide = 0
 
 " Download plug.vim if it doesn't exist yet
@@ -36,10 +39,8 @@ augroup END
 
 call plug#begin()
 
-" Plug 'https://github.com/sheerun/vim-polyglot'
 " misc
-Plug 'https://github.com/Konfekt/vim-compilers'
-Plug 'https://github.com/bfrg/vim-jqplay', { 'on': ['Jqplay'] }
+Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
@@ -50,8 +51,9 @@ Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/romainl/vim-qf'
-Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
+Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
@@ -69,7 +71,7 @@ Plug 'https://github.com/wellle/tmux-complete.vim'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 let g:mucomplete#chains = {
       \ 'default' : ['path', 'omni', 'c-n', 'user'],
-      \ 'vim'     : ['path', 'cmd', 'c-n']
+      \ 'vim'     : ['path', 'cmd', 'c-n', 'keyn']
       \ }
 
 " fzf
@@ -187,3 +189,5 @@ nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
+
+colorscheme habamax
