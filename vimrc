@@ -113,7 +113,7 @@ let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &iskeyword = &iskeyword . ',-'
+let &iskeyword .= ',-'
 let &laststatus=2
 let &lazyredraw = 1
 let &list = 1
@@ -141,6 +141,10 @@ let &wildignorecase = 1
 let &wildmenu = 1
 let &wildoptions = 'pum'
 let &wrap = 0
+
+if has('patch-9.1.0463')
+  let &completeopt .= 'fuzzy'
+endif
 
 let &wildignore = 'LICENSE,tags,*/.git/*'
 let &wildignore .= '*/.mypy_cache/*,*/__pycache__/*'

@@ -5,7 +5,7 @@ let g:loaded_fzf_custom = 1
 command! URLs
       \ call fzf#run(
       \   fzf#wrap({
-      \     'source': getline(1,'$')->join(' ')->split(' ')->map({_,v -> matchstr(v,'\chttp\(s\)\?:\/\/[a-z.@:?=&]\+')})->filter('!empty(v:val)')->sort()->uniq(),
+      \     'source': getline(1,'$')->join(' ')->split(' ')->map({_,v -> matchstr(v,'\chttp\(s\)\?:\/\/[0-9a-z.@:?=&/\-\_$#%]\+')})->filter('!empty(v:val)')->sort()->uniq(),
       \     'sink': executable('open') ? '!open' : '!xdg-open', 'options': '--multi --prompt=URLs\>\ '
       \   })
       \ )
