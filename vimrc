@@ -46,7 +46,6 @@ Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }

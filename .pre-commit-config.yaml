@@ -34,13 +34,24 @@ repos:
         entry: npx
         args:
           - markdownlint-cli
+      # - id: trufflehog
+      #   name: trufflehog
+      #   description: This hook checks commits for secrets.
+      #   language: docker_image
+      #   entry: us-docker.pkg.dev/thog-artifacts/public/scanner
+      #   args:
+      #     - git
+      #     - main
+      #     - HEAD
       - id: gitleaks
         name: gitleaks
         description: This hook checks commits for secrets. `brew install gitleaks` required.
-        language: system
-        entry: gitleaks
+        language: docker_image
+        entry: -u root:root zricethezav/gitleaks
         args:
           - protect
+          - --verbose
+          - --staged
       - id: shellcheck
         name: shellcheck
         description: This hook checks shell files for common problems. `brew install shellcheck` required.
