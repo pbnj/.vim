@@ -74,7 +74,6 @@ let g:mucomplete#chains = {
       \ }
 
 " fzf
-Plug 'https://github.com/junegunn/vim-slash' | noremap <plug>(slash-after) zz
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
@@ -97,6 +96,7 @@ syntax off
 " Options
 let &autoindent = 1
 let &autoread = 1
+let &background = 'dark'
 let &backspace = 'indent,eol,start'
 let &belloff = 'all'
 let &breakindent = 1
@@ -105,6 +105,7 @@ let &complete = '.,w,b,u,t'
 let &completeopt = 'menuone,noselect'
 let &cursorline = 0
 let &expandtab = 1
+let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
 let &guifont = 'InputMonoNarrow-Regular:h12'
 let &guioptions = '!'
 let &hidden = 1
@@ -112,10 +113,11 @@ let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
+let &iskeyword = &iskeyword . ',-'
 let &laststatus=2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:¦ ,trail:~'
+let &listchars = 'tab:│ ,trail:~'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
@@ -151,18 +153,17 @@ if executable('rg')
 endif
 
 " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
-augroup PATH
-  autocmd!
-  autocmd VimEnter,BufReadPost,BufNewFile * if isdirectory('.git')
-        \ |   if executable('git')
-        \ |     let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',')
-        \ |   endif
-augroup END
+if isdirectory('.git')
+  augroup PATH
+    autocmd!
+    autocmd BufReadPost,BufNewFile * let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',')
+  augroup END
+endif
 
 " disable syntax if file is larger than 10MB (performance improvement)
 augroup SYNTAX
   autocmd!
-  autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | endif
+  autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | echo 'Syntax disabled on large files' | endif
 augroup END
 
 " change insert/replace cursor shape based on vim mode, similar to neovim
@@ -189,4 +190,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme habamax
+colorscheme pbnj
