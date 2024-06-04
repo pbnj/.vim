@@ -1,7 +1,7 @@
-/.netrwhist
-/pack/*
-/plugged/*
-/spell/*
-/tags*
-.viminfo
 *.swp
+.netrwhist
+.viminfo
+pack/*
+plugged/*
+spell/*
+tags*
