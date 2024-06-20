@@ -50,7 +50,6 @@ Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/romainl/vim-qf'
-Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
@@ -65,6 +64,9 @@ Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/wellle/tmux-complete.vim'
+
+Plug 'https://github.com/sheerun/vim-polyglot'
+let g:polyglot_disabled = ['modula2']
 
 " completion
 Plug 'https://github.com/lifepillar/vim-mucomplete'
@@ -106,14 +108,10 @@ let &completeopt = 'menuone,noselect'
 let &cursorline = 0
 let &expandtab = 1
 let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
-let &guifont = 'InputMonoNarrow-Regular:h12'
-let &guioptions = '!'
 let &hidden = 1
 let &hlsearch = 1
-let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &iskeyword .= ',-'
 let &laststatus=2
 let &lazyredraw = 1
 let &list = 1
@@ -128,7 +126,6 @@ let &ruler = 0
 let &shortmess = 'filnxtocTOCI'
 let &showmode = 1
 let &signcolumn = 'no'
-let &smartcase = 1
 let &smarttab = 1
 let &statusline = '%f:%l:%c%m%r%h%w%q%=[%{&formatprg}]%y'
 let &swapfile = 0
@@ -141,11 +138,11 @@ let &undofile = 1
 let &viminfofile = '$HOME/.vim/.viminfo'
 let &wildignorecase = 1
 let &wildmenu = 1
-let &wildoptions = 'pum'
+let &wildoptions = 'pum,fuzzy'
 let &wrap = 0
 
 if has('patch-9.1.0463')
-  let &completeopt .= 'fuzzy'
+  let &completeopt .= ',fuzzy'
 endif
 
 let &wildignore = 'LICENSE,tags,*/.git/*'
@@ -159,17 +156,20 @@ if executable('rg')
 endif
 
 " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
-if isdirectory('.git')
-  augroup PATH
-    autocmd!
-    autocmd BufReadPost,BufNewFile * let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',')
-  augroup END
-endif
+augroup PATH
+  autocmd!
+  autocmd BufReadPost,BufNewFile * if isdirectory('.git') | let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',') | endif
+augroup END
 
 " disable syntax if file is larger than 10MB (performance improvement)
 augroup SYNTAX
   autocmd!
   autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | echo 'Syntax disabled on large files' | endif
+augroup END
+
+augroup RESIZE
+  autocmd!
+  autocmd VimResized * wincmd =
 augroup END
 
 " change insert/replace cursor shape based on vim mode, similar to neovim

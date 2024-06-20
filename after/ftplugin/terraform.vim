@@ -1,3 +1,4 @@
+let &iskeyword .= ',-'
 let &l:formatprg = 'terraform fmt -'
 
 function! TFenvCompletion(A, L, P)
