@@ -8,6 +8,8 @@ source $VIMRUNTIME/defaults.vim
 " Plugins
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd! cfilter
+" Enable built-in plugin to auto-turn-off hlsearch
+packadd! nohlsearch
 
 " vim-only plugins
 runtime ftplugin/man.vim
@@ -50,6 +52,9 @@ Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/romainl/vim-qf'
+Plug 'https://github.com/wellle/targets.vim'
+
+" tpope plugins
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
 Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
@@ -62,20 +67,9 @@ Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
-Plug 'https://github.com/wellle/targets.vim'
-Plug 'https://github.com/wellle/tmux-complete.vim'
 
-Plug 'https://github.com/sheerun/vim-polyglot'
-let g:polyglot_disabled = ['modula2']
-
-" completion
-Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {
-      \ 'default' : ['path', 'omni', 'c-n', 'user'],
-      \ 'vim'     : ['path', 'cmd', 'c-n', 'keyn']
-      \ }
-
-" fzf
+" junegunn plugins
+Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
@@ -90,10 +84,20 @@ nnoremap <leader>fw      :Rg <c-r><c-w><cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 nnoremap <leader>gf      <cmd>GFiles<cr>
 
+Plug 'https://github.com/sheerun/vim-polyglot'
+let g:polyglot_disabled = ['modula2']
+
+" completion
+Plug 'https://github.com/wellle/tmux-complete.vim'
+Plug 'https://github.com/lifepillar/vim-mucomplete'
+let g:mucomplete#chains = {
+      \ 'default' : ['path', 'omni', 'c-n', 'user'],
+      \ 'vim'     : ['path', 'cmd', 'c-n', 'keyn']
+      \ }
+
 call plug#end()
 
 filetype plugin indent on
-syntax off
 
 " Options
 let &autoindent = 1
@@ -115,7 +119,7 @@ let &infercase = 1
 let &laststatus=2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:│ ,trail:~'
+let &listchars = 'tab:│ ,trail:·,leadmultispace:│·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
@@ -138,11 +142,12 @@ let &undofile = 1
 let &viminfofile = '$HOME/.vim/.viminfo'
 let &wildignorecase = 1
 let &wildmenu = 1
-let &wildoptions = 'pum,fuzzy'
+let &wildoptions = 'pum'
 let &wrap = 0
 
-if has('patch-9.1.0463')
+if has('patch-9.1.0500')
   let &completeopt .= ',fuzzy'
+  let &wildoptions .= ',fuzzy'
 endif
 
 let &wildignore = 'LICENSE,tags,*/.git/*'
