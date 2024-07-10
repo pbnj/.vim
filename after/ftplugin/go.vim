@@ -5,4 +5,6 @@ else
   let &l:formatprg = 'gofmt'
 endif
 
+let b:undo_ftplugin = 'setlocal formatprg<'
+
 " TODO: command to generate go tests

@@ -1,5 +1,6 @@
-let &iskeyword .= ',-'
+let &l:iskeyword .= ',-'
 let &l:formatprg = 'terraform fmt -'
+let b:undo_ftplugin = 'setlocal formatprg< iskeyword<'
 
 function! TFenvCompletion(A, L, P)
   return filter([
