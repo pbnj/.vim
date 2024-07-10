@@ -9,7 +9,7 @@ source $VIMRUNTIME/defaults.vim
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd! cfilter
 " Enable built-in plugin to auto-turn-off hlsearch
-packadd! nohlsearch
+" packadd! nohlsearch
 
 " vim-only plugins
 runtime ftplugin/man.vim
@@ -60,8 +60,8 @@ Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
-Plug 'https://github.com/tpope/vim-fugitive', { 'on': ['G', 'Git', 'Gwrite', 'GBrowse'] } | nnoremap <leader>gg <cmd>G<cr>
-Plug 'https://github.com/tpope/vim-rhubarb', { 'on': ['G', 'Git', 'Gwrite', 'GBrowse'] }
+Plug 'https://github.com/tpope/vim-fugitive' | nnoremap <leader>gg <cmd>G<cr>
+Plug 'https://github.com/tpope/vim-rhubarb'
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
@@ -132,12 +132,13 @@ let &expandtab = 1
 let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
 let &hidden = 1
 let &hlsearch = 1
+let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
 let &laststatus=2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:│ ,trail:·,leadmultispace:│·'
+let &listchars = 'tab:» ,trail:·,lead:·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
@@ -148,8 +149,9 @@ let &ruler = 0
 let &shortmess = 'filnxtocTOCIS'
 let &showmode = 1
 let &signcolumn = 'no'
+let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f:%l:%c%m%r%h%w%q%=%{v:hlsearch ? LastSearchCount() : ""}[%{&formatprg}]%y'
+let &statusline = '%f:%l:%c%m%r%h%w%q%=%{v:hlsearch ? LastSearchCount() : ""} [%{&l:formatprg}]%y'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -185,7 +187,7 @@ augroup PATH
 augroup END
 
 " disable syntax if file is larger than 10MB (performance improvement)
-augroup SYNTAX
+augroup LARGEFILE
   autocmd!
   autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | echo 'Syntax disabled on large files' | endif
 augroup END
@@ -219,4 +221,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme pbnj
+colorscheme habamax
