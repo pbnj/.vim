@@ -99,6 +99,24 @@ call plug#end()
 
 filetype plugin indent on
 
+" :help searchcount()
+function! LastSearchCount() abort
+  let result = searchcount(#{recompute: 1})
+  if empty(result)
+    return ''
+  endif
+  if result.incomplete ==# 1     " timed out
+    return printf(' /%s [?/??]', @/)
+  elseif result.incomplete ==# 2 " max count exceeded
+    if result.total > result.maxcount && result.current > result.maxcount
+      return printf(' /%s [>%d/>%d]', @/, result.current, result.total)
+    elseif result.total > result.maxcount
+      return printf(' /%s [%d/>%d]', @/, result.current, result.total)
+    endif
+  endif
+  return printf(' /%s [%d/%d]', @/, result.current, result.total)
+endfunction
+
 " Options
 let &autoindent = 1
 let &autoread = 1
@@ -127,11 +145,11 @@ let &number = 0
 let &path = '.,,'
 let &pumheight = 50
 let &ruler = 0
-let &shortmess = 'filnxtocTOCI'
+let &shortmess = 'filnxtocTOCIS'
 let &showmode = 1
 let &signcolumn = 'no'
 let &smarttab = 1
-let &statusline = '%f:%l:%c%m%r%h%w%q%=[%{&formatprg}]%y'
+let &statusline = '%f:%l:%c%m%r%h%w%q%=%{v:hlsearch ? LastSearchCount() : ""}[%{&formatprg}]%y'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
