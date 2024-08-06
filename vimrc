@@ -71,6 +71,7 @@ Plug 'https://github.com/tpope/vim-vinegar'
 " junegunn plugins
 Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+let g:fzf_layout = { 'down': '30%' }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
@@ -120,13 +121,12 @@ endfunction
 " Options
 let &autoindent = 1
 let &autoread = 1
-let &background = 'dark'
 let &backspace = 'indent,eol,start'
 let &belloff = 'all'
 let &breakindent = 1
 let &clipboard = 'unnamed'
 let &complete = '.,w,b,u,t'
-let &completeopt = 'menuone,noselect'
+let &completeopt = 'menuone'
 let &cursorline = 0
 let &expandtab = 1
 let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
@@ -142,7 +142,7 @@ let &listchars = 'tab:» ,trail:·,lead:·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
-let &number = 0
+let &number = 1
 let &path = '.,,'
 let &pumheight = 50
 let &ruler = 0
@@ -192,6 +192,7 @@ augroup LARGEFILE
   autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | echo 'Syntax disabled on large files' | endif
 augroup END
 
+" automatically re-balance window sizes
 augroup RESIZE
   autocmd!
   autocmd VimResized * wincmd =
