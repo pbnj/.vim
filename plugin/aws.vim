@@ -392,5 +392,5 @@ command! -nargs=* -complete=customlist,AWSProfileCompletion AWSProfile
       \ terminal aws --profile <args>
 command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole
       \ ! aws-console -p <args>
-command! AWSLogin
-      \ ! aws sso login
+command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSLogin
+      \ ! aws sso login --profile <args>
