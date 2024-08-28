@@ -220,5 +220,3 @@ nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
-
-colorscheme habamax
