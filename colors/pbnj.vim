@@ -71,6 +71,8 @@ hi!  SpellCap      cterm=underline       ctermfg=Yellow       ctermbg=NONE
 hi!  SpellLocal    cterm=underline       ctermfg=Magenta      ctermbg=NONE
 hi!  SpellRare     cterm=underline       ctermfg=Cyan         ctermbg=NONE
 hi!  Statement     cterm=NONE            ctermfg=DarkYellow   ctermbg=NONE
+" hi!  StatusLine    cterm=bold            ctermfg=NONE         ctermbg=NONE
+" hi!  StatusLineNC  cterm=bold,italic     ctermfg=NONE         ctermbg=NONE
 hi!  TabLine       cterm=reverse         ctermfg=NONE         ctermbg=NONE
 hi!  TabLineSel    cterm=bold            ctermfg=NONE         ctermbg=NONE
 hi!  Title         cterm=bold            ctermfg=DarkMagenta  ctermbg=NONE
@@ -81,6 +83,7 @@ hi!  Visual        cterm=reverse         ctermfg=NONE         ctermbg=NONE
 hi!  WarningMsg    cterm=bold            ctermfg=DarkYellow   ctermbg=NONE
 
 " TODO: should these default highlights be overridden?
+" hi StatusLine
 " hi Conceal
 " hi CursorLine
 " hi CursorLineNr
@@ -128,6 +131,8 @@ if has('gui_running')
   hi!  SpellLocal    gui=underline       guifg=Magenta      guibg=NONE
   hi!  SpellRare     gui=underline       guifg=Cyan         guibg=NONE
   hi!  Statement     gui=NONE            guifg=DarkYellow   guibg=NONE
+  hi!  StatusLine    gui=bold            guifg=NONE         guibg=NONE
+  hi!  StatusLineNC  gui=bold,italic     guifg=NONE         guibg=NONE
   hi!  TabLine       gui=reverse         guifg=NONE         guibg=NONE
   hi!  TabLineSel    gui=bold            guifg=NONE         guibg=NONE
   hi!  Title         gui=bold            guifg=DarkMagenta  guibg=NONE
@@ -137,17 +142,6 @@ if has('gui_running')
   hi!  WarningMsg    gui=bold            guifg=DarkYellow   guibg=NONE
 
 endif
-
-" TODO: are ALE highlights still needed?
-" hi!  link  ALEError                    ErrorMsg
-" hi!  link  ALEErrorSign                ErrorMsg
-" hi!  link  ALEVirtualTextError         DiffDelete
-" hi!  link  ALEVirtualTextInfo          DiffChange
-" hi!  link  ALEVirtualTextStyleError    DiffDelete
-" hi!  link  ALEVirtualTextStyleWarning  DiffChange
-" hi!  link  ALEVirtualTextWarning       DiffChange
-" hi!  link  ALEWarning                  WarningMsg
-" hi!  link  ALEWarningSign              WarningMsg
 
 hi!  link  Added                 DiffAdd
 hi!  link  Changed               DiffChange

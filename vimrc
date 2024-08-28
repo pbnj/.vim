@@ -134,7 +134,7 @@ let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
-let &laststatus=2
+let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
 let &listchars = 'tab:» ,trail:·,lead:·'
@@ -150,7 +150,7 @@ let &showmode = 1
 let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f:%l:%c%m%r%h%w%q%=%{v:hlsearch ? LastSearchCount() : ""} [%{&l:formatprg}]%y'
+let &statusline = '%f:%l:%c %m%r%h%w%q %y %{v:hlsearch ? LastSearchCount() : ""}'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -221,3 +221,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
+colorscheme habamax

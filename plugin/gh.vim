@@ -34,7 +34,7 @@ function! s:gh_completion(A,L,P) abort
 endfunction
 
 command! -nargs=* -complete=customlist,s:gh_completion GH
-      \ <mods> terminal gh <args>
+      \ terminal gh <args>
 
 " PR
 function! s:gh_pr_completion(A,L,P) abort
@@ -62,7 +62,7 @@ function! s:gh_pr_completion(A,L,P) abort
 endfunction
 
 command! -nargs=* -complete=customlist,s:gh_pr_completion GHPR
-      \ <mods> terminal gh pr <args>
+      \ terminal gh pr <args>
 
 " RUN
 function! s:gh_run_completion(A,L,P) abort
@@ -81,15 +81,23 @@ function! s:gh_run_completion(A,L,P) abort
 endfunction
 
 command! -nargs=* -complete=customlist,s:gh_run_completion GHRun
-      \ <mods> terminal gh run <args>
+      \ terminal gh run <args>
 
 function! s:gh_run_view_completion(A,L,P) abort
   return filter(systemlist('gh run list --json=databaseId --jq .[].databaseId'), 'v:val =~ a:A')
 endfunction
 
 command! -nargs=* -complete=customlist,s:gh_run_view_completion GHRunView
-      \ <mods> terminal gh run view <args>
+      \ terminal gh run view <args>
 command! -nargs=* -complete=customlist,s:gh_run_view_completion GHRunLog
-      \ <mods> terminal gh run view --log <args>
+      \ terminal gh run view --log <args>
 command! -nargs=* GHRunWatch
-      \ <mods> terminal gh run watch <args>
+      \ terminal gh run watch <args>
+
+" WORKFLOW
+function! s:gh_workflow_completion(A,L,P) abort
+  return filter(systemlist('gh workflow list --json=name --jq .[].name'), 'v:val =~ a:A')
+endfunction
+
+command! -nargs=1 -complete=customlist,s:gh_workflow_completion GHWorkflowRun
+      \ exe 'terminal gh workflow run ' .. shellescape('<args>')
