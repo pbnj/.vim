@@ -8,8 +8,6 @@ source $VIMRUNTIME/defaults.vim
 " Plugins
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd! cfilter
-" Enable built-in plugin to auto-turn-off hlsearch
-" packadd! nohlsearch
 
 " vim-only plugins
 runtime ftplugin/man.vim
