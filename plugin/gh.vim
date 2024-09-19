@@ -36,7 +36,26 @@ endfunction
 command! -nargs=* -complete=customlist,s:gh_completion GH
       \ terminal gh <args>
 
-" PR
+" REPO subcommand
+function! s:gh_repo_completion(A,L,P) abort
+  let l:org_repo = split(a:A, '/')
+  let l:org = l:org_repo[0]
+  let l:repo = ""
+  if len(l:org_repo) == 2
+    let l:repo = l:org_repo[1]
+  endif
+  return filter(systemlist(printf('gh repo list --json=nameWithOwner --jq .[].nameWithOwner %s', l:org)) ,'v:val =~ l:repo' )
+endfunction
+
+" REPO VIEW
+command! -nargs=1 -complete=customlist,s:gh_repo_completion GHRepoView
+      \ terminal gh repo view <args>
+
+" REPO CLONE
+command! -nargs=1 -complete=customlist,s:gh_repo_completion GHRepoClone
+      \ exe 'terminal gh repo clone <args> ' . expand('~/Projects/github.com/<args>')
+
+" PR subcommand
 function! s:gh_pr_completion(A,L,P) abort
   return filter(
         \ [
@@ -64,7 +83,7 @@ endfunction
 command! -nargs=* -complete=customlist,s:gh_pr_completion GHPR
       \ terminal gh pr <args>
 
-" RUN
+" RUN subcommand
 function! s:gh_run_completion(A,L,P) abort
   return filter(
         \ [
