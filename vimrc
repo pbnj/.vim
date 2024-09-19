@@ -177,6 +177,13 @@ if executable('rg')
   let &grepformat = '%f:%l:%m'
 endif
 
+" auto-toggle vim background based on macOS system theme
+if system("defaults read -g AppleInterfaceStyle") =~? 'Dark'
+  let &background = 'dark'
+else
+  let &background = 'light'
+endif
+
 " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
 augroup PATH
   autocmd!
