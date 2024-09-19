@@ -43,11 +43,11 @@ Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
+Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
-Plug 'https://github.com/romainl/vim-qf'
 Plug 'https://github.com/wellle/targets.vim'
 
 " tpope plugins
@@ -57,7 +57,7 @@ Plug 'https://github.com/tpope/vim-dispatch'
 Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
-Plug 'https://github.com/tpope/vim-fugitive' | nnoremap <leader>gg <cmd>G<cr>
+Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-sleuth'
@@ -68,7 +68,7 @@ Plug 'https://github.com/tpope/vim-vinegar'
 " junegunn plugins
 Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-let g:fzf_layout = { 'down': '30%' }
+let g:fzf_layout = { 'down': '40%' }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
@@ -79,8 +79,9 @@ nnoremap <leader>fb      <cmd>Buffers<cr>
 nnoremap <leader>ff      <cmd>Files<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
+nnoremap <leader>gg      <cmd>GFiles<cr>
+nnoremap <leader>gd      <cmd>GFiles!?<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
-nnoremap <leader>gf      <cmd>GFiles<cr>
 
 Plug 'https://github.com/sheerun/vim-polyglot'
 let g:polyglot_disabled = ['modula2']
@@ -119,6 +120,7 @@ endfunction
 let &autoindent = 1
 let &autoread = 1
 let &backspace = 'indent,eol,start'
+let &background = 'dark'
 let &belloff = 'all'
 let &breakindent = 1
 let &clipboard = 'unnamed'
@@ -135,7 +137,7 @@ let &infercase = 1
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:» ,trail:·,lead:·'
+let &listchars = 'tab:» ,trail:·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
@@ -143,12 +145,12 @@ let &number = 0
 let &path = '.,,'
 let &pumheight = 50
 let &ruler = 0
-let &shortmess = 'filnxtocTOCIS'
+let &shortmess = 'filnxtocTOCI'
 let &showmode = 1
 let &signcolumn = 'no'
 let &smartcase = 1
 let &smarttab = 1
-let &statusline = '%f:%l:%c %m%r%h%w%q %y %{v:hlsearch ? LastSearchCount() : ""}'
+let &statusline = '%f:%l:%c %m%r%h%w%q %y %{FugitiveStatusline()}'
 let &swapfile = 0
 let &termguicolors = 0
 let &ttimeout = 1
@@ -173,7 +175,7 @@ let &wildignore .= '*/target/*'
 let &wildignore .= '*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*'
 
 if executable('rg')
-  let &grepprg = 'rg --vimgrep --smart-case $*'
+  let &grepprg = 'rg --hidden --vimgrep --smart-case $*'
   let &grepformat = '%f:%l:%m'
 endif
 
@@ -202,12 +204,12 @@ augroup RESIZE
   autocmd VimResized * wincmd =
 augroup END
 
-" change insert/replace cursor shape based on vim mode, similar to neovim
-if &term =~# 'xterm'
-  let &t_SI = "\e[6 q"
-  let &t_SR = "\e[4 q"
-  let &t_EI = "\e[2 q"
-endif
+" " change insert/replace cursor shape based on vim mode, similar to neovim
+" if &term =~# 'xterm'
+"   let &t_SI = "\e[6 q"
+"   let &t_SR = "\e[4 q"
+"   let &t_EI = "\e[2 q"
+" endif
 
 " Mappings
 cnoremap <c-n> <c-Down>
@@ -225,3 +227,5 @@ nnoremap k gk
 noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
+
+colorscheme quiet
