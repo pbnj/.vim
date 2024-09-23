@@ -50,6 +50,9 @@ Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/wellle/targets.vim'
 
+Plug 'https://github.com/preservim/tagbar'
+nnoremap <leader>tt <cmd>TagbarToggle<cr>
+
 " tpope plugins
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
@@ -204,12 +207,12 @@ augroup RESIZE
   autocmd VimResized * wincmd =
 augroup END
 
-" " change insert/replace cursor shape based on vim mode, similar to neovim
-" if &term =~# 'xterm'
-"   let &t_SI = "\e[6 q"
-"   let &t_SR = "\e[4 q"
-"   let &t_EI = "\e[2 q"
-" endif
+" change insert/replace cursor shape based on vim mode, similar to neovim
+if &term =~# 'xterm'
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
+endif
 
 " Mappings
 cnoremap <c-n> <c-Down>
@@ -228,4 +231,4 @@ noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme quiet
+colorscheme habamax
