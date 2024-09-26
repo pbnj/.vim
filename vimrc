@@ -38,6 +38,7 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
+Plug 'https://github.com/chaoren/vim-wordmotion'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
@@ -49,9 +50,6 @@ Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/wellle/targets.vim'
-
-Plug 'https://github.com/preservim/tagbar'
-nnoremap <leader>tt <cmd>TagbarToggle<cr>
 
 " tpope plugins
 Plug 'https://github.com/tpope/vim-commentary'
@@ -71,7 +69,7 @@ Plug 'https://github.com/tpope/vim-vinegar'
 " junegunn plugins
 Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-let g:fzf_layout = { 'down': '40%' }
+" let g:fzf_layout = { 'down': '40%' }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
@@ -81,9 +79,11 @@ nnoremap <leader>?       <cmd>Helptags<cr>
 nnoremap <leader>fb      <cmd>Buffers<cr>
 nnoremap <leader>ff      <cmd>Files<cr>
 nnoremap <leader>fs      <cmd>GFiles?<cr>
+nnoremap <leader>tt      <cmd>Tags<cr>
+nnoremap <leader>ft      <cmd>BTags<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
-nnoremap <leader>gg      <cmd>GFiles<cr>
 nnoremap <leader>gd      <cmd>GFiles!?<cr>
+nnoremap <leader>gg      <cmd>GFiles<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
 Plug 'https://github.com/sheerun/vim-polyglot'
@@ -140,7 +140,7 @@ let &infercase = 1
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:» ,trail:·'
+let &listchars = 'tab:│ ,trail:·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
