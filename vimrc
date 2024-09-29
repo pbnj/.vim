@@ -38,7 +38,6 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
-Plug 'https://github.com/chaoren/vim-wordmotion'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
@@ -123,7 +122,6 @@ endfunction
 let &autoindent = 1
 let &autoread = 1
 let &backspace = 'indent,eol,start'
-let &background = 'dark'
 let &belloff = 'all'
 let &breakindent = 1
 let &clipboard = 'unnamed'
@@ -137,10 +135,11 @@ let &hlsearch = 1
 let &ignorecase = 1
 let &incsearch = 1
 let &infercase = 1
+let &iskeyword = '@,48-57,_,192-255,-,#'
 let &laststatus = 2
 let &lazyredraw = 1
 let &list = 1
-let &listchars = 'tab:│ ,trail:·'
+let &listchars = 'tab:│·,trail:·'
 let &modeline = 1
 let &modelines = 5
 let &mouse = 'a'
@@ -227,8 +226,7 @@ nnoremap <leader>vs :vs **/*
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-noremap <expr> N (v:searchforward ? 'N' : 'n')
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme habamax
+colorscheme quiet
