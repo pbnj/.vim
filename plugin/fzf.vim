@@ -21,5 +21,14 @@ command! URLs
       \   })
       \ )
 
-" Project fuzzy finder and launcher
-command! Projects call fzf#run( fzf#wrap( {'source': 'fd . ~/Projects --type d --max-depth 3', 'sink': 'Explore', 'options': '--multi --prompt=Projects\>\ '}))
+" Projects fuzzy finds local projects & opens them in a new vim buffer
+command! -nargs=? Projects
+      \ Files ~/Projects
+nnoremap <leader>fp <cmd>Projects<cr>
+
+" GHProjects fuzzy finds remote projects, clones them, then open them in a new
+" vim buffer
+function! KHRepoCompletion(A, L, P) abort
+  return systemlist('gh search repos --json fullName --jq .[].fullName --owner=komodohealth '.a:A)->filter('v:val =~ a:A')
+endfunction
+command! -nargs=1 -complete=customlist,KHRepoCompletion KHProjects call system('gh repo clone '.<q-args>.' ~/Projects/github.com/'.<q-args>) | Projects <args>
