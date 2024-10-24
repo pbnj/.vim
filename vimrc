@@ -16,8 +16,9 @@ runtime ftplugin/man.vim
 packadd! editorconfig
 
 " netrw
-" let g:netrw_keepdir = 0
 let g:netrw_hide = 0
+let g:netrw_keepdir = 0
+let g:netrw_liststyle= 3
 
 " Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -38,9 +39,9 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
+Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
-Plug 'https://github.com/habamax/vim-shout', { 'on': ['Sh'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/ludovicchabant/vim-gutentags'
@@ -68,21 +69,22 @@ Plug 'https://github.com/tpope/vim-vinegar'
 " junegunn plugins
 Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-" let g:fzf_layout = { 'down': '40%' }
+let g:fzf_layout = { 'down': '40%' }
 Plug 'https://github.com/junegunn/fzf.vim'
 nnoremap <leader>/       <cmd>Rg<cr>
 nnoremap <leader>:       <cmd>Commands<cr>
 nnoremap <leader>;       <cmd>History:<cr>
 nnoremap <leader><space> <cmd>History<cr>
-nnoremap <leader>?       <cmd>Helptags<cr>
-nnoremap <leader>fb      <cmd>Buffers<cr>
+nnoremap <leader>bb      <cmd>Buffers<cr>
 nnoremap <leader>ff      <cmd>Files<cr>
-nnoremap <leader>fs      <cmd>GFiles?<cr>
-nnoremap <leader>tt      <cmd>Tags<cr>
-nnoremap <leader>ft      <cmd>BTags<cr>
+nnoremap <leader>fF      <cmd>Files!<cr>
 nnoremap <leader>fw      :Rg <c-r><c-w><cr>
-nnoremap <leader>gd      <cmd>GFiles!?<cr>
 nnoremap <leader>gg      <cmd>GFiles<cr>
+nnoremap <leader>gs      <cmd>GFiles?<cr>
+nnoremap <leader>gS      <cmd>GFiles!?<cr>
+nnoremap <leader>hh      <cmd>Helptags<cr>
+nnoremap <leader>tt      <cmd>BTags<cr>
+nnoremap <leader>tT      <cmd>Tags<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
 Plug 'https://github.com/sheerun/vim-polyglot'
@@ -119,52 +121,54 @@ function! LastSearchCount() abort
 endfunction
 
 " Options
-let &autoindent = 1
-let &autoread = 1
-let &backspace = 'indent,eol,start'
-let &belloff = 'all'
-let &breakindent = 1
-let &clipboard = 'unnamed'
-let &complete = '.,w,b,u,t'
-let &completeopt = 'menuone'
-let &cursorline = 0
-let &expandtab = 1
-let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
-let &hidden = 1
-let &hlsearch = 1
-let &ignorecase = 1
-let &incsearch = 1
-let &infercase = 1
-let &iskeyword = '@,48-57,_,192-255,-,#'
-let &laststatus = 2
-let &lazyredraw = 1
-let &list = 1
-let &listchars = 'tab:│·,trail:·'
-let &modeline = 1
-let &modelines = 5
-let &mouse = 'a'
-let &number = 0
-let &path = '.,,'
-let &pumheight = 50
-let &ruler = 0
-let &shortmess = 'filnxtocTOCI'
-let &showmode = 1
-let &signcolumn = 'no'
-let &smartcase = 1
-let &smarttab = 1
-let &statusline = '%f:%l:%c %m%r%h%w%q %y %{FugitiveStatusline()}'
-let &swapfile = 0
-let &termguicolors = 0
-let &ttimeout = 1
-let &ttimeoutlen = 50
-let &ttyfast = 1
-let &undodir = expand('~/.vim/undo/')
-let &undofile = 1
-let &viminfofile = '$HOME/.vim/.viminfo'
+let &autoindent     = 1
+let &autoread       = 1
+let &backspace      = 'indent,eol,start'
+let &belloff        = 'all'
+let &breakindent    = 1
+let &clipboard      = 'unnamed'
+let &complete       = '.,w,b,u,t'
+let &completeopt    = 'menuone'
+let &cursorline     = 0
+let &expandtab      = 1
+let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
+let &guifont        = 'Iosevka:h15'
+let &guioptions     = 'gT'
+let &hidden         = 1
+let &hlsearch       = 1
+let &ignorecase     = 1
+let &incsearch      = 1
+let &infercase      = 1
+let &iskeyword      = '@,48-57,_,192-255,-,#'
+let &laststatus     = 2
+let &lazyredraw     = 1
+let &list           = 1
+let &listchars      = 'tab:│·,trail:·'
+let &modeline       = 1
+let &modelines      = 5
+let &mouse          = 'a'
+let &number         = 0
+let &path           = '.,,'
+let &pumheight      = 50
+let &ruler          = 0
+let &shortmess      = 'filnxtocTOCI'
+let &showmode       = 1
+let &signcolumn     = 'no'
+let &smartcase      = 1
+let &smarttab       = 1
+let &statusline     = ' %f:%l:%c %m%r%h%w%q%y %{FugitiveStatusline()} '
+let &swapfile       = 0
+let &termguicolors  = 0
+let &ttimeout       = 1
+let &ttimeoutlen    = 50
+let &ttyfast        = 1
+let &undodir        = expand('~/.vim/undo/')
+let &undofile       = 1
+let &viminfofile    = '$HOME/.vim/.viminfo'
 let &wildignorecase = 1
-let &wildmenu = 1
-let &wildoptions = 'pum'
-let &wrap = 0
+let &wildmenu       = 1
+let &wildoptions    = 'pum'
+let &wrap           = 0
 
 if has('patch-9.1.0500')
   let &completeopt .= ',fuzzy'
@@ -218,7 +222,6 @@ cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
 nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
-nnoremap <leader>bb <cmd>b#<cr>
 nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>sp :sp **/*
@@ -229,4 +232,13 @@ nnoremap k gk
 tnoremap <esc><esc> <c-\><c-n>
 tnoremap <s-space> <space>
 
-colorscheme quiet
+" Abbreviations
+inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+
+if has('gui_running')
+  let &shell = '/opt/homebrew/bin/bash'
+  let &termguicolors = 1
+  colorscheme iceberg
+else
+  colorscheme habamax
+endif
