@@ -106,12 +106,52 @@ repos:
           - dockerfile
         entry: hadolint
 
+      # terraform
+      - id: terraform-fmt
+        name: terraform fmt
+        description: Enforces Terraform styling and formatting. `brew install tfenv && tfenv use 1.5.6` required.
+        types:
+          - terraform
+        language: system
+        entry: env TF_CLI_ARGS="-no-color" terraform
+        args:
+          - fmt
+      - id: terraform-validate
+        name: terraform validate
+        description: Validates Terraform code. `brew install tfenv && tfenv use 1.5.6` required.
+        types:
+          - terraform
+        language: system
+        entry: env TF_CLI_ARGS="-no-color" terraform
+        args:
+          - validate
+        pass_filenames: false
+      - id: tflint
+        name: tflint
+        description: Lints Terraform code. `brew install tflint` required.
+        types:
+          - terraform
+        language: system
+        entry: tflint
+        pass_filenames: false
+      - id: snyk-iac
+        name: snyk iac test
+        description: Checks IaC files for security misconfiguration
+        types:
+          - terraform
+        language: system
+        entry: npx
+        args:
+          - snyk
+          - iac
+          - test
+        pass_filenames: false
+
       # commit
       - id: commitizen
         name: commitizen
         description: Lints commit messages. `brew install commitizen` required.
-        stages:
-          - commit-msg # run only in git commit-msg lifecycle event
+        stages: [commit-msg] # run only in git commit-msg lifecycle event
         language: system
         entry: cz
         args:
