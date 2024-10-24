@@ -383,14 +383,25 @@ endfunction
 
 " Completion for AWS `--profile`
 function! AWSProfileCompletion(A,L,P) abort
-  return systemlist("awk -F '[][]' '{print $2}' ~/.aws/config | awk 'NF > 0 {print $2}'")->filter('v:val =~ a:A')
+  return systemlist('aws configure list-profiles')->filter('v:val =~ a:A')
 endfunction
 
 command! -nargs=* -complete=customlist,AWSCompletion AWS
       \ terminal aws --cli-auto-prompt <args>
 command! -nargs=* -complete=customlist,AWSProfileCompletion AWSProfile
       \ terminal aws --profile <args>
-command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole
-      \ ! aws-console -p <args>
-command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSLogin
-      \ ! aws sso login --profile <args>
+
+function! AWSConsole(profile) abort
+  let l:profile_elements = split(a:profile, '/')
+  " extract accound id (1st or 2nd element) from profile
+  let l:account_id_index = match(l:profile_elements, '\d\{12\}')
+  let l:account_id = l:profile_elements[l:account_id_index]
+  " extract permission set (3rd element) from profile
+  let l:permission_set = l:profile_elements[2]
+  " construct url
+  let l:aws_sso_shortcut_url = printf('%s/console?account_id=%s&role_name=%s', $AWS_SSO_ACCESS_PORTAL_URL, l:account_id, l:permission_set)
+  call system(printf('open %s', shellescape(l:aws_sso_shortcut_url)))
+endfunction
+command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole call AWSConsole(<q-args>)
+
+command! AWSLogin ! aws sso login
