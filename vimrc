@@ -49,6 +49,7 @@ Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
+Plug 'https://github.com/sedm0784/vim-rainbow-trails'
 Plug 'https://github.com/wellle/targets.vim'
 
 " tpope plugins
@@ -102,24 +103,6 @@ call plug#end()
 
 filetype plugin indent on
 
-" :help searchcount()
-function! LastSearchCount() abort
-  let result = searchcount(#{recompute: 1})
-  if empty(result)
-    return ''
-  endif
-  if result.incomplete ==# 1     " timed out
-    return printf(' /%s [?/??]', @/)
-  elseif result.incomplete ==# 2 " max count exceeded
-    if result.total > result.maxcount && result.current > result.maxcount
-      return printf(' /%s [>%d/>%d]', @/, result.current, result.total)
-    elseif result.total > result.maxcount
-      return printf(' /%s [%d/>%d]', @/, result.current, result.total)
-    endif
-  endif
-  return printf(' /%s [%d/%d]', @/, result.current, result.total)
-endfunction
-
 " Options
 let &autoindent     = 1
 let &autoread       = 1
@@ -132,8 +115,6 @@ let &completeopt    = 'menuone'
 let &cursorline     = 0
 let &expandtab      = 1
 let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
-let &guifont        = 'Iosevka:h15'
-let &guioptions     = 'gT'
 let &hidden         = 1
 let &hlsearch       = 1
 let &ignorecase     = 1
@@ -143,7 +124,7 @@ let &iskeyword      = '@,48-57,_,192-255,-,#'
 let &laststatus     = 2
 let &lazyredraw     = 1
 let &list           = 1
-let &listchars      = 'tab:│·,trail:·'
+let &listchars      = 'tab:│⋅,trail:⋅'
 let &modeline       = 1
 let &modelines      = 5
 let &mouse          = 'a'
@@ -170,6 +151,13 @@ let &wildmenu       = 1
 let &wildoptions    = 'pum'
 let &wrap           = 0
 
+if &term =~# 'xterm'
+  " change insert/replace cursor shape based on vim mode, similar to neovim
+  let &t_SI = "\e[6 q"
+  let &t_SR = "\e[4 q"
+  let &t_EI = "\e[2 q"
+endif
+
 if has('patch-9.1.0500')
   let &completeopt .= ',fuzzy'
   let &wildoptions .= ',fuzzy'
@@ -183,13 +171,6 @@ let &wildignore .= '*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*'
 if executable('rg')
   let &grepprg = 'rg --hidden --vimgrep --smart-case $*'
   let &grepformat = '%f:%l:%m'
-endif
-
-" auto-toggle vim background based on macOS system theme
-if system("defaults read -g AppleInterfaceStyle") =~? 'Dark'
-  let &background = 'dark'
-else
-  let &background = 'light'
 endif
 
 " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
@@ -210,19 +191,11 @@ augroup RESIZE
   autocmd VimResized * wincmd =
 augroup END
 
-" change insert/replace cursor shape based on vim mode, similar to neovim
-if &term =~# 'xterm'
-  let &t_SI = "\e[6 q"
-  let &t_SR = "\e[4 q"
-  let &t_EI = "\e[2 q"
-endif
-
 " Mappings
 cnoremap <c-n> <c-Down>
 cnoremap <c-p> <c-Up>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
 nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
-nnoremap <leader>cd <cmd>lcd %:p:h<cr>
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
@@ -234,11 +207,3 @@ tnoremap <s-space> <space>
 
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
-
-if has('gui_running')
-  let &shell = '/opt/homebrew/bin/bash'
-  let &termguicolors = 1
-  colorscheme iceberg
-else
-  colorscheme habamax
-endif
