@@ -39,7 +39,6 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
-Plug 'https://github.com/cocopon/iceberg.vim'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
@@ -91,8 +90,8 @@ nnoremap <leader>tt      <cmd>BTags<cr>
 nnoremap <leader>tT      <cmd>Tags<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
-Plug 'https://github.com/sheerun/vim-polyglot'
-let g:polyglot_disabled = ['modula2']
+" Plug 'https://github.com/sheerun/vim-polyglot'
+" let g:polyglot_disabled = ['modula2']
 
 " completion
 Plug 'https://github.com/wellle/tmux-complete.vim'
@@ -105,6 +104,7 @@ let g:mucomplete#chains = {
 call plug#end()
 
 filetype plugin indent on
+syntax off
 
 " Options
 let &autoindent     = 1
