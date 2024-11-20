@@ -44,13 +44,16 @@ Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/ludovicchabant/vim-gutentags'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
 Plug 'https://github.com/sedm0784/vim-rainbow-trails'
 Plug 'https://github.com/wellle/targets.vim'
+
+if executable('ctags')
+  Plug 'https://github.com/ludovicchabant/vim-gutentags'
+endif
 
 " tpope plugins
 Plug 'https://github.com/tpope/vim-commentary'
@@ -137,7 +140,7 @@ let &showmode       = 1
 let &signcolumn     = 'no'
 let &smartcase      = 1
 let &smarttab       = 1
-let &statusline     = ' %f:%l:%c %m%r%h%w%q%y %{FugitiveStatusline()} '
+let &statusline     = ' %f:%l:%c %m%r%h%w%q%y'
 let &swapfile       = 0
 let &termguicolors  = 0
 let &ttimeout       = 1
