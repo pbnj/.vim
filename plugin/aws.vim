@@ -389,7 +389,7 @@ endfunction
 command! -nargs=* -complete=customlist,AWSCompletion AWS
       \ terminal aws --cli-auto-prompt <args>
 command! -nargs=* -complete=customlist,AWSProfileCompletion AWSProfile
-      \ terminal aws --profile <args>
+      \ terminal aws --cli-auto-prompt --profile <args>
 
 function! AWSConsole(profile) abort
   let l:profile_elements = split(a:profile, '/')

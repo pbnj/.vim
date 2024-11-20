@@ -22,8 +22,7 @@ command! URLs
       \ )
 
 " Projects fuzzy finds local projects & opens them in a new vim buffer
-command! -nargs=? Projects
-      \ Files ~/Projects
+command! -nargs=? Projects Files ~/Projects
 nnoremap <leader>fp <cmd>Projects<cr>
 
 " GHProjects fuzzy finds remote projects, clones them, then open them in a new

@@ -1,5 +1,5 @@
 let &l:formatprg = 'terraform fmt -no-color -'
-let &l:keywordprg = 'ddgr'
+let &l:keywordprg = 'ddgr terraform'
 let b:undo_ftplugin = 'setlocal formatprg< keywordprg<'
 
 function! TFenvCompletion(A, L, P)
