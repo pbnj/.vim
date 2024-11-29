@@ -1,5 +1,5 @@
 let &l:formatprg = 'terraform fmt -no-color -'
-let &l:keywordprg = 'ddgr terraform'
+let &l:keywordprg = 'ddgr terraform ' ..  matchstr(getline(search('\(resource\|data\)', 'bW')), '"\(\zs.\{-}\ze\)"')
 let b:undo_ftplugin = 'setlocal formatprg< keywordprg<'
 
 function! TFenvCompletion(A, L, P)
