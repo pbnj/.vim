@@ -70,7 +70,6 @@ Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 
 " junegunn plugins
-Plug 'https://github.com/junegunn/vim-peekaboo'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 let g:fzf_layout = { 'down': '40%' }
 Plug 'https://github.com/junegunn/fzf.vim'
@@ -90,9 +89,6 @@ nnoremap <leader>tt      <cmd>BTags<cr>
 nnoremap <leader>tT      <cmd>Tags<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
-" Plug 'https://github.com/sheerun/vim-polyglot'
-" let g:polyglot_disabled = ['modula2']
-
 " completion
 Plug 'https://github.com/wellle/tmux-complete.vim'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
@@ -104,7 +100,7 @@ let g:mucomplete#chains = {
 call plug#end()
 
 filetype plugin indent on
-syntax off
+syntax on
 
 " Options
 let &autoindent     = 1
