@@ -117,6 +117,22 @@ command! -nargs=* GHRunWatch
 function! s:gh_workflow_completion(A,L,P) abort
   return filter(systemlist('gh workflow list --json=name --jq .[].name'), 'v:val =~ a:A')
 endfunction
-
 command! -nargs=1 -complete=customlist,s:gh_workflow_completion GHWorkflowRun
       \ exe 'terminal gh workflow run ' .. shellescape('<args>')
+
+" SEARCH
+function! s:gh_search_completion(A, L, P) abort
+  return [
+        \ '--extension=',
+        \ '--filename=',
+        \ '--jq=',
+        \ '--json=',
+        \ '--language=',
+        \ '--limit=30',
+        \ '--owner=',
+        \ '--repo=',
+        \ '--web',
+        \ ]->filter('v:val =~ a:A')
+endfunction
+command! -nargs=* -complete=customlist,s:gh_search_completion GHSearchCode
+      \ terminal gh search code <args>
