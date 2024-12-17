@@ -100,7 +100,7 @@ let g:mucomplete#chains = {
 call plug#end()
 
 filetype plugin indent on
-syntax on
+syntax off
 
 " Options
 let &autoindent     = 1
@@ -131,6 +131,7 @@ let &number         = 0
 let &path           = '.,,'
 let &pumheight      = 50
 let &ruler          = 0
+let &scrolloff      = 0
 let &shortmess      = 'filnxtocTOCI'
 let &showmode       = 1
 let &signcolumn     = 'no'
