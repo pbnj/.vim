@@ -1,6 +1,8 @@
 if exists('g:loaded_aws') | finish | endif
 let g:loaded_aws = 1
 
+command! AWSLogin terminal ++close aws sso login
+
 " Completion for AWS
 function! AWSCompletion(A,L,P) abort
   let l:cmdline_list = split(a:L[:a:P-1], '\%(\%(\%(^\|[^\\]\)\\\)\@<!\s\)\+')
@@ -403,5 +405,3 @@ function! AWSConsole(profile) abort
   call system(printf('open %s', shellescape(l:aws_sso_shortcut_url)))
 endfunction
 command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole call AWSConsole(<q-args>)
-
-command! AWSLogin ! aws sso login
