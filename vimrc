@@ -90,17 +90,16 @@ nnoremap <leader>tT      <cmd>Tags<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
 " completion
-Plug 'https://github.com/wellle/tmux-complete.vim'
 Plug 'https://github.com/lifepillar/vim-mucomplete'
 let g:mucomplete#chains = {
-      \ 'default' : ['path', 'omni', 'c-n', 'user'],
+      \ 'default' : ['path', 'c-n', 'keyn'],
       \ 'vim'     : ['path', 'cmd', 'c-n', 'keyn']
       \ }
 
 call plug#end()
 
 filetype plugin indent on
-syntax off
+syntax on
 
 " Options
 let &autoindent     = 1
@@ -199,6 +198,7 @@ nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<c
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
+nnoremap <leader>rr :read !
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
@@ -207,3 +207,6 @@ tnoremap <s-space> <space>
 
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+
+" Colorscheme
+colorscheme quiet
