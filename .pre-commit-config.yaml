@@ -34,6 +34,8 @@ repos:
         entry: npx
         args:
           - markdownlint-cli
+          - --ignore
+          - ./templates
       # - id: trufflehog
       #   name: trufflehog
       #   description: This hook checks commits for secrets.
