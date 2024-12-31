@@ -39,6 +39,7 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
+Plug 'https://github.com/chrisbra/csv.vim'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/kana/vim-textobj-entire'
@@ -207,6 +208,3 @@ tnoremap <s-space> <space>
 
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
-
-" Colorscheme
-colorscheme quiet
