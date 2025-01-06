@@ -36,20 +36,11 @@ repos:
           - markdownlint-cli
           - --ignore
           - ./templates
-      # - id: trufflehog
-      #   name: trufflehog
-      #   description: This hook checks commits for secrets.
-      #   language: docker_image
-      #   entry: us-docker.pkg.dev/thog-artifacts/public/scanner
-      #   args:
-      #     - git
-      #     - main
-      #     - HEAD
       - id: gitleaks
         name: gitleaks
         description: This hook checks commits for secrets. `brew install gitleaks` required.
-        language: docker_image
-        entry: -u root:root zricethezav/gitleaks
+        language: system
+        entry: gitleaks
         args:
           - protect
           - --verbose
