@@ -15,11 +15,6 @@ runtime ftplugin/man.vim
 " enable built-in editorconfig
 packadd! editorconfig
 
-" netrw
-let g:netrw_hide = 0
-let g:netrw_keepdir = 0
-let g:netrw_liststyle= 3
-
 " Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -163,7 +158,7 @@ if has('patch-9.1.0500')
   let &wildoptions .= ',fuzzy'
 endif
 
-let &wildignore = 'LICENSE,tags,*/.git/*'
+let &wildignore  = 'LICENSE,tags,*/.git/*'
 let &wildignore .= '*/.mypy_cache/*,*/__pycache__/*'
 let &wildignore .= '*/target/*'
 let &wildignore .= '*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*'
@@ -199,12 +194,12 @@ nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<c
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
-nnoremap <leader>rr :read !
+nnoremap <leader>rr :read ! <c-r><c-l>
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-tnoremap <esc><esc> <c-\><c-n>
-tnoremap <s-space> <space>
 
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+
+colorscheme jnbp
