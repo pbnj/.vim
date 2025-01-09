@@ -51,15 +51,15 @@ hi!  DiffText      cterm=bold                    ctermfg=brown       ctermbg=NON
 hi!  Directory     cterm=bold                    ctermfg=NONE        ctermbg=NONE
 hi!  Error         cterm=reverse                 ctermfg=NONE        ctermbg=NONE
 hi!  ErrorMsg      cterm=bold                    ctermfg=darkred     ctermbg=NONE
-hi!  FoldColumn    cterm=NONE                    ctermfg=NONE        ctermbg=NONE
-hi!  Folded        cterm=italic                  ctermfg=NONE        ctermbg=NONE
+hi!  FoldColumn    cterm=italic                  ctermfg=darkgray    ctermbg=NONE
+hi!  Folded        cterm=italic                  ctermfg=darkgray    ctermbg=NONE
 hi!  Identifier    cterm=NONE                    ctermfg=NONE        ctermbg=NONE
 hi!  Ignore        cterm=NONE                    ctermfg=NONE        ctermbg=NONE
 hi!  LineNr        cterm=NONE                    ctermfg=NONE        ctermbg=NONE
 hi!  MatchParen    cterm=bold                    ctermfg=NONE        ctermbg=NONE
 hi!  ModeMsg       cterm=bold                    ctermfg=NONE        ctermbg=NONE
 hi!  MoreMsg       cterm=bold                    ctermfg=NONE        ctermbg=NONE
-hi!  NonText       cterm=NONE                    ctermfg=NONE        ctermbg=NONE
+hi!  NonText       cterm=NONE                    ctermfg=darkgray    ctermbg=NONE
 hi!  Pmenu         cterm=reverse                 ctermfg=NONE        ctermbg=NONE
 hi!  PmenuMatch    cterm=reverse,bold,underline  ctermfg=NONE        ctermbg=NONE
 hi!  PmenuSel      cterm=reverse,bold,underline  ctermfg=NONE        ctermbg=NONE
@@ -72,8 +72,6 @@ hi!  SpellCap      cterm=underline               ctermfg=NONE        ctermbg=NON
 hi!  SpellLocal    cterm=underline               ctermfg=NONE        ctermbg=NONE
 hi!  SpellRare     cterm=underline               ctermfg=NONE        ctermbg=NONE
 hi!  Statement     cterm=NONE                    ctermfg=NONE        ctermbg=NONE
-hi!  StatusLine    cterm=bold                    ctermfg=NONE        ctermbg=NONE
-hi!  StatusLineNC  cterm=bold                    ctermfg=NONE        ctermbg=NONE
 hi!  TabLine       cterm=reverse                 ctermfg=NONE        ctermbg=NONE
 hi!  TabLineSel    cterm=bold                    ctermfg=NONE        ctermbg=NONE
 hi!  Title         cterm=bold                    ctermfg=NONE        ctermbg=NONE
@@ -84,7 +82,8 @@ hi!  Visual        cterm=reverse                 ctermfg=NONE        ctermbg=NON
 hi!  WarningMsg    cterm=bold                    ctermfg=NONE        ctermbg=NONE
 
 " TODO: should these default highlights be overridden?
-" hi StatusLine
+" hi!  StatusLine    cterm=bold                    ctermfg=NONE        ctermbg=NONE
+" hi!  StatusLineNC  cterm=bold                    ctermfg=NONE        ctermbg=NONE
 " hi Conceal
 " hi CursorLine
 " hi CursorLineNr
@@ -116,8 +115,8 @@ hi!  link  PopupNotification     Todo
 hi!  link  QuickFixLine          Error
 hi!  link  Removed               DiffDelete
 hi!  link  SpecialKey            NonText
-hi!  link  StatuslineTerm        Statusline
-hi!  link  StatuslineTermNC      StatuslineNC
+" hi!  link  StatuslineTerm        Statusline
+" hi!  link  StatuslineTermNC      StatuslineNC
 hi!  link  TabLineFill           TabLine
 hi!  link  Terminal              Normal
 hi!  link  Terminal              Normal
