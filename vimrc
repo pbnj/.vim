@@ -5,15 +5,18 @@ let g:maplocalleader = ' '
 " sane defaults
 source $VIMRUNTIME/defaults.vim
 
+" vim-only plugins
+runtime ftplugin/man.vim
+
 " Plugins
 " Enable built-in plugin to filter quickfix list. See :h :Cfilter
 packadd! cfilter
 
-" vim-only plugins
-runtime ftplugin/man.vim
-
 " enable built-in editorconfig
 packadd! editorconfig
+
+" disable search highlight after some duration
+packadd! nohlsearch
 
 " Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -98,56 +101,58 @@ filetype plugin indent on
 syntax on
 
 " Options
-let &autoindent     = 1
-let &autoread       = 1
-let &backspace      = 'indent,eol,start'
-let &belloff        = 'all'
-let &breakindent    = 1
-let &clipboard      = 'unnamed'
-let &complete       = '.,w,b,u,t'
-let &completeopt    = 'menuone'
-let &cursorline     = 0
-let &expandtab      = 1
-let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
-let &hidden         = 1
-let &hlsearch       = 1
-let &ignorecase     = 1
-let &incsearch      = 1
-let &infercase      = 1
-let &iskeyword      = '@,48-57,_,192-255,-,#'
-let &laststatus     = 2
-let &lazyredraw     = 1
-let &list           = 1
-let &listchars      = 'tab:│⋅,trail:⋅'
-let &modeline       = 1
-let &modelines      = 5
-let &mouse          = 'a'
-let &number         = 0
-let &path           = '.,,'
-let &pumheight      = 50
-let &ruler          = 0
-let &scrolloff      = 0
-let &shortmess      = 'filnxtocTOCI'
-let &showmode       = 1
-let &signcolumn     = 'no'
-let &smartcase      = 1
-let &smarttab       = 1
-let &statusline     = ' %f:%l:%c %m%r%h%w%q%y'
-let &swapfile       = 0
-let &termguicolors  = 0
-let &ttimeout       = 1
-let &ttimeoutlen    = 50
-let &ttyfast        = 1
-let &undodir        = expand('~/.vim/undo/')
-let &undofile       = 1
-let &viminfofile    = '$HOME/.vim/.viminfo'
-let &wildignorecase = 1
-let &wildmenu       = 1
-let &wildoptions    = 'pum'
-let &wrap           = 0
+let &autoindent      = 1
+let &autoread        = 1
+let &background      = 'dark'
+let &backspace       = 'indent,eol,start'
+let &belloff         = 'all'
+let &breakindent     = 1
+let &clipboard       = 'unnamed'
+let &complete        = '.,w,b,u,t'
+let &completeopt     = 'menuone'
+let &cursorline      = 0
+let &expandtab       = 1
+let &fillchars       = 'vert:│,fold:-,eob:~,lastline:@'
+let &grepformat      = '%f:%l:%m'
+let &grepprg         = 'grep --line-number -HI'
+let &hidden          = 1
+let &hlsearch        = 1
+let &ignorecase      = 1
+let &incsearch       = 1
+let &infercase       = 1
+let &iskeyword       = '@,48-57,_,192-255,-,#'
+let &laststatus      = 2
+let &lazyredraw      = 1
+let &list            = 1
+let &listchars       = 'tab:│⋅,trail:⋅'
+let &modeline        = 1
+let &modelines       = 5
+let &mouse           = 'a'
+let &number          = 0
+let &pumheight       = 50
+let &ruler           = 0
+let &scrolloff       = 0
+let &shortmess       = 'filnxtocTOCI'
+let &showmode        = 1
+let &signcolumn      = 'no'
+let &smartcase       = 1
+let &smarttab        = 1
+let &statusline      = ' %f:%l:%c %m%r%h%w%q%y'
+let &swapfile        = 0
+let &termguicolors   = 0
+let &ttimeout        = 1
+let &ttimeoutlen     = 50
+let &ttyfast         = 1
+let &undodir         = expand('~/.vim/undo/')
+let &undofile        = 1
+let &viminfofile     = '$HOME/.vim/.viminfo'
+let &wildignorecase  = 1
+let &wildmenu        = 1
+let &wildoptions     = 'pum'
+let &wrap            = 0
 
 if &term =~# 'xterm'
-  " change insert/replace cursor shape based on vim mode, similar to neovim
+  " change cursor shape from block to beam when in INSERT or REPLACE mode
   let &t_SI = "\e[6 q"
   let &t_SR = "\e[4 q"
   let &t_EI = "\e[2 q"
@@ -158,21 +163,18 @@ if has('patch-9.1.0500')
   let &wildoptions .= ',fuzzy'
 endif
 
-let &wildignore  = 'LICENSE,tags,*/.git/*'
-let &wildignore .= '*/.mypy_cache/*,*/__pycache__/*'
-let &wildignore .= '*/target/*'
-let &wildignore .= '*/dist/*,*/node_modules/*,*/vendor/*,*/cache/*'
-
-if executable('rg')
-  let &grepprg = 'rg --hidden --vimgrep --smart-case $*'
-  let &grepformat = '%f:%l:%m'
-endif
-
-" https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
-augroup PATH
-  autocmd!
-  autocmd BufReadPost,BufNewFile * if isdirectory('.git') | let &path .= join(systemlist('git ls-tree -d --name-only -r HEAD'), ',') | endif
-augroup END
+" " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
+" augroup PATH_AND_WILDIGNORE
+"   autocmd!
+"   autocmd BufReadPost,BufNewFile *
+"         \ if !empty(FugitiveGitDir()) |
+"         \   Glcd |
+"         \   let &l:path = &g:path . join(systemlist('git ls-tree -d --name-only -r HEAD'), ',') |
+"         \   if filereadable('.gitignore') |
+"         \     let &l:wildignore = &g:wildignore . join(readfile('.gitignore')->sort()->uniq()->filter('v:val !~ "\#"')->filter('v:val != ""'), ',') |
+"         \   endif |
+"         \ endif
+" augroup END
 
 " disable syntax if file is larger than 10MB (performance improvement)
 augroup LARGEFILE
@@ -202,4 +204,4 @@ nnoremap k gk
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
 
-colorscheme jnbp
+colorscheme pbnj
