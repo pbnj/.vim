@@ -4,17 +4,17 @@ let g:loaded_aws = 1
 command! AWSLogin terminal ++close aws sso login
 
 " Completion for AWS
-function! AWSCompletion(A,L,P) abort
+function! s:aws_completion(A,L,P) abort
   let l:cmdline_list = split(a:L[:a:P-1], '\%(\%(\%(^\|[^\\]\)\\\)\@<!\s\)\+')
   if index(l:cmdline_list[-2:], '--profile') >= 0
-    return call('AWSProfileCompletion', [a:A, a:L, a:P])
+    return call('s:aws_profile_completion', [a:A, a:L, a:P])
   else
-    return call('AWSCommandCompletion', [a:A, a:L, a:P])
+    return call('s:aws_command_completion', [a:A, a:L, a:P])
   endif
 endfunction
 
 " Completion for AWS commands
-function! AWSCommandCompletion(A,L,P) abort
+function! s:aws_command_completion(A,L,P) abort
   return [
         \ '--ca-bundle', '--cli-connect-timeout', '--debug', '--no-cli-pager', '--no-verify-ssl', '--query',
         \ '--cli-auto-prompt', '--cli-read-timeout', '--endpoint-url', '--no-paginate', '--output', '--region',
@@ -384,16 +384,16 @@ function! AWSCommandCompletion(A,L,P) abort
 endfunction
 
 " Completion for AWS `--profile`
-function! AWSProfileCompletion(A,L,P) abort
+function! s:aws_profile_completion(A,L,P) abort
   return systemlist('aws configure list-profiles')->filter('v:val =~ a:A')
 endfunction
 
-command! -nargs=* -complete=customlist,AWSCompletion AWS
+command! -nargs=* -complete=customlist,s:aws_completion AWS
       \ terminal aws --cli-auto-prompt <args>
-command! -nargs=* -complete=customlist,AWSProfileCompletion AWSProfile
+command! -nargs=* -complete=customlist,s:aws_profile_completion AWSProfile
       \ terminal aws --cli-auto-prompt --profile <args>
 
-function! AWSConsole(profile) abort
+function! s:aws_console(profile) abort
   let l:profile_elements = split(a:profile, '/')
   " extract accound id (1st or 2nd element) from profile
   let l:account_id_index = match(l:profile_elements, '\d\{12\}')
@@ -404,4 +404,4 @@ function! AWSConsole(profile) abort
   let l:aws_sso_shortcut_url = printf('%s/console?account_id=%s&role_name=%s', $AWS_SSO_ACCESS_PORTAL_URL, l:account_id, l:permission_set)
   call system(printf('open %s', shellescape(l:aws_sso_shortcut_url)))
 endfunction
-command! -nargs=1 -complete=customlist,AWSProfileCompletion AWSConsole call AWSConsole(<q-args>)
+command! -nargs=1 -complete=customlist,s:aws_profile_completion AWSConsole call s:aws_console(<q-args>)

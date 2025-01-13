@@ -1,6 +1,6 @@
 " TODO: formatprg cargo fmt
 
-function! CargoCompletion(A,L,P) abort
+function! s:cargo_completion(A,L,P) abort
   return filter([
         \ 'build', 'b',
         \ 'check', 'c',
@@ -21,9 +21,9 @@ function! CargoCompletion(A,L,P) abort
         \ ], 'v:val =~ a:A')
 endfunction
 if exists(':Dispatch')
-  command! -nargs=* -complete=customlist,CargoCompletion Cargo Dispatch cargo <args>
+  command! -nargs=* -complete=customlist,s:cargo_completion Cargo Dispatch cargo <args>
 elseif exists(':terminal')
-  command! -nargs=* -complete=customlist,CargoCompletion Cargo terminal cargo <args>
+  command! -nargs=* -complete=customlist,s:cargo_completion Cargo terminal cargo <args>
 endif
 
 command! -nargs=* Cadd Cargo add <args>
