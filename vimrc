@@ -24,15 +24,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-" Run PlugInstall if there are missing plugins
-augroup PLUG
-  autocmd!
-  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) > 0
-        \ |   PlugInstall --sync
-        \ |   source $MYVIMRC
-        \ | endif
-augroup END
-
 call plug#begin()
 
 " misc
@@ -45,8 +36,7 @@ Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
-Plug 'https://github.com/pbnj/vim-ddgr', { 'on': ['DDGR'] }
-Plug 'https://github.com/sedm0784/vim-rainbow-trails'
+Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/wellle/targets.vim'
 
 if executable('ctags')
@@ -68,6 +58,14 @@ Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
 
+" completion
+Plug 'https://github.com/lifepillar/vim-mucomplete'
+let g:mucomplete#chains = {
+      \ 'default' : ['path', 'c-n'],
+      \ 'vim'     : ['path', 'cmd', 'c-n'],
+      \ 'dockerfile' : ['user', 'path', 'c-n'],
+      \ }
+
 " junegunn plugins
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 let g:fzf_layout = { 'down': '40%' }
@@ -88,13 +86,6 @@ nnoremap <leader>tt      <cmd>BTags<cr>
 nnoremap <leader>tT      <cmd>Tags<cr>
 vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
-" completion
-Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {
-      \ 'default' : ['path', 'c-n', 'keyn'],
-      \ 'vim'     : ['path', 'cmd', 'c-n', 'keyn']
-      \ }
-
 call plug#end()
 
 filetype plugin indent on
@@ -113,8 +104,8 @@ let &completeopt     = 'menuone'
 let &cursorline      = 0
 let &expandtab       = 1
 let &fillchars       = 'vert:│,fold:-,eob:~,lastline:@'
-let &grepformat      = '%f:%l:%m'
-let &grepprg         = 'grep --line-number -HI'
+let &grepformat      = '%f:%l:%c:%m,%f:%l:%m'
+let &grepprg         = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'git grep $*'
 let &hidden          = 1
 let &hlsearch        = 1
 let &ignorecase      = 1
@@ -162,19 +153,6 @@ if has('patch-9.1.0500')
   let &completeopt .= ',fuzzy'
   let &wildoptions .= ',fuzzy'
 endif
-
-" " https://gist.github.com/romainl/7e2b425a1706cd85f04a0bd8b3898805
-" augroup PATH_AND_WILDIGNORE
-"   autocmd!
-"   autocmd BufReadPost,BufNewFile *
-"         \ if !empty(FugitiveGitDir()) |
-"         \   Glcd |
-"         \   let &l:path = &g:path . join(systemlist('git ls-tree -d --name-only -r HEAD'), ',') |
-"         \   if filereadable('.gitignore') |
-"         \     let &l:wildignore = &g:wildignore . join(readfile('.gitignore')->sort()->uniq()->filter('v:val !~ "\#"')->filter('v:val != ""'), ',') |
-"         \   endif |
-"         \ endif
-" augroup END
 
 " disable syntax if file is larger than 10MB (performance improvement)
 augroup LARGEFILE
