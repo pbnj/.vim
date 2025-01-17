@@ -68,4 +68,4 @@ function! s:kubectl_completion(A, L, P) abort
   endif
 endfunction
 command! -nargs=* -complete=customlist,s:kubectl_completion Kubectl
-      \ terminal kubectl <args>
+      \ <mods> terminal kubectl <args>

@@ -181,4 +181,4 @@ nnoremap k gk
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
 
-colorscheme pbnj
+colorscheme lunaperche
