@@ -94,6 +94,7 @@ syntax on
 " Options
 let &autoindent     = 1
 let &autoread       = 1
+let &background     = 'dark'
 let &backspace      = 'indent,eol,start'
 let &belloff        = 'all'
 let &breakindent    = 1
@@ -118,13 +119,13 @@ let &listchars      = 'tab:│⋅,trail:⋅'
 let &modeline       = 1
 let &modelines      = 5
 let &mouse          = 'a'
-let &number         = 0
+let &number         = 1
 let &pumheight      = 50
 let &ruler          = 0
 let &scrolloff      = 0
 let &shortmess      = 'filnxtocTOCI'
 let &showmode       = 1
-let &signcolumn     = 'no'
+let &signcolumn     = 'number'
 let &smartcase      = 1
 let &smarttab       = 1
 let &statusline     = ' %f:%l:%c %m%r%h%w%q%y'
