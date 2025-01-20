@@ -392,16 +392,3 @@ command! -nargs=* -complete=customlist,s:aws_completion AWS
       \ terminal aws --cli-auto-prompt <args>
 command! -nargs=* -complete=customlist,s:aws_profile_completion AWSProfile
       \ terminal aws --cli-auto-prompt --profile <args>
-
-function! s:aws_console(profile) abort
-  let l:profile_elements = split(a:profile, '/')
-  " extract accound id (1st or 2nd element) from profile
-  let l:account_id_index = match(l:profile_elements, '\d\{12\}')
-  let l:account_id = l:profile_elements[l:account_id_index]
-  " extract permission set (3rd element) from profile
-  let l:permission_set = l:profile_elements[2]
-  " construct url
-  let l:aws_sso_shortcut_url = printf('%s/console?account_id=%s&role_name=%s', $AWS_SSO_ACCESS_PORTAL_URL, l:account_id, l:permission_set)
-  call system(printf('open %s', shellescape(l:aws_sso_shortcut_url)))
-endfunction
-command! -nargs=1 -complete=customlist,s:aws_profile_completion AWSConsole call s:aws_console(<q-args>)
