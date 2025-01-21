@@ -130,7 +130,6 @@ let &smartcase      = 1
 let &smarttab       = 1
 let &statusline     = ' %f:%l:%c %m%r%h%w%q%y'
 let &swapfile       = 0
-let &termguicolors  = 0
 let &ttimeout       = 1
 let &ttimeoutlen    = 50
 let &ttyfast        = 1
@@ -147,6 +146,9 @@ if &term =~# 'xterm'
   let &t_SI = "\e[6 q"
   let &t_SR = "\e[4 q"
   let &t_EI = "\e[2 q"
+  " set terminal colors
+  let &t_Co          = 256
+  let &termguicolors = 0
 endif
 
 if has('patch-9.1.0500')
