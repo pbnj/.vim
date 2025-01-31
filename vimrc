@@ -36,9 +36,11 @@ Plug 'https://github.com/kana/vim-textobj-user'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
-Plug 'https://github.com/pbnj/vim-ddgr'
 Plug 'https://github.com/wellle/targets.vim'
 
+if executable('ddgr')
+  Plug 'https://github.com/pbnj/vim-ddgr'
+endif
 if executable('ctags')
   Plug 'https://github.com/ludovicchabant/vim-gutentags'
 endif
@@ -104,6 +106,7 @@ let &completeopt    = 'menuone'
 let &cursorline     = 0
 let &expandtab      = 1
 let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
+let &foldenable     = 0
 let &grepformat     = '%f:%l:%c:%m,%f:%l:%m'
 let &grepprg        = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'git grep $*'
 let &hidden         = 1
@@ -115,7 +118,7 @@ let &iskeyword      = '@,48-57,_,192-255,-,#'
 let &laststatus     = 2
 let &lazyredraw     = 1
 let &list           = 1
-let &listchars      = 'tab:│⋅,trail:⋅'
+let &listchars      = 'tab:│⋅,trail:⋅,nbsp:␣'
 let &modeline       = 1
 let &modelines      = 5
 let &mouse          = 'a'
@@ -184,4 +187,4 @@ nnoremap k gk
 " Abbreviations
 inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
 
-colorscheme lunaperche
+colorscheme pbnj
