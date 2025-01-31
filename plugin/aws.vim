@@ -392,3 +392,14 @@ command! -nargs=* -complete=customlist,s:aws_completion AWS
       \ terminal aws --cli-auto-prompt <args>
 command! -nargs=* -complete=customlist,s:aws_profile_completion AWSProfile
       \ terminal aws --cli-auto-prompt --profile <args>
+
+function! s:amazon_q(args) range
+  let l:args = a:args
+  if empty(l:args)
+    let l:args = join(getline(a:firstline, a:lastline), ' ')
+  endif
+  let l:cmd = printf('terminal q chat "%s"', l:args)
+  execute l:cmd
+endfunction
+
+command! -nargs=? -range QChat <line1>,<line2>call s:amazon_q(<q-args>)
