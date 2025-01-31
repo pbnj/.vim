@@ -34,11 +34,14 @@ highlight! clear
 if exists("g:syntax_on") | syntax reset | endif
 let g:colors_name='pbnj'
 
-highlight!  DiffAdd     cterm=bold    ctermfg=darkgreen  ctermbg=none
-highlight!  DiffChange  cterm=bold    ctermfg=brown      ctermbg=none
-highlight!  DiffDelete  cterm=bold    ctermfg=darkred    ctermbg=none
-highlight!  DiffText    cterm=bold    ctermfg=brown      ctermbg=none
-highlight!  Comment     cterm=italic  ctermfg=darkgray   ctermbg=none
-highlight!  MatchParen  cterm=bold    ctermfg=none       ctermbg=none
-highlight!  NonText     cterm=none    ctermfg=darkgray   ctermbg=none
-highlight!  SpecialKey  cterm=none    ctermfg=darkgray   ctermbg=none
+highlight!  Comment     cterm=italic        ctermfg=darkgray    ctermbg=none
+highlight!  DiffAdd     cterm=reverse       ctermfg=darkgreen   ctermbg=none
+highlight!  DiffChange  cterm=reverse       ctermfg=darkyellow  ctermbg=none
+highlight!  DiffDelete  cterm=reverse       ctermfg=darkred     ctermbg=none
+highlight!  DiffText    cterm=bold,reverse  ctermfg=darkyellow  ctermbg=none
+highlight!  LineNr      cterm=none          ctermfg=darkgray    ctermbg=none
+highlight!  MatchParen  cterm=bold          ctermfg=none        ctermbg=none
+highlight!  NonText     cterm=none          ctermfg=darkgray    ctermbg=none
+highlight!  Pmenu       cterm=none          ctermfg=black       ctermbg=magenta
+highlight!  PmenuSel    cterm=reverse       ctermfg=black       ctermbg=magenta
+highlight!  SpecialKey  cterm=none          ctermfg=darkgray    ctermbg=none
