@@ -42,10 +42,10 @@ nnoremap <leader>fn <cmd>Notes<cr>
 command! FNotesLines call fzf#vim#grep('rg --vimgrep . ~/.notes', {'options': printf('--preview="%s"', executable('bat') ? 'bat {1}' : 'cat -n {1}')})
 
 " FAWSConsole fuzzy finds and opens AWS accounts in web browser.
-"
-" a:profile is the aws config profile string that must be in either pattern:
-" <account-id>/<account-alias>/<permission-set>
-" <account-alias>/<account-id>/<permission-set>
+" Arguments:
+"   `profile` is the aws config profile string that must be in either pattern:
+"       <account-id>/<account-alias>/<permission-set>
+"       <account-alias>/<account-id>/<permission-set>
 function! s:aws_console(profile) abort
   " extract accound id (1st or 2nd element) from profile
   let l:account_id = matchstr(a:profile, '\d\{12\}')
@@ -57,12 +57,13 @@ function! s:aws_console(profile) abort
   echom l:aws_sso_shortcut_url
   call system(printf('%s %s', l:cmd, shellescape(l:aws_sso_shortcut_url)))
 endfunction
-command! FAWSConsole
+command! -nargs=? FAWSConsole
       \ call fzf#run(
       \   fzf#wrap({
       \     'source': 'aws configure list-profiles',
       \     'sink': function('s:aws_console'),
-      \     'options': ['--prompt=AWS Profiles> '],
+      \     'options': ['--prompt=AWS Console> ', printf('--query=%s', <q-args>)],
       \   })
       \ )
 nnoremap <leader>fa <cmd>FAWSConsole<cr>
+vnoremap <leader>fa      y:FAWSConsole <c-r>0<cr>
