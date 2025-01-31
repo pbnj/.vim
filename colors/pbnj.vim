@@ -42,5 +42,6 @@ highlight!  LineNr      cterm=none          ctermfg=darkgray    ctermbg=none
 highlight!  MatchParen  cterm=bold          ctermfg=none        ctermbg=none
 highlight!  NonText     cterm=none          ctermfg=darkgray    ctermbg=none
 highlight!  Pmenu       cterm=none          ctermfg=black       ctermbg=magenta
-highlight!  PmenuSel    cterm=reverse       ctermfg=black       ctermbg=magenta
+highlight!  PmenuMatch  cterm=bold          ctermfg=black       ctermbg=none
+highlight!  PmenuSel    cterm=bold          ctermfg=black       ctermbg=magenta
 highlight!  SpecialKey  cterm=none          ctermfg=darkgray    ctermbg=none
