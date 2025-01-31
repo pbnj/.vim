@@ -7,8 +7,7 @@
 "  |_|              |__/
 "
 " Author:      Peter Benjamin
-" Description: Minimal, 16-color colorscheme that works on light & dark terminal
-"              & GUI Vim.
+" Description: Slightly modified/improved version of default Vim colorscheme
 
 " :help cterm-colors
 
