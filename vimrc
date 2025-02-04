@@ -28,19 +28,19 @@ call plug#begin()
 
 " misc
 Plug 'https://github.com/airblade/vim-rooter'
-Plug 'https://github.com/chrisbra/csv.vim'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
 Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
+Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/kana/vim-textobj-entire'
 Plug 'https://github.com/kana/vim-textobj-user'
+Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/michaeljsmith/vim-indent-object'
+Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/wellle/targets.vim'
 
-if executable('ddgr')
-  Plug 'https://github.com/pbnj/vim-ddgr'
-endif
 if executable('ctags')
   Plug 'https://github.com/ludovicchabant/vim-gutentags'
 endif
@@ -59,34 +59,6 @@ Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
 Plug 'https://github.com/tpope/vim-vinegar'
-
-" completion
-Plug 'https://github.com/lifepillar/vim-mucomplete'
-let g:mucomplete#chains = {
-      \ 'default' : ['path', 'c-n'],
-      \ 'vim'     : ['path', 'cmd', 'c-n'],
-      \ 'dockerfile' : ['user', 'path', 'c-n'],
-      \ }
-
-" junegunn plugins
-Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-let g:fzf_layout = { 'down': '40%' }
-Plug 'https://github.com/junegunn/fzf.vim'
-nnoremap <leader>/       <cmd>Rg<cr>
-nnoremap <leader>:       <cmd>Commands<cr>
-nnoremap <leader>;       <cmd>History:<cr>
-nnoremap <leader><space> <cmd>History<cr>
-nnoremap <leader>bb      <cmd>Buffers<cr>
-nnoremap <leader>ff      <cmd>Files<cr>
-nnoremap <leader>fF      <cmd>Files!<cr>
-nnoremap <leader>fw      :Rg <c-r><c-w><cr>
-nnoremap <leader>gg      <cmd>GFiles<cr>
-nnoremap <leader>gs      <cmd>GFiles?<cr>
-nnoremap <leader>gS      <cmd>GFiles!?<cr>
-nnoremap <leader>hh      <cmd>Helptags<cr>
-nnoremap <leader>tt      <cmd>BTags<cr>
-nnoremap <leader>tT      <cmd>Tags<cr>
-vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
 call plug#end()
 
@@ -158,18 +130,6 @@ if has('patch-9.1.0500')
   let &completeopt .= ',fuzzy'
   let &wildoptions .= ',fuzzy'
 endif
-
-" disable syntax if file is larger than 10MB (performance improvement)
-augroup LARGEFILE
-  autocmd!
-  autocmd BufReadPost * if line2byte(line("$") + 1) > 1000000 | syntax clear | echo 'Syntax disabled on large files' | endif
-augroup END
-
-" automatically re-balance window sizes
-augroup RESIZE
-  autocmd!
-  autocmd VimResized * wincmd =
-augroup END
 
 " Mappings
 cnoremap <c-n> <c-Down>

@@ -1,5 +1,22 @@
-if exists('g:loaded_fzf_custom') | finish | endif
+if !executable('fzf') || exists('g:loaded_fzf_custom') | finish | endif
 let g:loaded_fzf_custom = 1
+
+let g:fzf_layout = { 'down': '40%' }
+nnoremap <leader>/       <cmd>Rg<cr>
+nnoremap <leader>:       <cmd>Commands<cr>
+nnoremap <leader>;       <cmd>History:<cr>
+nnoremap <leader><space> <cmd>History<cr>
+nnoremap <leader>bb      <cmd>Buffers<cr>
+nnoremap <leader>ff      <cmd>Files<cr>
+nnoremap <leader>fF      <cmd>Files!<cr>
+nnoremap <leader>fw      :Rg <c-r><c-w><cr>
+nnoremap <leader>gg      <cmd>GFiles<cr>
+nnoremap <leader>gs      <cmd>GFiles?<cr>
+nnoremap <leader>gS      <cmd>GFiles!?<cr>
+nnoremap <leader>hh      <cmd>Helptags<cr>
+nnoremap <leader>tt      <cmd>BTags<cr>
+nnoremap <leader>tT      <cmd>Tags<cr>
+vnoremap <leader>fw      y:Rg <c-r>0<cr>
 
 " FURLs fuzzy finder & launcher for URLs in any vim buffer
 "

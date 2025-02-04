@@ -35,13 +35,16 @@ let g:colors_name='pbnj'
 
 highlight!  Comment     cterm=italic        ctermfg=darkgray    ctermbg=none
 highlight!  DiffAdd     cterm=reverse       ctermfg=darkgreen   ctermbg=none
+highlight!  diffAdded   cterm=none          ctermfg=darkgreen   ctermbg=none
 highlight!  DiffChange  cterm=reverse       ctermfg=darkyellow  ctermbg=none
 highlight!  DiffDelete  cterm=reverse       ctermfg=darkred     ctermbg=none
+highlight!  diffDiffer  cterm=none          ctermfg=darkyellow  ctermbg=none
+highlight!  diffRemoved cterm=none          ctermfg=darkred     ctermbg=none
 highlight!  DiffText    cterm=bold,reverse  ctermfg=darkyellow  ctermbg=none
 highlight!  LineNr      cterm=none          ctermfg=darkgray    ctermbg=none
 highlight!  MatchParen  cterm=bold          ctermfg=none        ctermbg=none
 highlight!  NonText     cterm=none          ctermfg=darkgray    ctermbg=none
 highlight!  Pmenu       cterm=none          ctermfg=black       ctermbg=magenta
 highlight!  PmenuMatch  cterm=bold          ctermfg=black       ctermbg=none
-highlight!  PmenuSel    cterm=bold          ctermfg=black       ctermbg=magenta
+highlight!  PmenuSel    cterm=bold          ctermfg=black       ctermbg=gray
 highlight!  SpecialKey  cterm=none          ctermfg=darkgray    ctermbg=none
