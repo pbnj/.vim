@@ -2,9 +2,6 @@ nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 let g:maplocalleader = ' '
 
-" sane defaults
-source $VIMRUNTIME/defaults.vim
-
 " vim-only plugins
 runtime ftplugin/man.vim
 
@@ -17,6 +14,8 @@ packadd! editorconfig
 
 " disable search highlight after some duration
 packadd! nohlsearch
+
+let g:netrw_liststyle = 3
 
 " Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -63,7 +62,6 @@ Plug 'https://github.com/tpope/vim-vinegar'
 call plug#end()
 
 filetype plugin indent on
-syntax on
 
 " Options
 let &autoindent     = 1
@@ -74,7 +72,7 @@ let &belloff        = 'all'
 let &breakindent    = 1
 let &clipboard      = 'unnamed'
 let &complete       = '.,w,b,u,t'
-let &completeopt    = 'menuone'
+let &completeopt    = 'menuone,longest'
 let &cursorline     = 0
 let &expandtab      = 1
 let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
@@ -94,19 +92,19 @@ let &listchars      = 'tab:│⋅,trail:⋅,nbsp:␣'
 let &modeline       = 1
 let &modelines      = 5
 let &mouse          = 'a'
-let &number         = 1
+let &number         = 0
 let &pumheight      = 50
 let &ruler          = 0
 let &scrolloff      = 0
 let &shortmess      = 'filnxtocTOCI'
 let &showmode       = 1
-let &signcolumn     = 'number'
+let &signcolumn     = 'no'
 let &smartcase      = 1
 let &smarttab       = 1
-let &statusline     = ' %f:%l:%c %m%r%h%w%q%y'
+let &statusline     = ' %f:%l:%c %m%r%h%w%q%y%{FugitiveStatusline()} '
 let &swapfile       = 0
 let &ttimeout       = 1
-let &ttimeoutlen    = 50
+let &ttimeoutlen    = 100
 let &ttyfast        = 1
 let &undodir        = expand('~/.vim/undo/')
 let &undofile       = 1
@@ -126,25 +124,28 @@ if &term =~# 'xterm'
   let &termguicolors = 0
 endif
 
-if has('patch-9.1.0500')
-  let &completeopt .= ',fuzzy'
-  let &wildoptions .= ',fuzzy'
-endif
-
 " Mappings
-cnoremap <c-n> <c-Down>
-cnoremap <c-p> <c-Up>
+cnoremap <C-N> <c-Down>
+cnoremap <C-P> <c-Up>
+inoremap <C-U> <C-G>u<C-U>
 nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
 nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
 nnoremap <leader>ee :ed **/*
+nnoremap <leader>rr :read ! <c-r><c-l>
 nnoremap <leader>sp :sp **/*
 nnoremap <leader>vs :vs **/*
-nnoremap <leader>rr :read ! <c-r><c-l>
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
+noremap Q gq
+
+" Mappings > Fugitive
+nnoremap <leader>gw <cmd>Gwrite<cr>
+nnoremap <leader>gp <cmd>G push -u origin<cr>
+nnoremap <leader>gP <cmd>G pull<cr>
 
 " Abbreviations
-inoreabbrev isodate <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+inoreabbrev isod <c-r>=strftime('%Y-%m-%d')<cr>
+inoreabbrev isodt <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
 
 colorscheme pbnj
