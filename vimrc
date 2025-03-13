@@ -6,15 +6,13 @@ let g:maplocalleader = ' '
 runtime ftplugin/man.vim
 
 " Plugins
-" Enable built-in plugin to filter quickfix list. See :h :Cfilter
+" Filter quickfix list. See :h :Cfilter
 packadd! cfilter
 
 " enable built-in editorconfig
 packadd! editorconfig
 
-" disable search highlight after some duration
-packadd! nohlsearch
-
+" tree view
 let g:netrw_liststyle = 3
 
 " Download plug.vim if it doesn't exist yet
@@ -140,9 +138,13 @@ nnoremap k gk
 noremap Q gq
 
 " Mappings > Fugitive
-nnoremap <leader>gw <cmd>Gwrite<cr>
-nnoremap <leader>gp <cmd>G push -u origin<cr>
-nnoremap <leader>gP <cmd>G pull<cr>
+nnoremap <leader>gg <cmd>Git<cr>
+nnoremap <leader>gww <cmd>Gwrite<cr>
+nnoremap <leader>gpp <cmd>G push -u origin<cr>
+nnoremap <leader>gpl <cmd>G pull<cr>
+nnoremap <leader>gco <cmd>G co -<cr>
+nnoremap <leader>gcc <cmd>G commit<cr>
+nnoremap <leader>gbb <cmd>G blame<cr>
 
 " Abbreviations
 inoreabbrev isod <c-r>=strftime('%Y-%m-%d')<cr>
