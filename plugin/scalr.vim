@@ -1,6 +1,8 @@
 if exists('g:loaded_scalr') | finish | endif
 let g:loaded_scalr = 1
 
+command! -nargs=? ScalrWorkspace exe 'terminal ++hidden ++close fzf-scalr ' . <q-args>
+
 function! s:scalr_completion(A,L,P) abort
   return [
         \ 'add-environment-tags',
@@ -242,11 +244,7 @@ function! s:scalr_completion(A,L,P) abort
 endfunction
 
 function! s:Scalr(...) abort
-  if len(a:000) == 0
-    terminal ++close fzf-scalr
-  else
-    let l:cmd = 'terminal scalr ' . join(a:000, ' ')
-    execute l:cmd
-  endif
+  let l:cmd = 'terminal scalr ' . join(a:000, ' ')
+  execute l:cmd
 endfunction
-command! -nargs=* -complete=customlist,s:scalr_completion Scalr call s:Scalr(<f-args>)
+command! -nargs=+ -complete=customlist,s:scalr_completion Scalr call s:Scalr(<f-args>)
