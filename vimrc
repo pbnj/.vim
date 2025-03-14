@@ -126,8 +126,6 @@ endif
 cnoremap <C-N> <c-Down>
 cnoremap <C-P> <c-Up>
 inoremap <C-U> <C-G>u<C-U>
-nnoremap <expr> <leader>ll (empty(filter(getwininfo(), 'v:val.loclist'))) ? '<cmd>lopen<cr>' : '<cmd>lclose<cr>'
-nnoremap <expr> <leader>qq (empty(filter(getwininfo(), 'v:val.quickfix'))) ? '<cmd>copen<cr>' : '<cmd>cclose<cr>'
 nnoremap <leader>ee :ed **/*
 nnoremap <leader>rr :read ! <c-r><c-l>
 nnoremap <leader>sp :sp **/*
