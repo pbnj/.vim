@@ -1,6 +1,8 @@
 if !executable('fzf') || exists('g:loaded_fzf_custom') | finish | endif
 let g:loaded_fzf_custom = 1
 
+let g:fzf_layout = {'down': '40%'}
+
 nnoremap <leader>/  <cmd>Rg<cr>
 nnoremap <leader>:  <cmd>Commands<cr>
 nnoremap <leader>;  <cmd>History:<cr>

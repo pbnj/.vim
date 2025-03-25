@@ -1,7 +1,25 @@
 if exists('g:loaded_aws') | finish | endif
 let g:loaded_aws = 1
 
-command! AWSLogin terminal ++close aws sso login
+command! -nargs=? AWSConsole
+      \ exe 'terminal ++hidden ++close fzf-aws-console ' . <q-args>
+
+command! AWSLogin
+      \ terminal ++close aws sso login
+
+function! s:amazon_q(args, line_start, line_end, count) range
+  let args = [a:args]
+  if a:count > -1
+    let lines = getline(a:line_start, a:line_end)
+    call add(args, ":")
+    call add(args, lines)
+  endif
+  let cmd = printf('terminal q chat "%s"', escape(join(flatten(args), ' '), '"'))
+  exe cmd
+  " call term_start(cmd)
+endfunction
+command! -nargs=? -range Q call s:amazon_q(<q-args>, <line1>, <line2>, <count>)
+nnoremap <leader>qq <cmd>Q<cr>
 
 " Completion for AWS
 function! s:aws_completion(A,L,P) abort
@@ -50,21 +68,7 @@ function! s:aws_profile_completion(A,L,P) abort
 endfunction
 
 command! -nargs=* -complete=customlist,s:aws_completion AWS
-      \ terminal awe --cli-auto-prompt <args>
+      \ terminal awe --no-cli-pager --cli-auto-prompt <args>
 
 command! -nargs=* -complete=customlist,s:aws_profile_completion AWSProfile
-      \ terminal awe --cli-auto-prompt --profile <args>
-
-function! s:amazon_q(args) range
-  let l:args = a:args
-  if empty(l:args)
-    let l:args = join(getline(a:firstline, a:lastline), ' ')
-  endif
-  let l:cmd = printf('terminal q chat "%s"', l:args)
-  execute l:cmd
-endfunction
-
-command! -nargs=? -range QChat <line1>,<line2>call s:amazon_q(<q-args>)
-
-command! -nargs=? AWSConsole
-      \ exe 'terminal ++hidden ++close fzf-aws-console ' . <q-args>
+      \ terminal awe --no-cli-pager --cli-auto-prompt --profile <args>

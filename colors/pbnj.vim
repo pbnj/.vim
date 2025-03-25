@@ -33,19 +33,19 @@ highlight! clear
 if exists("g:syntax_on") | syntax reset | endif
 let g:colors_name='pbnj'
 
-highlight!  Comment      cterm=italic        ctermfg=DarkGray     ctermbg=none
-highlight!  CurSearch    cterm=reverse          ctermfg=DarkRed         ctermbg=none
-highlight!  DiffAdd      cterm=reverse       ctermfg=DarkGreen    ctermbg=none
-highlight!  diffAdded    cterm=none          ctermfg=DarkGreen    ctermbg=none
-highlight!  DiffChange   cterm=reverse       ctermfg=DarkYellow   ctermbg=none
-highlight!  DiffDelete   cterm=reverse       ctermfg=DarkRed      ctermbg=none
-highlight!  diffDiffer   cterm=none          ctermfg=DarkYellow   ctermbg=none
-highlight!  diffRemoved  cterm=none          ctermfg=DarkRed      ctermbg=none
-highlight!  DiffText     cterm=bold,reverse  ctermfg=DarkYellow   ctermbg=none
-highlight!  LineNr       cterm=none          ctermfg=DarkGray     ctermbg=none
-highlight!  MatchParen   cterm=bold          ctermfg=none         ctermbg=none
-highlight!  NonText      cterm=none          ctermfg=DarkGray     ctermbg=none
-highlight!  Pmenu        cterm=none          ctermfg=Black        ctermbg=Magenta
-highlight!  PmenuMatch   cterm=bold          ctermfg=Black        ctermbg=none
-highlight!  PmenuSel     cterm=bold          ctermfg=Black        ctermbg=Gray
-highlight!  SpecialKey   cterm=none          ctermfg=DarkGray     ctermbg=none
+highlight!  Comment      cterm=none          ctermfg=DarkGray    ctermbg=none
+highlight!  CurSearch    cterm=reverse       ctermfg=DarkRed     ctermbg=none
+highlight!  DiffAdd      cterm=reverse       ctermfg=DarkGreen   ctermbg=none
+highlight!  diffAdded    cterm=none          ctermfg=DarkGreen   ctermbg=none
+highlight!  DiffChange   cterm=reverse       ctermfg=DarkYellow  ctermbg=none
+highlight!  DiffDelete   cterm=reverse       ctermfg=DarkRed     ctermbg=none
+highlight!  diffDiffer   cterm=none          ctermfg=DarkYellow  ctermbg=none
+highlight!  diffRemoved  cterm=none          ctermfg=DarkRed     ctermbg=none
+highlight!  DiffText     cterm=bold,reverse  ctermfg=DarkYellow  ctermbg=none
+highlight!  LineNr       cterm=none          ctermfg=DarkGray    ctermbg=none
+highlight!  MatchParen   cterm=bold          ctermfg=none        ctermbg=none
+highlight!  NonText      cterm=none          ctermfg=DarkGray    ctermbg=none
+highlight!  Pmenu        cterm=none          ctermfg=Black       ctermbg=Magenta
+highlight!  PmenuMatch   cterm=bold          ctermfg=Black       ctermbg=none
+highlight!  PmenuSel     cterm=bold          ctermfg=Black       ctermbg=Gray
+highlight!  SpecialKey   cterm=none          ctermfg=DarkGray    ctermbg=none

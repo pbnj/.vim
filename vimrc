@@ -2,18 +2,29 @@ nnoremap <silent><nowait><space> <nop>
 let g:mapleader = ' '
 let g:maplocalleader = ' '
 
+""""""""""""""""""""""""""""""""""""""""
+" Built-in Plugins
+""""""""""""""""""""""""""""""""""""""""
+
 " vim-only plugins
 runtime ftplugin/man.vim
 
-" Plugins
 " Filter quickfix list. See :h :Cfilter
 packadd! cfilter
 
 " enable built-in editorconfig
 packadd! editorconfig
 
+" enable built
+packadd! helptoc
+nnoremap <leader>ht <cmd>HelpToc<cr>
+
 " tree view
 let g:netrw_liststyle = 3
+
+""""""""""""""""""""""""""""""""""""""""
+" External Pulgins
+""""""""""""""""""""""""""""""""""""""""
 
 " Download plug.vim if it doesn't exist yet
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -61,56 +72,60 @@ call plug#end()
 
 filetype plugin indent on
 
+""""""""""""""""""""""""""""""""""""""""
 " Options
-let &autoindent     = 1
-let &autoread       = 1
-let &background     = 'dark'
-let &backspace      = 'indent,eol,start'
-let &belloff        = 'all'
-let &breakindent    = 1
-let &clipboard      = 'unnamed'
-let &complete       = '.,w,b,u,t'
-let &completeopt    = 'menuone,longest'
-let &cursorline     = 0
-let &expandtab      = 1
-let &fillchars      = 'vert:│,fold:-,eob:~,lastline:@'
-let &foldenable     = 0
-let &grepformat     = '%f:%l:%c:%m,%f:%l:%m'
-let &grepprg        = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'git grep $*'
-let &hidden         = 1
-let &hlsearch       = 1
-let &ignorecase     = 1
-let &incsearch      = 1
-let &infercase      = 1
-let &iskeyword      = '@,48-57,_,192-255,-,#'
-let &laststatus     = 2
-let &lazyredraw     = 1
-let &list           = 1
-let &listchars      = 'tab:│⋅,trail:⋅,nbsp:␣'
-let &modeline       = 1
-let &modelines      = 5
-let &mouse          = 'a'
-let &number         = 0
-let &pumheight      = 50
-let &ruler          = 0
-let &scrolloff      = 0
-let &shortmess      = 'filnxtocTOCI'
-let &showmode       = 1
-let &signcolumn     = 'no'
-let &smartcase      = 1
-let &smarttab       = 1
-let &statusline     = ' %f:%l:%c %m%r%h%w%q%y%{FugitiveStatusline()} '
-let &swapfile       = 0
-let &ttimeout       = 1
-let &ttimeoutlen    = 100
-let &ttyfast        = 1
-let &undodir        = expand('~/.vim/undo/')
-let &undofile       = 1
-let &viminfofile    = '$HOME/.vim/.viminfo'
+""""""""""""""""""""""""""""""""""""""""
+
+let &autoindent = 1
+let &autoread = 1
+let &background = 'dark'
+let &backspace = 'indent,eol,start'
+let &belloff = 'all'
+let &breakindent = 1
+let &clipboard = 'unnamed'
+let &complete = '.,w,b,u,t'
+let &completeopt = 'menuone,longest'
+let &cursorline = 0
+let &expandtab = 1
+let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
+let &foldenable = 0
+let &grepformat = '%f:%l:%c:%m,%f:%l:%m'
+let &grepprg = executable('rg') ? 'rg --vimgrep --smart-case $*' : 'git grep $*'
+let &hidden = 1
+let &hlsearch = 1
+let &ignorecase = 1
+let &incsearch = 1
+let &infercase = 1
+let &iskeyword = '@,48-57,_,192-255,-,#'
+let &laststatus = 2
+let &lazyredraw = 1
+let &list = 1
+let &listchars = 'tab:│⋅,trail:⋅,nbsp:␣'
+let &modeline = 1
+let &modelines = 5
+let &mouse = 'a'
+let &number = 0
+let &pumheight = 50
+let &ruler = 0
+let &scrolloff = 0
+let &shortmess = 'filnxtocTOCI'
+let &showmode = 1
+let &signcolumn = 'no'
+let &smartcase = 1
+let &smarttab = 1
+let &statusline = ' %f:%l:%c %m%r%h%w%q%y%{FugitiveStatusline()} '
+let &swapfile = 0
+let &ttimeout = 1
+let &ttimeoutlen = 100
+let &ttyfast = 1
+let &undodir = expand('~/.vim/undo/')
+let &undofile = 1
+let &viminfofile = '$HOME/.vim/.viminfo'
 let &wildignorecase = 1
-let &wildmenu       = 1
-let &wildoptions    = 'pum'
-let &wrap           = 0
+let &wildmenu = 1
+let &wildoptions = 'pum'
+let &wrap = 0
+let &wrapscan = 0
 
 if &term =~# 'xterm'
   " change cursor shape from block to beam when in INSERT or REPLACE mode
@@ -122,7 +137,11 @@ if &term =~# 'xterm'
   let &termguicolors = 0
 endif
 
+""""""""""""""""""""""""""""""""""""""""
 " Mappings
+""""""""""""""""""""""""""""""""""""""""
+
+" General
 cnoremap <C-N> <c-Down>
 cnoremap <C-P> <c-Up>
 inoremap <C-U> <C-G>u<C-U>
@@ -135,7 +154,7 @@ nnoremap j gj
 nnoremap k gk
 noremap Q gq
 
-" Mappings > Fugitive
+" Fugitive
 nnoremap <leader>gg <cmd>Git<cr>
 nnoremap <leader>gww <cmd>Gwrite<cr>
 nnoremap <leader>gpp <cmd>G push -u origin<cr>
@@ -144,8 +163,16 @@ nnoremap <leader>gco <cmd>G co -<cr>
 nnoremap <leader>gcc <cmd>G commit<cr>
 nnoremap <leader>gbb <cmd>G blame<cr>
 
+""""""""""""""""""""""""""""""""""""""""
 " Abbreviations
+""""""""""""""""""""""""""""""""""""""""
+
+" date & time shortcuts
 inoreabbrev isod <c-r>=strftime('%Y-%m-%d')<cr>
 inoreabbrev isodt <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+
+""""""""""""""""""""""""""""""""""""""""
+" Colors
+""""""""""""""""""""""""""""""""""""""""
 
 colorscheme pbnj
