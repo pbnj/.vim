@@ -7,19 +7,20 @@ command! -nargs=? AWSConsole
 command! AWSLogin
       \ terminal ++close aws sso login
 
-function! s:amazon_q(args, line_start, line_end, count) range
-  let args = [a:args]
+function! s:amazon_q(args, line_start, line_end, count, mods) range
+  let cmd = 'terminal q chat'
+  let args = [a:args]->filter('v:val != ""')
   if a:count > -1
     let lines = getline(a:line_start, a:line_end)
     call add(args, ":")
     call add(args, lines)
   endif
-  let cmd = printf('terminal q chat "%s"', escape(join(flatten(args), ' '), '"'))
-  exe cmd
-  " call term_start(cmd)
+  if len(args) > 0
+    let cmd = printf(cmd .. ' "%s"', escape(join(flatten(args), ' '), '"'))
+  endif
+  exe a:mods .. ' ' .. cmd
 endfunction
-command! -nargs=? -range Q call s:amazon_q(<q-args>, <line1>, <line2>, <count>)
-nnoremap <leader>qq <cmd>Q<cr>
+command! -nargs=? -range Q call s:amazon_q(<q-args>, <line1>, <line2>, <count>, <q-mods>)
 
 " Completion for AWS
 function! s:aws_completion(A,L,P) abort

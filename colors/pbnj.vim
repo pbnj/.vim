@@ -49,3 +49,4 @@ highlight!  Pmenu        cterm=none          ctermfg=Black       ctermbg=Magenta
 highlight!  PmenuMatch   cterm=bold          ctermfg=Black       ctermbg=none
 highlight!  PmenuSel     cterm=bold          ctermfg=Black       ctermbg=Gray
 highlight!  SpecialKey   cterm=none          ctermfg=DarkGray    ctermbg=none
+highlight!  ColorColumn  cterm=none          ctermfg=none        ctermbg=Black

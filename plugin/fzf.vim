@@ -3,22 +3,6 @@ let g:loaded_fzf_custom = 1
 
 let g:fzf_layout = {'down': '40%'}
 
-nnoremap <leader>/  <cmd>Rg<cr>
-nnoremap <leader>:  <cmd>Commands<cr>
-nnoremap <leader>;  <cmd>History:<cr>
-nnoremap <leader>bb <cmd>Buffers<cr>
-nnoremap <leader>ff <cmd>Files<cr>
-nnoremap <leader>fo <cmd>History<cr>
-nnoremap <leader>fp <cmd>Files ~/Projects<cr>
-nnoremap <leader>fw :Rg <c-r><c-w><cr>
-nnoremap <leader>gf <cmd>GFiles<cr>
-nnoremap <leader>gs <cmd>GFiles?<cr>
-nnoremap <leader>hh <cmd>Helptags<cr>
-nnoremap <leader>tT <cmd>Tags<cr>
-nnoremap <leader>tt <cmd>BTags<cr>
-vnoremap <leader>/  y:Rg <c-r>0<cr>
-vnoremap <leader>fw y:Rg <c-r>0<cr>
-
 " URLs fuzzy finder & launcher for URLs in any vim buffer
 "
 " Test data

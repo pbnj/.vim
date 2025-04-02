@@ -15,10 +15,6 @@ packadd! cfilter
 " enable built-in editorconfig
 packadd! editorconfig
 
-" enable built
-packadd! helptoc
-nnoremap <leader>ht <cmd>HelpToc<cr>
-
 " tree view
 let g:netrw_liststyle = 3
 
@@ -35,29 +31,18 @@ endif
 call plug#begin()
 
 " misc
-Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
-Plug 'https://github.com/godlygeek/tabular', { 'on': ['Tabularize'] }
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
-Plug 'https://github.com/kana/vim-textobj-entire'
-Plug 'https://github.com/kana/vim-textobj-user'
-Plug 'https://github.com/lifepillar/vim-mucomplete'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
-Plug 'https://github.com/michaeljsmith/vim-indent-object'
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/wellle/targets.vim'
-
-if executable('ctags')
-  Plug 'https://github.com/ludovicchabant/vim-gutentags'
-endif
+Plug 'https://github.com/ervandew/supertab'
 
 " tpope plugins
 Plug 'https://github.com/tpope/vim-commentary'
 Plug 'https://github.com/tpope/vim-dadbod', { 'on': ['DB'] }
-Plug 'https://github.com/tpope/vim-dispatch'
-Plug 'https://github.com/tpope/vim-dotenv'
 Plug 'https://github.com/tpope/vim-endwise'
 Plug 'https://github.com/tpope/vim-eunuch'
 Plug 'https://github.com/tpope/vim-fugitive'
@@ -66,7 +51,6 @@ Plug 'https://github.com/tpope/vim-rsi'
 Plug 'https://github.com/tpope/vim-sleuth'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/tpope/vim-unimpaired'
-Plug 'https://github.com/tpope/vim-vinegar'
 
 call plug#end()
 
@@ -145,23 +129,10 @@ endif
 cnoremap <C-N> <c-Down>
 cnoremap <C-P> <c-Up>
 inoremap <C-U> <C-G>u<C-U>
-nnoremap <leader>ee :ed **/*
-nnoremap <leader>rr :read ! <c-r><c-l>
-nnoremap <leader>sp :sp **/*
-nnoremap <leader>vs :vs **/*
 nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
 noremap Q gq
-
-" Fugitive
-nnoremap <leader>gg <cmd>Git<cr>
-nnoremap <leader>gww <cmd>Gwrite<cr>
-nnoremap <leader>gpp <cmd>G push -u origin<cr>
-nnoremap <leader>gpl <cmd>G pull<cr>
-nnoremap <leader>gco <cmd>G co -<cr>
-nnoremap <leader>gcc <cmd>G commit<cr>
-nnoremap <leader>gbb <cmd>G blame<cr>
 
 """"""""""""""""""""""""""""""""""""""""
 " Abbreviations
@@ -170,6 +141,7 @@ nnoremap <leader>gbb <cmd>G blame<cr>
 " date & time shortcuts
 inoreabbrev isod <c-r>=strftime('%Y-%m-%d')<cr>
 inoreabbrev isodt <c-r>=strftime('%Y-%m-%dT%H:%M:%S')<cr>
+inoreabbrev teh the
 
 """"""""""""""""""""""""""""""""""""""""
 " Colors
