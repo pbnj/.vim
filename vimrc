@@ -17,6 +17,8 @@ packadd! editorconfig
 
 " tree view
 let g:netrw_liststyle = 3
+let g:netrw_keepdir = 0
+let g:netrw_keepj = ""
 
 """"""""""""""""""""""""""""""""""""""""
 " External Pulgins
@@ -31,14 +33,15 @@ endif
 call plug#begin()
 
 " misc
+Plug 'https://github.com/airblade/vim-rooter'
 Plug 'https://github.com/dstein64/vim-startuptime', { 'on': ['StartupTime'] }
+Plug 'https://github.com/ervandew/supertab'
 Plug 'https://github.com/junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'https://github.com/machakann/vim-highlightedyank'
 Plug 'https://github.com/markonm/traces.vim'
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/wellle/targets.vim'
-Plug 'https://github.com/ervandew/supertab'
 
 " tpope plugins
 Plug 'https://github.com/tpope/vim-commentary'
@@ -68,7 +71,7 @@ let &belloff = 'all'
 let &breakindent = 1
 let &clipboard = 'unnamed'
 let &complete = '.,w,b,u,t'
-let &completeopt = 'menuone,longest'
+let &completeopt = 'menuone,longest,fuzzy'
 let &cursorline = 0
 let &expandtab = 1
 let &fillchars = 'vert:│,fold:-,eob:~,lastline:@'
@@ -129,10 +132,8 @@ endif
 cnoremap <C-N> <c-Down>
 cnoremap <C-P> <c-Up>
 inoremap <C-U> <C-G>u<C-U>
-nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-noremap Q gq
 
 """"""""""""""""""""""""""""""""""""""""
 " Abbreviations
