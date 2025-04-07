@@ -3,6 +3,9 @@ let g:loaded_fzf_custom = 1
 
 let g:fzf_layout = {'down': '40%'}
 
+command! -nargs=? -complete=file_in_path F call fzf#vim#files(<q-args>)
+command! FT call fzf#vim#filetypes()
+
 " URLs fuzzy finder & launcher for URLs in any vim buffer
 "
 " Test data
