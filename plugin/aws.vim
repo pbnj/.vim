@@ -10,17 +10,19 @@ command! AWSLogin
 function! s:amazon_q(args, line_start, line_end, count, mods) range
   let cmd = 'terminal q chat'
   let args = [a:args]->filter('v:val != ""')
-  if a:count > -1
-    let lines = getline(a:line_start, a:line_end)
-    call add(args, ":")
-    call add(args, lines)
-  endif
-  if len(args) > 0
-    let cmd = printf(cmd .. ' "%s"', escape(join(flatten(args), ' '), '"'))
+  let formatted_string = ''
+  if !empty(args)
+    if a:count > -1
+      let lines = getline(a:line_start, a:line_end)
+      call add(args, ":")
+      call add(args, lines)
+    endif
+    let formatted_string = flatten(args)->join(' ')->escape('"')->escape('%')->escape('#')
+    let cmd = printf(cmd .. ' "%s"', formatted_string)
   endif
   exe a:mods .. ' ' .. cmd
 endfunction
-command! -nargs=? -range Q call s:amazon_q(<q-args>, <line1>, <line2>, <count>, <q-mods>)
+command! -nargs=? -range -complete=file_in_path Q call s:amazon_q(<q-args>, <line1>, <line2>, <count>, <q-mods>)
 
 " Completion for AWS
 function! s:aws_completion(A,L,P) abort
